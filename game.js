@@ -238,6 +238,12 @@ function init() {
     document.getElementById('btn-close-help').addEventListener('click', () => {
         document.getElementById('instructions-modal').classList.add('hidden');
     });
+    document.getElementById('btn-reset-data').addEventListener('click', () => {
+        if(confirm("⚠️ ¿Estás seguro de que quieres BORRAR TODA TU PARTIDA? Perderás tus cartas, tus mazos y tus Notas de Oro. Esta acción es irreversible.")) {
+            localStorage.clear();
+            location.reload();
+        }
+    });
     document.getElementById('btn-help').addEventListener('click', () => {
         document.getElementById('instructions-modal').classList.remove('hidden');
     });
@@ -1382,6 +1388,14 @@ function guardarMazo() {
 function startWelcomeFlow() {
     const starterIds = ['c_01', 'c_06', 'c_07', 'v_01', 'v_06', 'v_07', 'p_01', 'p_06', 'e_01', 'e_03'];
     
+    // Conceder automáticamente el mazo inicial
+    mazoJugador = [...starterIds];
+    localStorage.setItem('symphonicClashMazo', JSON.stringify(mazoJugador));
+    actualizarMazoContador();
+    
+    // Hide the welcome box so the pack opening cinematic takes full focus
+    document.getElementById('welcome-modal').classList.add('hidden');
+    
     const container = document.getElementById('opened-cards-container');
     const title = document.getElementById('pack-opening-title');
     const btnFinish = document.getElementById('btn-finish-opening');
@@ -1424,8 +1438,8 @@ function startWelcomeFlow() {
             container.style.justifyContent = '';
             btnFinish.onclick = null; // reset
             
-            document.getElementById('btn-open-welcome-pack').classList.add('hidden');
-            document.getElementById('btn-close-welcome').classList.remove('hidden');
+            // Mark as played and return to main menu
+            localStorage.setItem('sc_hasPlayed', 'true');
         };
     }, 300 + 10 * 200 + 500);
 }

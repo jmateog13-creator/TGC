@@ -36,55 +36,62 @@
 
             <div class="menu-divider-line"></div>
 
-            <!-- Campaign Track -->
-            <div class="campaign-section">
-                <p class="section-label">Campaña — Derrota los 5 Directores</p>
-                <div class="campaign-track">
-                    <div class="boss-node" id="boss-0">
-                        <div class="boss-avatar bg-apprentice"></div>
-                        <div class="boss-name">Aprendiz</div>
+            <!-- Horizontal Layout Split -->
+            <div class="menu-horizontal-layout">
+                
+                <!-- Left Panel: Campaign -->
+                <div class="menu-left-panel">
+                    <div class="campaign-section">
+                        <p class="section-label">Campaña — Derrota los 5 Directores</p>
+                        <div class="campaign-track">
+                            <div class="boss-node" id="boss-0">
+                                <div class="boss-avatar bg-apprentice"></div>
+                                <div class="boss-name">Aprendiz</div>
+                            </div>
+                            <div class="campaign-connector"></div>
+                            <div class="boss-node" id="boss-1">
+                                <div class="boss-avatar bg-promise"></div>
+                                <div class="boss-name">Promesa</div>
+                            </div>
+                            <div class="campaign-connector"></div>
+                            <div class="boss-node" id="boss-2">
+                                <div class="boss-avatar bg-titular"></div>
+                                <div class="boss-name">Titular</div>
+                            </div>
+                            <div class="campaign-connector"></div>
+                            <div class="boss-node" id="boss-3">
+                                <div class="boss-avatar bg-virtuoso"></div>
+                                <div class="boss-name">Virtuoso</div>
+                            </div>
+                            <div class="campaign-connector"></div>
+                            <div class="boss-node" id="boss-4">
+                                <div class="boss-avatar bg-maestro"></div>
+                                <div class="boss-name">Maestro</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="campaign-connector"></div>
-                    <div class="boss-node" id="boss-1">
-                        <div class="boss-avatar bg-promise"></div>
-                        <div class="boss-name">Promesa</div>
+                    <p class="streak-display">Próximo rival: <span id="menu-streak-name">Aprendiz</span></p>
+                </div>
+
+                <div class="menu-divider-vertical"></div>
+
+                <!-- Right Panel: Setup & Buttons -->
+                <div class="menu-right-panel">
+                    <div class="player-setup">
+                        <input type="text" id="player-name-input" placeholder="Tu nombre artístico..." maxlength="15">
                     </div>
-                    <div class="campaign-connector"></div>
-                    <div class="boss-node" id="boss-2">
-                        <div class="boss-avatar bg-titular"></div>
-                        <div class="boss-name">Titular</div>
-                    </div>
-                    <div class="campaign-connector"></div>
-                    <div class="boss-node" id="boss-3">
-                        <div class="boss-avatar bg-virtuoso"></div>
-                        <div class="boss-name">Virtuoso</div>
-                    </div>
-                    <div class="campaign-connector"></div>
-                    <div class="boss-node" id="boss-4">
-                        <div class="boss-avatar bg-maestro"></div>
-                        <div class="boss-name">Maestro</div>
+
+                    <button id="btn-play" class="btn-primary">▶ &nbsp;INICIAR CONCIERTO</button>
+
+                    <div class="menu-buttons-grid">
+                        <button id="btn-menu-deck" class="btn-secondary">🃏 Mi Mazo (<span id="menu-deck-count">0</span>/10)</button>
+                        <button id="btn-menu-album" class="btn-secondary">📖 Álbum</button>
+                        <button id="btn-menu-store" class="btn-secondary">🛒 Tienda</button>
+                        <button id="btn-menu-quiz" class="btn-secondary">🧠 Quiz</button>
+                        <button id="btn-menu-help" class="btn-secondary" style="grid-column: span 2;">❔ Ayuda / Instrucciones</button>
                     </div>
                 </div>
-            </div>
 
-            <p class="streak-display">Próximo rival: <span id="menu-streak-name">Aprendiz</span></p>
-
-            <div class="player-setup">
-                <input type="text" id="player-name-input" placeholder="Tu nombre artístico..." maxlength="15">
-            </div>
-
-            <button id="btn-play" class="btn-primary">▶ &nbsp;INICIAR CONCIERTO</button>
-
-            <div class="menu-secondary-row">
-                <button id="btn-menu-deck" class="btn-secondary">🃏 Mi Mazo (<span id="menu-deck-count">0</span>/10)</button>
-                <button id="btn-menu-album" class="btn-secondary">📖 Álbum</button>
-            </div>
-            <div class="menu-secondary-row">
-                <button id="btn-menu-store" class="btn-secondary">🛒 Tienda</button>
-                <button id="btn-menu-quiz" class="btn-secondary">🧠 Quiz</button>
-            </div>
-            <div class="menu-secondary-row" style="margin-top: 1vh;">
-                <button id="btn-menu-help" class="btn-secondary" style="width: 100%;">❔ Ayuda / Instrucciones</button>
             </div>
 
             <div class="menu-footer-stats">
@@ -115,7 +122,10 @@
                 <p><strong>El Ataque:</strong> Los combates no tienen bloqueadores en este MVP. Cuando uno de tus
                     instrumentos ataca, ¡el daño va directo a los puntos vitales del Director Rival!</p>
             </div>
-            <button id="btn-close-help" class="btn-primary">Entendido</button>
+            <div style="margin-top: 3vh; display: flex; gap: 1vw; justify-content: center;">
+                <button id="btn-close-help" class="btn-primary">Entendido</button>
+                <button id="btn-reset-data" class="btn-secondary" style="background: darkred; color: white;">Borrar Partida</button>
+            </div>
         </div>
     </div>
 
