@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 
 <head>
+    <!-- <base href="/1.Gamificacion/TGC/"> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symphonic Clash - Prototype</title>
@@ -11,6 +12,22 @@
 </head>
 
 <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="overlay">
+        <div class="splash-content">
+            <div class="splash-deco">♩ ♫ ♪ ♬ ♪ ♫ ♩</div>
+            <h1 class="splash-title">Symphonic Clash</h1>
+            <p class="splash-tagline">Un joc de cartes on els instruments d'orquestra lluiten per l'harmonia universal. Construeix el teu mazo, derrota directors rivals i converteix-te en el Mestre Suprem.</p>
+            <button id="btn-splash-enter" class="btn-splash-enter">Entrar al Món Simfònic</button>
+            <div class="splash-families">
+                <span>🎻 Corda</span>
+                <span>🌬️ Vent</span>
+                <span>🥁 Percussió</span>
+                <span>⚡ Electrònic</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Menu Overlay -->
     <div id="main-menu" class="overlay">
         <!-- Floating music note particles -->
@@ -28,9 +45,9 @@
             <div class="menu-hero">
                 <div class="menu-notes-deco">♩ ♫ ♪ ♬ ♪ ♫ ♩</div>
                 <h1 class="game-title">Symphonic Clash</h1>
-                <p class="game-subtitle">La Batalla de la Orquesta</p>
+                <p class="game-subtitle">La Batalla de l'Orquestra</p>
                 <div class="player-economy">
-                    <span class="gold-icon">💰</span> <span id="player-gold-display">0</span> Notas de Oro
+                    <span class="gold-icon">💰</span> <span id="player-gold-display">0</span> Notes d'Or
                 </div>
             </div>
 
@@ -42,11 +59,11 @@
                 <!-- Left Panel: Campaign -->
                 <div class="menu-left-panel">
                     <div class="campaign-section">
-                        <p class="section-label">Campaña — Derrota los 5 Directores</p>
+                        <p class="section-label">Campanya — Derrota els 5 Directors</p>
                         <div class="campaign-track">
                             <div class="boss-node" id="boss-0">
                                 <div class="boss-avatar bg-apprentice"></div>
-                                <div class="boss-name">Aprendiz</div>
+                                <div class="boss-name">Aprenent</div>
                             </div>
                             <div class="campaign-connector"></div>
                             <div class="boss-node" id="boss-1">
@@ -61,16 +78,16 @@
                             <div class="campaign-connector"></div>
                             <div class="boss-node" id="boss-3">
                                 <div class="boss-avatar bg-virtuoso"></div>
-                                <div class="boss-name">Virtuoso</div>
+                                <div class="boss-name">Virtuós</div>
                             </div>
                             <div class="campaign-connector"></div>
                             <div class="boss-node" id="boss-4">
                                 <div class="boss-avatar bg-maestro"></div>
-                                <div class="boss-name">Maestro</div>
+                                <div class="boss-name">Mestre</div>
                             </div>
                         </div>
                     </div>
-                    <p class="streak-display">Próximo rival: <span id="menu-streak-name">Aprendiz</span></p>
+                    <p class="streak-display">Pròxim rival: <span id="menu-streak-name">Aprenent</span></p>
                 </div>
 
                 <div class="menu-divider-vertical"></div>
@@ -78,31 +95,43 @@
                 <!-- Right Panel: Setup & Buttons -->
                 <div class="menu-right-panel">
                     <div class="player-setup">
-                        <input type="text" id="player-name-input" placeholder="Tu nombre artístico..." maxlength="15">
+                        <input type="text" id="player-name-input" placeholder="El teu nom artístic..." maxlength="15">
                     </div>
 
-                    <button id="btn-play" class="btn-primary">▶ &nbsp;INICIAR CONCIERTO</button>
+                    <!-- PLAY MODES -->
+                    <div class="menu-btn-group">
+                        <button id="btn-play" class="btn-primary">▶ Campanya</button>
+                        <button id="btn-menu-arena" class="btn-primary btn-arena-primary">🏟️ Arena Draft</button>
+                    </div>
 
-                    <div class="menu-buttons-grid">
-                        <button id="btn-menu-deck" class="btn-secondary">🃏 Mi Mazo (<span id="menu-deck-count">0</span>/10)</button>
-                        <button id="btn-menu-album" class="btn-secondary">📖 Álbum</button>
-                        <button id="btn-menu-store" class="btn-secondary">🛒 Tienda</button>
+                    <!-- COLLECTION -->
+                    <div class="menu-group-label">Col·lecció</div>
+                    <div class="menu-buttons-grid menu-grid-3">
+                        <button id="btn-menu-deck" class="btn-secondary">🃏 Mazo (<span id="menu-deck-count">0</span>/10)</button>
+                        <button id="btn-menu-album" class="btn-secondary">📖 Àlbum</button>
+                        <button id="btn-menu-store" class="btn-secondary">🛒 Botiga</button>
+                    </div>
+
+                    <!-- LEARN & SETTINGS -->
+                    <div class="menu-group-label">Aprendre</div>
+                    <button id="btn-menu-tutorial" class="btn-tutorial-main">🎓 Tutorial — Aprèn a Jugar</button>
+                    <div class="menu-buttons-grid menu-grid-3">
                         <button id="btn-menu-quiz" class="btn-secondary">🧠 Quiz</button>
-                        <button id="btn-menu-help" class="btn-secondary">❔ Ayuda</button>
-                        <button id="btn-reset-data" class="btn-secondary" style="background: rgba(180, 20, 20, 0.4); border-color: #ff4444; color: #ffaaaa;" title="Borra todo el progreso, mazo y monedas">🔥 Borrar Partida</button>
+                        <button id="btn-menu-help" class="btn-secondary">❔ Ajuda</button>
+                        <button id="btn-reset-data" class="btn-secondary btn-danger">🔥 Esborrar</button>
                     </div>
                 </div>
 
             </div>
 
             <div class="menu-footer-stats">
-                <span>🎻 Cuerda</span>
+                <span>🎻 Corda</span>
                 <span class="footer-sep">·</span>
-                <span>🎺 Viento</span>
+                <span>🎺 Vent</span>
                 <span class="footer-sep">·</span>
-                <span>🥁 Percusión</span>
+                <span>🥁 Percussió</span>
                 <span class="footer-sep">·</span>
-                <span>⚡ Electrónico</span>
+                <span>⚡ Electrònic</span>
             </div>
         </div>
     </div>
@@ -110,32 +139,42 @@
     <!-- Instructions Modal Overlay -->
     <div id="instructions-modal" class="overlay hidden">
         <div class="modal-box">
-            <h2>Cómo Jugar</h2>
+            <h2>Com Jugar</h2>
             <div class="rules-text">
-                <p><strong>El Objetivo:</strong> Reduce los Puntos de Audiencia (PA) del Director rival a 0 antes de que
-                    él lo haga contigo. Gana 5 partidas consecutivas para completar la campaña.</p>
-                <p><strong>Tempo (Maná):</strong> Empiezas con 1 de Tempo y ganas 1 más en cada turno (hasta un máximo
-                    de 10). Jugar cartas o robar una extra de tu mazo cuesta Tempo.</p>
-                <p><strong>Cartas de Instrumentos:</strong> Tienen un coste en azul, un Ataque de Volumen en rojo (daño
-                    que hacen) y una Defensa de Resonancia en verde (vida que resisten).</p>
-                <p><strong>Cansancio de Afinación:</strong> Los instrumentos recién invocados al Escenario no pueden
-                    atacar ese mismo turno (ícono 💤).</p>
-                <p><strong>El Ataque:</strong> Los combates no tienen bloqueadores en este MVP. Cuando uno de tus
-                    instrumentos ataca, ¡el daño va directo a los puntos vitales del Director Rival!</p>
+                <div class="rule-row">
+                    <span class="rule-icon">🎯</span>
+                    <div><strong>Objectiu</strong><br>Redueix la vida del Director rival a 0. Guanya 5 partides seguides per completar la campanya.</div>
+                </div>
+                <div class="rule-row">
+                    <span class="rule-icon">⚡</span>
+                    <div><strong>Tempo</strong><br>El teu manà. Comences amb 1 i en guanyes 1 cada torn (màxim 10). Les cartes costen Tempo per jugar-les.</div>
+                </div>
+                <div class="rule-row">
+                    <span class="rule-icon">🎻</span>
+                    <div><strong>Les Cartes</strong><br><span class="stat-pill cost">🔵 Cost</span> <span class="stat-pill atk">🔴 Atac</span> <span class="stat-pill def">🟢 Defensa</span><br>Juga-les a l'Escenari i ordena'ls atacar.</div>
+                </div>
+                <div class="rule-row">
+                    <span class="rule-icon">💤</span>
+                    <div><strong>Primer torn</strong><br>Una carta acabada d'invocar no pot atacar fins al torn següent.</div>
+                </div>
+                <div class="rule-row">
+                    <span class="rule-icon">⚔️</span>
+                    <div><strong>Atacar</strong><br>Clica una de les teves cartes i després "Atacar". El dany va directe al rival!</div>
+                </div>
             </div>
-            <button id="btn-close-help" class="btn-primary" style="margin-top: 2vh;">Entendido</button>
+            <button id="btn-close-help" class="btn-primary" style="margin-top: 2vh;">Entesos</button>
         </div>
     </div>
 
     <!-- Album Modal Overlay -->
     <div id="album-modal" class="overlay hidden">
         <div class="modal-box album-box">
-            <h2>Álbum de Colección</h2>
-            <div class="album-stats">Descubiertas: <span id="album-count">0</span> / <span id="album-total">10</span></div>
+            <h2>Àlbum de Col·lecció</h2>
+            <div class="album-stats">Descobertes: <span id="album-count">0</span> / <span id="album-total">10</span></div>
             <div class="album-grid" id="album-grid-container">
                 <!-- Cards will be injected here -->
             </div>
-            <button id="btn-close-album" class="btn-primary">Volver al Menú</button>
+            <button id="btn-close-album" class="btn-primary">Tornar al Menú</button>
         </div>
     </div>
 
@@ -150,16 +189,16 @@
             </div>
             <!-- Right Side: The Info -->
             <div class="inspector-right">
-                <h2 id="inspector-title">Nombre del Instrumento</h2>
-                <h4 id="inspector-family">Familia</h4>
+                <h2 id="inspector-title">Nom de l'Instrument</h2>
+                <h4 id="inspector-family">Família</h4>
                 <div class="inspector-text-box">
-                    <h3>📚 Historia y Origen</h3>
+                    <h3>📚 Història i Origen</h3>
                     <p id="inspector-history">...</p>
                     
-                    <h3>🎵 Rango y Timbre</h3>
+                    <h3>🎵 Rang i Timbre</h3>
                     <p id="inspector-timbre">...</p>
                     
-                    <h3>⚙ Mecánicas en Batalla</h3>
+                    <h3>⚙ Mecàniques en Batalla</h3>
                     <p id="inspector-mechanic">...</p>
                 </div>
             </div>
@@ -169,21 +208,21 @@
     <!-- Deckbuilder Modal Overlay -->
     <div id="deckbuilder-modal" class="overlay hidden">
         <div class="modal-box deckbuilder-box">
-            <h2>Construye tu Mazo</h2>
+            <h2>Construeix el Teu Mazo</h2>
             <div class="deckbuilder-layout">
                 <div class="deckbuilder-available">
-                    <h3>Cartas Desbloqueadas</h3>
+                    <h3>Cartes Desbloquejades</h3>
                     <div class="album-grid" id="deckbuilder-grid-container">
                         <!-- Cards will be injected here -->
                     </div>
                 </div>
                 <div class="deckbuilder-selected">
-                    <h3>Tu Mazo (<span id="deckbuilder-selected-count">0</span>/10)</h3>
+                    <h3>El Teu Mazo (<span id="deckbuilder-selected-count">0</span>/10)</h3>
                     <div class="decklist-grid" id="deckbuilder-list-container">
                         <!-- Selected cards will be injected here -->
                     </div>
                     <button id="btn-save-deck" class="btn-primary" disabled>Guardar Mazo</button>
-                    <button id="btn-close-deckbuilder" class="btn-secondary" style="margin-top: 1vh;">Volver al Menú</button>
+                    <button id="btn-close-deckbuilder" class="btn-secondary" style="margin-top: 1vh;">Tornar al Menú</button>
                 </div>
             </div>
         </div>
@@ -192,70 +231,69 @@
     <!-- Store Modal Overlay -->
     <div id="store-modal" class="overlay hidden">
         <div class="modal-box store-box">
-            <h2>Tienda Sinfónica</h2>
-            <p class="store-gold-text">Tus fondos: 💰 <span id="store-gold-display">0</span> Notas de Oro</p>
+            <h2>Botiga Sinfònica</h2>
+            <p class="store-gold-text">Els teus fons: 💰 <span id="store-gold-display">0</span> Notes d'Or</p>
             
             <div class="booster-pack-container">
                 <div class="booster-pack" id="btn-buy-pack">
                     <div class="pack-art-icon">🎵</div>
                     <div class="pack-art">Symphonic Era</div>
-                    <div class="pack-price">100 Notas</div>
+                    <div class="pack-price">100 Notes</div>
                 </div>
             </div>
             
-            <button id="btn-close-store" class="btn-primary" style="margin-top:4vh;">Volver al Menú</button>
+            <button id="btn-close-store" class="btn-primary" style="margin-top:4vh;">Tornar al Menú</button>
         </div>
     </div>
 
     <!-- Quiz Modal Overlay -->
     <div id="quiz-modal" class="overlay hidden">
         <div class="modal-box quiz-box">
-            <h2>Quiz Pedagógico</h2>
-            <div class="quiz-progress-text">Progreso: <span id="quiz-score">0</span> / 5 aciertos seguidos</div>
+            <h2>Quiz Pedagògic</h2>
+            <div class="quiz-progress-text">Progrés: <span id="quiz-score">0</span> / 5 encerts seguits</div>
             
             <div id="quiz-question-container" class="quiz-question-container">
-                <p id="quiz-question" class="quiz-question-text">¿De qué instrumento hablamos?</p>
+                <p id="quiz-question" class="quiz-question-text">De quin instrument parlem?</p>
                 <div id="quiz-options" class="quiz-options-grid">
                     <!-- Buttons injected here -->
                 </div>
             </div>
             
             <div id="quiz-reward-container" class="hidden">
-                <h3 style="color:#ffdd44; margin-bottom: 2vh;">¡Increíble! Has ganado 100 Notas de Oro</h3>
+                <h3 style="color:#ffdd44; margin-bottom: 2vh;">Increïble! Has guanyat 100 Notes d'Or</h3>
                 <div class="booster-pack" id="btn-claim-quiz-reward" style="margin: 0 auto; width: 15vh; height: 22vh;">
                     <div class="pack-art-icon" style="font-size: 4vh;">🧠</div>
-                    <div class="pack-art" style="font-size: 1.5vh;">Sabiduría</div>
+                    <div class="pack-art" style="font-size: 1.5vh;">Saviesa</div>
                     <div class="pack-price" style="font-size: 1.2vh;">Reclamar</div>
                 </div>
             </div>
             
-            <button id="btn-close-quiz" class="btn-primary" style="margin-top: 4vh;">Volver al Menú</button>
+            <button id="btn-close-quiz" class="btn-primary" style="margin-top: 4vh;">Tornar al Menú</button>
         </div>
     </div>
 
     <!-- Pack Opening Overlay (Above Store) -->
     <div id="pack-opening-modal" class="overlay hidden" style="z-index: 3000;">
         <div class="pack-scene">
-            <h2 id="pack-opening-title" class="hidden">¡Nuevas Cartas!</h2>
+            <h2 id="pack-opening-title" class="hidden">Noves Cartes!</h2>
             <div id="opened-cards-container" class="opened-cards">
                 <!-- 3 cards animated here -->
             </div>
-            <button id="btn-finish-opening" class="btn-primary hidden">¡Genial!</button>
+            <button id="btn-finish-opening" class="btn-primary hidden">Genial!</button>
         </div>
         </div>
-    </div>
 
     <!-- Welcome Modal Overlay -->
     <div id="welcome-modal" class="overlay hidden" style="z-index: 4000;">
         <div class="welcome-box">
-            <h1 class="welcome-title">Bienvenido a Symphonic Clash</h1>
-            <p class="welcome-text">La orquesta moderna está en caos y disonancia. Los directores compiten por imponer su Estilo Absoluto al mundo. Para empezar tu carrera musical, ábrete paso con este regalo de iniciación.</p>
+            <h1 class="welcome-title">Benvingut a Symphonic Clash</h1>
+            <p class="welcome-text">L'orquestra moderna està en caos i dissonància. Els directors competeixen per imposar el seu Estil Absolut al món. Per començar la teva carrera musical, obre't camí amb aquest regal d'iniciació.</p>
             <div id="btn-open-welcome-pack" class="booster-pack">
                 <div class="pack-art-icon">🎁</div>
-                <div class="pack-art">Caja de Iniciación</div>
-                <div class="pack-price">10 Cartas Básicas</div>
+                <div class="pack-art">Caixa d'Iniciació</div>
+                <div class="pack-price">10 Cartes Bàsiques</div>
             </div>
-            <button id="btn-close-welcome" class="btn-primary hidden" style="margin-top:4vh;">Empezar Campaña</button>
+            <button id="btn-close-welcome" class="btn-primary hidden" style="margin-top:4vh;">Començar Campanya</button>
         </div>
     </div>
 
@@ -266,23 +304,25 @@
                 <div id="dialogue-avatar" class="boss-avatar-large"></div>
             </div>
             <div class="dialogue-box">
-                <h2 id="dialogue-name">Nombre Rival</h2>
+                <h2 id="dialogue-name">Nom Rival</h2>
                 <p id="dialogue-text"></p>
-                <p class="dialogue-continue">Haz clic en cualquier lado para jugar...</p>
+                <p class="dialogue-continue">Fes clic a qualsevol lloc per jugar...</p>
             </div>
         </div>
     </div>
 
     <div id="game-board" class="hidden">
         <!-- In-game Help Button -->
-        <button id="btn-help" class="btn-help" title="Ver Reglas">?</button>
+        <button id="btn-help" class="btn-help" title="Veure Regles">?</button>
+        <!-- Back to menu -->
+        <button id="btn-back-menu" class="btn-back-menu" title="Tornar al Menú">← Menú</button>
         <!-- AI Director -->
         <div class="director" id="ai-director-area">
             <div class="director-avatar-wrapper">
-                <div class="director-avatar">👺</div>
+                <div class="director-avatar" id="ai-director-avatar"></div>
             </div>
             <div class="director-info">
-                <h2>IA Director</h2>
+                <h2 id="ai-director-name">Director Rival</h2>
                 <div class="hp-bar-container">
                     <div class="hp-bar" id="ai-hp-bar"></div>
                     <span class="hp-bar-text" id="ai-hp-text">8000</span>
@@ -316,10 +356,10 @@
             <!-- Battlefield Divider / Button -->
             <div class="divider">
                 <div class="divider-line"></div>
-                <button id="btn-end-turn">⚡ FIN DE TURNO</button>
+                <button id="btn-end-turn">⚡ FINALITZAR TORN</button>
             </div>
             <div class="stage" id="player-stage">
-                <div class="zone-hint">🎵 Tu Escenario — Arrastra cartas aquí</div>
+                <div class="zone-hint">🎵 El Teu Escenari — Arrossega cartes aquí</div>
             </div>
         </div>
 
@@ -336,11 +376,11 @@
         <!-- Player Director -->
         <div class="director" id="player-director-area">
             <div class="director-avatar-wrapper">
-                <div class="director-avatar">🧑‍🎤</div>
+                <div id="player-director-avatar" class="director-avatar bg-player">🎼</div>
             </div>
             <div class="director-info">
-                <h2 id="player-director-name">Tu Director</h2>
-                <span class="racha-counter">(Racha: <span id="player-streak-ingame">0</span>/5)</span>
+                <h2 id="player-director-name">El Teu Director</h2>
+                <span class="racha-counter">(Ratxa: <span id="player-streak-ingame">0</span>/5)</span>
                 <div class="hp-bar-container">
                     <div class="hp-bar" id="player-hp-bar"></div>
                     <span class="hp-bar-text" id="player-hp-text">8000</span>
@@ -375,6 +415,19 @@
         </svg>
     </div>
 
+    <!-- TUTORIAL OVERLAY -->
+    <div id="tutorial-overlay" class="hidden">
+        <div id="tut-backdrop"></div>
+        <div id="tutorial-tooltip">
+            <div class="tut-header">
+                <span id="tut-step" class="tut-step-badge">1 / 10</span>
+                <h3 id="tut-title">Títol</h3>
+            </div>
+            <p id="tut-text">Text explicatiu...</p>
+            <button id="btn-tut-next" class="btn-primary hidden">Entès →</button>
+        </div>
+    </div>
+
     <!-- Toast Notification Container -->
     <div id="toast-container"></div>
 
@@ -382,9 +435,39 @@
     <div id="game-result-modal" class="overlay hidden">
         <div class="modal-box result-box">
             <div class="result-icon" id="result-icon"></div>
-            <h2 id="result-title">¡Victoria!</h2>
+            <h2 id="result-title">Victòria!</h2>
             <p id="result-message" class="result-message"></p>
             <button id="btn-result-ok" class="btn-primary">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Arena Modal -->
+    <div id="arena-modal" class="overlay hidden" style="z-index: 1100;">
+        <div class="modal-box arena-box">
+
+            <!-- DRAFT PHASE -->
+            <div id="arena-draft-phase">
+                <h2>🏟️ Arena Draft</h2>
+                <p class="arena-pick-progress">Tria una carta: <span id="arena-pick-count">0</span> / 10</p>
+                <div class="arena-pick-bar-wrap">
+                    <div class="arena-pick-bar" id="arena-pick-bar"></div>
+                </div>
+                <p class="arena-draft-hint">Escull la carta que vols afegir al teu mazo d'arena</p>
+                <div id="arena-draft-choices" class="arena-draft-choices">
+                    <!-- 2 cards injected here -->
+                </div>
+            </div>
+
+            <!-- READY PHASE (shown after 10 picks) -->
+            <div id="arena-ready-phase" class="hidden">
+                <h2>🏟️ El Teu Mazo d'Arena</h2>
+                <p class="arena-streak-info">Ratxa actual: <span id="arena-streak-display">0</span> / 5 victòries</p>
+                <p class="arena-draft-hint">Guanya 5 batalles seguides per conquerir l'Arena i guanyar 300 Notes d'Or!</p>
+                <div id="arena-deck-preview" class="arena-deck-list"></div>
+                <button id="btn-arena-fight" class="btn-primary" style="margin-top:3vh;">⚔️ Iniciar Batalla d'Arena</button>
+            </div>
+
+            <button id="btn-close-arena" class="btn-secondary" style="margin-top:2vh; opacity:0.7;">Abandonar Arena</button>
         </div>
     </div>
 

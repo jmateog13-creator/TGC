@@ -1,83 +1,83 @@
 const cartasBD = [
-    // 1. Cuerda Frotada — Resonancia: recupera PA al inicio de tu turno
-    { id: 'c_02', nombre: 'Violín',      familia: 'Cuerda Frotada', costo: 2, ataque: 300, defensa: 200,  descripcion: 'Tropa base ágil. El más agudo de las cuerdas.', emoji: '🎻', imagen: 'img/cartas/cartaviolin.png',
-      habilidad: { nombre: 'Resonancia', descripcion: 'Recupera 60 PA al inicio de tu turno.', tipo: 'regen', valor: 60 } },
-    { id: 'c_03', nombre: 'Viola',       familia: 'Cuerda Frotada', costo: 3, ataque: 200, defensa: 500,  descripcion: 'Defensa media. Cuerda de sonido melancólico.', emoji: '🎻', imagen: 'img/cartas/cartaviola.png',
-      habilidad: { nombre: 'Resonancia', descripcion: 'Recupera 90 PA al inicio de tu turno.', tipo: 'regen', valor: 90 } },
-    { id: 'c_04', nombre: 'Violonchelo', familia: 'Cuerda Frotada', costo: 4, ataque: 400, defensa: 500,  descripcion: 'Luchador equilibrado. Instrumento grande con pica.', emoji: '🎻', imagen: 'img/cartas/cartacello.png',
-      habilidad: { nombre: 'Resonancia', descripcion: 'Recupera 120 PA al inicio de tu turno.', tipo: 'regen', valor: 120 } },
-    { id: 'c_06', nombre: 'Contrabajo',  familia: 'Cuerda Frotada', costo: 6, ataque: 300, defensa: 1000, descripcion: 'Tanque principal. El gigante de cuerdas graves.', emoji: '🎻', imagen: 'img/cartas/cartacontrabajo.png',
-      habilidad: { nombre: 'Resonancia', descripcion: 'Recupera 180 PA al inicio de tu turno.', tipo: 'regen', valor: 180 } },
+    // 1. Corda Fregada — Ressonància: recupera PA a l'inici del teu torn
+    { id: 'c_02', nombre: 'Violí',      familia: 'Corda Fregada', costo: 2, ataque: 300, defensa: 200,  descripcion: 'Tropa base àgil. El més agut de les cordes.', emoji: '🎻', imagen: 'img/cartas/cartaviolin.png',
+      habilidad: { nombre: 'Ressonància', descripcion: 'Recupera 60 PA a l\'inici del teu torn.', tipo: 'regen', valor: 60 } },
+    { id: 'c_03', nombre: 'Viola',       familia: 'Corda Fregada', costo: 3, ataque: 200, defensa: 500,  descripcion: 'Defensa mitjana. Corda de so melancòlic.', emoji: '🎻', imagen: 'img/cartas/cartaviola.png',
+      habilidad: { nombre: 'Ressonància', descripcion: 'Recupera 90 PA a l\'inici del teu torn.', tipo: 'regen', valor: 90 } },
+    { id: 'c_04', nombre: 'Violoncel', familia: 'Corda Fregada', costo: 4, ataque: 400, defensa: 500,  descripcion: 'Lluitador equilibrat. Instrument gran amb pica.', emoji: '🎻', imagen: 'img/cartas/cartacello.png',
+      habilidad: { nombre: 'Ressonància', descripcion: 'Recupera 120 PA a l\'inici del teu torn.', tipo: 'regen', valor: 120 } },
+    { id: 'c_06', nombre: 'Contrabaix',  familia: 'Corda Fregada', costo: 6, ataque: 300, defensa: 1000, descripcion: 'Tanc principal. El gegant de cordes greus.', emoji: '🎻', imagen: 'img/cartas/cartacontrabajo.png',
+      habilidad: { nombre: 'Ressonància', descripcion: 'Recupera 180 PA a l\'inici del teu torn.', tipo: 'regen', valor: 180 } },
 
-    // 1. Cuerda Pulsada — Punteo: primer ataque hace el doble de daño
-    { id: 'c_01', nombre: 'Guitarra Clásica', familia: 'Cuerda Pulsada', costo: 2, ataque: 300, defensa: 200, descripcion: 'Daño temprano. Caja con seis cuerdas de nailon.', emoji: '🎸', imagen: 'img/cartas/cartaguitarra.png',
-      habilidad: { nombre: 'Punteo', descripcion: 'Su primer ataque hace el doble de daño.', tipo: 'primer_ataque' } },
-    { id: 'c_05', nombre: 'Arpa',         familia: 'Cuerda Pulsada', costo: 5, ataque: 300, defensa: 800,  descripcion: 'Muro defensivo. Gran marco de cuerdas tensadas.', emoji: '🎼', imagen: 'img/cartas/cartaarpa.png',
-      habilidad: { nombre: 'Punteo', descripcion: 'Su primer ataque hace el doble de daño.', tipo: 'primer_ataque' } },
-    { id: 'c_08', nombre: 'Ukelele',      familia: 'Cuerda Pulsada', costo: 1, ataque: 200, defensa: 100,  descripcion: 'Tropa barata. Instrumento pequeño hawaiano de cuatro cuerdas.', emoji: '🎸', imagen: 'img/cartas/cartaukelele.png',
-      habilidad: { nombre: 'Punteo', descripcion: 'Su primer ataque hace el doble de daño.', tipo: 'primer_ataque' } },
+    // 1. Corda Pulsada — Punteig: primer atac fa el doble de dany
+    { id: 'c_01', nombre: 'Guitarra Clàssica', familia: 'Corda Pulsada', costo: 2, ataque: 300, defensa: 200, descripcion: 'Dany primerenc. Caixa amb sis cordes de niló.', emoji: '🎸', imagen: 'img/cartas/cartaguitarra.png',
+      habilidad: { nombre: 'Punteig', descripcion: 'El seu primer atac fa el doble de dany.', tipo: 'primer_ataque' } },
+    { id: 'c_05', nombre: 'Arpa',         familia: 'Corda Pulsada', costo: 5, ataque: 300, defensa: 800,  descripcion: 'Mur defensiu. Gran marc de cordes tensades.', emoji: '🎼', imagen: 'img/cartas/cartaarpa.png',
+      habilidad: { nombre: 'Punteig', descripcion: 'El seu primer atac fa el doble de dany.', tipo: 'primer_ataque' } },
+    { id: 'c_08', nombre: 'Ukelele',      familia: 'Corda Pulsada', costo: 1, ataque: 200, defensa: 100,  descripcion: 'Tropa barata. Instrument petit hawaià de quatre cordes.', emoji: '🎸', imagen: 'img/cartas/cartaukelele.png',
+      habilidad: { nombre: 'Punteig', descripcion: 'El seu primer atac fa el doble de dany.', tipo: 'primer_ataque' } },
 
-    // 1. Cuerda Percutida — Impacto Total: daña a todos los enemigos en campo
-    { id: 'c_07', nombre: 'Piano', familia: 'Cuerda Percutida', costo: 8, ataque: 700, defensa: 1000, descripcion: 'Rematador pesado. Teclado de cuerdas percutidas.', emoji: '🎹', imagen: 'img/cartas/cartapiano.png',
-      habilidad: { nombre: 'Impacto Total', descripcion: 'Al atacar, daña a todos los instrumentos rivales en campo.', tipo: 'splash' } },
+    // 1. Corda Percudida — Impacte Total: danya a tots els enemics al camp
+    { id: 'c_07', nombre: 'Piano', familia: 'Corda Percudida', costo: 8, ataque: 700, defensa: 1000, descripcion: 'Rematador pesat. Teclat de cordes percudides.', emoji: '🎹', imagen: 'img/cartas/cartapiano.png',
+      habilidad: { nombre: 'Impacte Total', descripcion: 'En atacar, danya a tots els instruments rivals al camp.', tipo: 'splash' } },
 
-    // 2. Viento Madera — Ágil: puede atacar el mismo turno que se juega
-    { id: 'v_01', nombre: 'Flauta Travesera', familia: 'Viento Madera', costo: 1, ataque: 200, defensa: 100, descripcion: 'Apertura rápida. Tubo cilíndrico de sonido agudo.', emoji: '🌬️', imagen: 'img/cartas/cartaflautatravesera.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
-    { id: 'v_02', nombre: 'Oboe',    familia: 'Viento Madera', costo: 2, ataque: 400, defensa: 100, descripcion: 'Ataque punzante, frágil. Lengüeta doble.', emoji: '🎋', imagen: 'img/cartas/cartaoboe.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
-    { id: 'v_03', nombre: 'Clarinete', familia: 'Viento Madera', costo: 3, ataque: 400, defensa: 300, descripcion: 'Tropa agresiva. Tubo de madera oscuro.', emoji: '🥖', imagen: 'img/cartas/cartaclarinete.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
-    { id: 'v_05', nombre: 'Saxofón', familia: 'Viento Madera', costo: 4, ataque: 500, defensa: 400, descripcion: 'Luchador versátil. Cuerpo metálico pero caña de madera.', emoji: '🎷', imagen: 'img/cartas/cartasaxofon.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
-    { id: 'v_06', nombre: 'Fagot',   familia: 'Viento Madera', costo: 5, ataque: 400, defensa: 700, descripcion: 'Soporte pesado. El bajo de la familia de madera.', emoji: '🪵', imagen: 'img/cartas/cartafagot.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
-    { id: 'v_11', nombre: 'Acordeón', familia: 'Viento Madera', costo: 3, ataque: 300, defensa: 400, descripcion: 'Luchador callejero. Fuelle portátil de sonido rústico.', emoji: '🪗', imagen: 'img/cartas/cartaacordeon.png',
-      habilidad: { nombre: 'Ágil', descripcion: 'Puede atacar el mismo turno que se juega.', tipo: 'sin_cansancio' } },
+    // 2. Vent Fusta — Àgil: pot atacar el mateix torn que es juga
+    { id: 'v_01', nombre: 'Flauta Travessera', familia: 'Vent Fusta', costo: 1, ataque: 200, defensa: 100, descripcion: 'Obertura ràpida. Tub cilíndric de so agut.', emoji: '🌬️', imagen: 'img/cartas/cartaflautatravesera.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
+    { id: 'v_02', nombre: 'Oboè',    familia: 'Vent Fusta', costo: 2, ataque: 400, defensa: 100, descripcion: 'Atac punyent, fràgil. Llengüeta doble.', emoji: '🎋', imagen: 'img/cartas/cartaoboe.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
+    { id: 'v_03', nombre: 'Clarinet', familia: 'Vent Fusta', costo: 3, ataque: 400, defensa: 300, descripcion: 'Tropa agressiva. Tub de fusta fosc.', emoji: '🥖', imagen: 'img/cartas/cartaclarinete.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
+    { id: 'v_05', nombre: 'Saxofon', familia: 'Vent Fusta', costo: 4, ataque: 500, defensa: 400, descripcion: 'Lluitador versàtil. Cos metàl·lic però canya de fusta.', emoji: '🎷', imagen: 'img/cartas/cartasaxofon.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
+    { id: 'v_06', nombre: 'Fagot',   familia: 'Vent Fusta', costo: 5, ataque: 400, defensa: 700, descripcion: 'Suport pesat. El baix de la família de fusta.', emoji: '🪵', imagen: 'img/cartas/cartafagot.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
+    { id: 'v_11', nombre: 'Acordió', familia: 'Vent Fusta', costo: 3, ataque: 300, defensa: 400, descripcion: 'Lluitador de carrer. Manxa portàtil de so rústic.', emoji: '🪗', imagen: 'img/cartas/cartaacordeon.png',
+      habilidad: { nombre: 'Àgil', descripcion: 'Pot atacar el mateix torn que es juga.', tipo: 'sin_cansancio' } },
 
-    // 2. Viento Metal — Fanfarria: puede atacar al Director aunque haya rivales en campo
-    { id: 'v_04', nombre: 'Trompeta', familia: 'Viento Metal', costo: 4, ataque: 700, defensa: 200,  descripcion: 'Daño explosivo (Cañón). Tubo de metal con válvulas.', emoji: '🎺', imagen: 'img/cartas/cartatrompeta.png',
-      habilidad: { nombre: 'Fanfarria', descripcion: 'Puede atacar al Director rival aunque haya instrumentos en campo.', tipo: 'ataque_directo' } },
-    { id: 'v_07', nombre: 'Trompa',  familia: 'Viento Metal', costo: 5, ataque: 500, defensa: 600,  descripcion: 'Metal equilibrado. Tubo circular muy enrollado.', emoji: '📯', imagen: 'img/cartas/cartatrompa.png',
-      habilidad: { nombre: 'Fanfarria', descripcion: 'Puede atacar al Director rival aunque haya instrumentos en campo.', tipo: 'ataque_directo' } },
-    { id: 'v_08', nombre: 'Trombón', familia: 'Viento Metal', costo: 6, ataque: 800, defensa: 500,  descripcion: 'Destructor de defensas. Metal con vara corredera.', emoji: '📯', imagen: 'img/cartas/cartatrombon.png',
-      habilidad: { nombre: 'Fanfarria', descripcion: 'Puede atacar al Director rival aunque haya instrumentos en campo.', tipo: 'ataque_directo' } },
-    { id: 'v_09', nombre: 'Tuba',    familia: 'Viento Metal', costo: 7, ataque: 500, defensa: 1000, descripcion: 'Muro acústico gigante. Soporte indispensable de vientos.', emoji: '📯', imagen: 'img/cartas/cartatuba.png',
-      habilidad: { nombre: 'Fanfarria', descripcion: 'Puede atacar al Director rival aunque haya instrumentos en campo.', tipo: 'ataque_directo' } },
+    // 2. Vent Metall — Fanfàrria: pot atacar al Director tot i que hi hagi rivals al camp
+    { id: 'v_04', nombre: 'Trompeta', familia: 'Vent Metall', costo: 4, ataque: 700, defensa: 200,  descripcion: 'Dany explosiu (Canó). Tub de metall amb vàlvules.', emoji: '🎺', imagen: 'img/cartas/cartatrompeta.png',
+      habilidad: { nombre: 'Fanfàrria', descripcion: 'Pot atacar al Director rival tot i que hi hagi instruments al camp.', tipo: 'ataque_directo' } },
+    { id: 'v_07', nombre: 'Trompa',  familia: 'Vent Metall', costo: 5, ataque: 500, defensa: 600,  descripcion: 'Metall equilibrat. Tub circular molt enrotllat.', emoji: '📯', imagen: 'img/cartas/cartatrompa.png',
+      habilidad: { nombre: 'Fanfàrria', descripcion: 'Pot atacar al Director rival tot i que hi hagi instruments al camp.', tipo: 'ataque_directo' } },
+    { id: 'v_08', nombre: 'Trombó', familia: 'Vent Metall', costo: 6, ataque: 800, defensa: 500,  descripcion: 'Destructor de defenses. Metall amb vara corredissa.', emoji: '📯', imagen: 'img/cartas/cartatrombon.png',
+      habilidad: { nombre: 'Fanfàrria', descripcion: 'Pot atacar al Director rival tot i que hi hagi instruments al camp.', tipo: 'ataque_directo' } },
+    { id: 'v_09', nombre: 'Tuba',    familia: 'Vent Metall', costo: 7, ataque: 500, defensa: 1000, descripcion: 'Mur acústic gegant. Suport indispensable de vents.', emoji: '📯', imagen: 'img/cartas/cartatuba.png',
+      habilidad: { nombre: 'Fanfàrria', descripcion: 'Pot atacar al Director rival tot i que hi hagi instruments al camp.', tipo: 'ataque_directo' } },
 
-    // 2. Viento Especial — Acorde Mayor: al entrar inflige daño directo al Director rival
-    { id: 'v_10', nombre: 'Órgano', familia: 'Viento Especial', costo: 10, ataque: 1000, defensa: 1100, descripcion: 'Jefe Final. El rey de los instrumentos, tubos gigantes.', emoji: '⛪', imagen: 'img/cartas/cartaorgano.png',
-      habilidad: { nombre: 'Acorde Mayor', descripcion: 'Al entrar en escena, inflige 500 de daño al Director rival.', tipo: 'entrada_dano', valor: 500 } },
+    // 2. Vent Especial — Acord Major: en entrar infligeix dany directe al Director rival
+    { id: 'v_10', nombre: 'Orgue', familia: 'Vent Especial', costo: 10, ataque: 1000, defensa: 1100, descripcion: 'Cap Final. El rei dels instruments, tubs gegants.', emoji: '⛪', imagen: 'img/cartas/cartaorgano.png',
+      habilidad: { nombre: 'Acord Major', descripcion: 'En entrar en escena, infligeix 500 de dany al Director rival.', tipo: 'entrada_dano', valor: 500 } },
 
-    // 3. Percusión Determinada — Melodía: al atacar, da +ataque a un aliado
-    { id: 'p_03', nombre: 'Xilófono',   familia: 'Percusión Determinada', costo: 3, ataque: 500, defensa: 200, descripcion: 'Ataque preciso. Láminas de madera percutidas.', emoji: '🎹', imagen: 'img/cartas/cartaxilofono.png',
-      habilidad: { nombre: 'Melodía', descripcion: 'Al atacar, da +100 de ataque a un instrumento aliado.', tipo: 'buff_aliado', valor: 100 } },
-    { id: 'p_04', nombre: 'Metalófono', familia: 'Percusión Determinada', costo: 4, ataque: 600, defensa: 300, descripcion: 'Daño contundente. Vibráfono o campanas metálicas.', emoji: '🔔', imagen: 'img/cartas/cartametalofono.png',
-      habilidad: { nombre: 'Melodía', descripcion: 'Al atacar, da +100 de ataque a un instrumento aliado.', tipo: 'buff_aliado', valor: 100 } },
-    { id: 'p_07', nombre: 'Timbales',   familia: 'Percusión Determinada', costo: 7, ataque: 700, defensa: 800, descripcion: 'Tropa de élite. Calderos de cobre afinables.', emoji: '🥁', imagen: 'img/cartas/cartatimbales.png',
-      habilidad: { nombre: 'Melodía', descripcion: 'Al atacar, da +150 de ataque a un instrumento aliado.', tipo: 'buff_aliado', valor: 150 } },
+    // 3. Percussió Determinada — Melodia: en atacar, dóna +atac a un aliat
+    { id: 'p_03', nombre: 'Xilòfon',   familia: 'Percussió Determinada', costo: 3, ataque: 500, defensa: 200, descripcion: 'Atac precís. Làmines de fusta percudides.', emoji: '🎹', imagen: 'img/cartas/cartaxilofono.png',
+      habilidad: { nombre: 'Melodia', descripcion: 'En atacar, dóna +100 d\'atac a un instrument aliat.', tipo: 'buff_aliado', valor: 100 } },
+    { id: 'p_04', nombre: 'Metal·lòfon', familia: 'Percussió Determinada', costo: 4, ataque: 600, defensa: 300, descripcion: 'Dany contundent. Vibràfon o campanes metàl·liques.', emoji: '🔔', imagen: 'img/cartas/cartametalofono.png',
+      habilidad: { nombre: 'Melodia', descripcion: 'En atacar, dóna +100 d\'atac a un instrument aliat.', tipo: 'buff_aliado', valor: 100 } },
+    { id: 'p_07', nombre: 'Timbales',   familia: 'Percussió Determinada', costo: 7, ataque: 700, defensa: 800, descripcion: 'Tropa d\'elit. Calders de coure afinables.', emoji: '🥁', imagen: 'img/cartas/cartatimbales.png',
+      habilidad: { nombre: 'Melodia', descripcion: 'En atacar, dóna +150 d\'atac a un instrument aliat.', tipo: 'buff_aliado', valor: 150 } },
 
-    // 3. Percusión Indeterminada — Golpe Final: al ser destruido, inflige daño al Director rival
-    { id: 'p_01', nombre: 'Triángulo', familia: 'Percusión Indeterminada', costo: 1, ataque: 100, defensa: 200, descripcion: 'Utilidad barata. Varilla metálica doblada.', emoji: '🔺', imagen: 'img/cartas/cartatriangulo.png',
-      habilidad: { nombre: 'Golpe Final', descripcion: 'Al ser destruido, inflige su Ataque al Director que lo destruyó.', tipo: 'muerte_dano' } },
-    { id: 'p_02', nombre: 'Pandereta', familia: 'Percusión Indeterminada', costo: 2, ataque: 200, defensa: 300, descripcion: 'Defensa ligera. Marco con sonajas metálicas.', emoji: '🪇', imagen: 'img/cartas/cartapandereta.png',
-      habilidad: { nombre: 'Golpe Final', descripcion: 'Al ser destruido, inflige su Ataque al Director que lo destruyó.', tipo: 'muerte_dano' } },
-    { id: 'p_05', nombre: 'Platos',    familia: 'Percusión Indeterminada', costo: 5, ataque: 900, defensa: 200, descripcion: 'Ataque suicida masivo. Dos discos chocando.', emoji: '💿', imagen: 'img/cartas/cartaplatos.png',
-      habilidad: { nombre: 'Golpe Final', descripcion: 'Al ser destruido, inflige su Ataque al Director que lo destruyó.', tipo: 'muerte_dano' } },
-    { id: 'p_06', nombre: 'Bombo',     familia: 'Percusión Indeterminada', costo: 6, ataque: 400, defensa: 900, descripcion: 'Absorbedor de daño. El tambor más grave.', emoji: '🥁', imagen: 'img/cartas/cartabombo.png',
-      habilidad: { nombre: 'Golpe Final', descripcion: 'Al ser destruido, inflige su Ataque al Director que lo destruyó.', tipo: 'muerte_dano' } },
-    { id: 'p_08', nombre: 'Batería',   familia: 'Percusión Indeterminada', costo: 8, ataque: 800, defensa: 900, descripcion: 'El motor del ritmo. Conjunto masivo de tambores y platos.', emoji: '🥁', imagen: 'img/cartas/cartabateria.png',
-      habilidad: { nombre: 'Golpe Final', descripcion: 'Al ser destruido, inflige su Ataque al Director que lo destruyó.', tipo: 'muerte_dano' } },
+    // 3. Percussió Indeterminada — Colp Final: en ser destruït, infligeix dany al Director rival
+    { id: 'p_01', nombre: 'Triangle', familia: 'Percussió Indeterminada', costo: 1, ataque: 100, defensa: 200, descripcion: 'Utilitat barata. Vareta metàl·lica doblegada.', emoji: '🔺', imagen: 'img/cartas/cartatriangulo.png',
+      habilidad: { nombre: 'Colp Final', descripcion: 'En ser destruït, infligeix el seu Atac al Director que l\'ha destruït.', tipo: 'muerte_dano' } },
+    { id: 'p_02', nombre: 'Pandereta', familia: 'Percussió Indeterminada', costo: 2, ataque: 200, defensa: 300, descripcion: 'Defensa lleugera. Marc amb sonalles metàl·liques.', emoji: '🪇', imagen: 'img/cartas/cartapandereta.png',
+      habilidad: { nombre: 'Colp Final', descripcion: 'En ser destruït, infligeix el seu Atac al Director que l\'ha destruït.', tipo: 'muerte_dano' } },
+    { id: 'p_05', nombre: 'Plats',    familia: 'Percussió Indeterminada', costo: 5, ataque: 900, defensa: 200, descripcion: 'Atac suïcida massiu. Dos discos xocant.', emoji: '💿', imagen: 'img/cartas/cartaplatos.png',
+      habilidad: { nombre: 'Colp Final', descripcion: 'En ser destruït, infligeix el seu Atac al Director que l\'ha destruït.', tipo: 'muerte_dano' } },
+    { id: 'p_06', nombre: 'Bombo',     familia: 'Percussió Indeterminada', costo: 6, ataque: 400, defensa: 900, descripcion: 'Absorbidor de dany. El tambor més greu.', emoji: '🥁', imagen: 'img/cartas/cartabombo.png',
+      habilidad: { nombre: 'Colp Final', descripcion: 'En ser destruït, infligeix el seu Atac al Director que l\'ha destruït.', tipo: 'muerte_dano' } },
+    { id: 'p_08', nombre: 'Bateria',   familia: 'Percussió Indeterminada', costo: 8, ataque: 800, defensa: 900, descripcion: 'El motor del ritme. Conjunt massiu de tambors i plats.', emoji: '🥁', imagen: 'img/cartas/cartabateria.png',
+      habilidad: { nombre: 'Colp Final', descripcion: 'En ser destruït, infligeix el seu Atac al Director que l\'ha destruït.', tipo: 'muerte_dano' } },
 
-    // 4. Electrónicos — Amplificación: al entrar, da +ataque a todos los aliados en campo
-    { id: 'e_01', nombre: 'Teclado MIDI',      familia: 'Electrónico', costo: 3, ataque: 300, defensa: 400, descripcion: 'Soporte flexible. Controlador digital silencioso por sí mismo.', emoji: '⌨️', imagen: 'img/cartas/cartatecladomidi.png',
-      habilidad: { nombre: 'Amplificación', descripcion: 'Al entrar, da +80 de ataque a todos tus instrumentos en campo.', tipo: 'amplificar', valor: 80 } },
-    { id: 'e_02', nombre: 'Sintetizador',      familia: 'Electrónico', costo: 4, ataque: 500, defensa: 400, descripcion: 'Daño constante. Creador de ondas artificiales.', emoji: '🎛️', imagen: 'img/cartas/cartasintetizador.png',
-      habilidad: { nombre: 'Amplificación', descripcion: 'Al entrar, da +100 de ataque a todos tus instrumentos en campo.', tipo: 'amplificar', valor: 100 } },
-    { id: 'e_03', nombre: 'Bajo Eléctrico',    familia: 'Electrónico', costo: 5, ataque: 400, defensa: 700, descripcion: 'Base rítmica sólida. Sostiene el groove de la banda.', emoji: '🎸', imagen: 'img/cartas/cartabajoelectrico.png',
-      habilidad: { nombre: 'Amplificación', descripcion: 'Al entrar, da +100 de ataque a todos tus instrumentos en campo.', tipo: 'amplificar', valor: 100 } },
-    { id: 'e_04', nombre: 'Guitarra Eléctrica', familia: 'Electrónico', costo: 6, ataque: 800, defensa: 500, descripcion: 'Rematador eléctrico. Melodías desgarradoras y distorsión.', emoji: '⚡', imagen: 'img/cartas/cartaguitarraelectrica.png',
-      habilidad: { nombre: 'Amplificación', descripcion: 'Al entrar, da +150 de ataque a todos tus instrumentos en campo.', tipo: 'amplificar', valor: 150 } },
+    // 4. Electrònics — Amplificació: en entrar, dóna +atac a tots els aliats al camp
+    { id: 'e_01', nombre: 'Teclat MIDI',      familia: 'Electrònic', costo: 3, ataque: 300, defensa: 400, descripcion: 'Suport flexible. Controlador digital silenciós per si mateix.', emoji: '⌨️', imagen: 'img/cartas/cartatecladomidi.png',
+      habilidad: { nombre: 'Amplificació', descripcion: 'En entrar, dóna +80 d\'atac a tots els teus instruments al camp.', tipo: 'amplificar', valor: 80 } },
+    { id: 'e_02', nombre: 'Sintetitzador',      familia: 'Electrònic', costo: 4, ataque: 500, defensa: 400, descripcion: 'Dany constant. Creador d\'ones artificials.', emoji: '🎛️', imagen: 'img/cartas/cartasintetizador.png',
+      habilidad: { nombre: 'Amplificació', descripcion: 'En entrar, dóna +100 d\'atac a tots els teus instruments al camp.', tipo: 'amplificar', valor: 100 } },
+    { id: 'e_03', nombre: 'Baix Elèctric',    familia: 'Electrònic', costo: 5, ataque: 400, defensa: 700, descripcion: 'Base rítmica sòlida. Sosté el groove de la banda.', emoji: '🎸', imagen: 'img/cartas/cartabajoelectrico.png',
+      habilidad: { nombre: 'Amplificació', descripcion: 'En entrar, dóna +100 d\'atac a tots els teus instruments al camp.', tipo: 'amplificar', valor: 100 } },
+    { id: 'e_04', nombre: 'Guitarra Elèctrica', familia: 'Electrònic', costo: 6, ataque: 800, defensa: 500, descripcion: 'Rematador elèctric. Melodies desgarradores i distorsió.', emoji: '⚡', imagen: 'img/cartas/cartaguitarraelectrica.png',
+      habilidad: { nombre: 'Amplificació', descripcion: 'En entrar, dóna +150 d\'atac a tots els teus instruments al camp.', tipo: 'amplificar', valor: 150 } },
 ];
 
 const estado = {
@@ -100,7 +100,80 @@ let draggingCard = null;
 let cardCounter = 0;
 let rachaVictorias = 0;
 let atacanteSeleccionado = null;
-const bossNames = ["Aprendiz", "Promesa", "Titular", "Virtuoso", "Maestro"];
+const bossNames = ["Aprenent", "Promesa", "Titular", "Virtuós", "Mestre"];
+
+// ARENA STATE
+let arenaMode = false;
+let arenaDeck = [];   // IDs de cartes triades (10)
+let arenaStreak = 0;  // victòries consecutives en la run actual
+
+// TUTORIAL STATE
+let tutorialActivo = false;
+let tutorialPas = 0;
+let tutorialEsperant = null; // 'card_played' | 'attack_done' | 'end_turn'
+
+const TUTORIAL_PASOS = [
+    {
+        selector: null,
+        title: '🎼 Benvingut al Tutorial!',
+        text: 'Aprèn a jugar a Symphonic Clash en uns pocs passos guiats.\n\nObjectiu: reduir la vida del Director Rival a 0 usant les teves cartes d\'instruments. Clica "Entès" per continuar!',
+        waitFor: null, position: 'center'
+    },
+    {
+        selector: '#ai-director-area',
+        title: '🎯 L\'Objectiu: Reduir la seva vida',
+        text: 'Aquí és el Director Rival. Té 800 Punts d\'Audiència (PA). Quan arribin a 0, guanyes la partida!',
+        waitFor: null, position: 'bottom'
+    },
+    {
+        selector: '#player-director-area',
+        title: '🛡️ La Teva Vida',
+        text: 'Ets el Director Blau. Tens 5000 PA. Si el rival et deixa a 0, perds.\n\nProtegeix-te mentre destrueixes el rival!',
+        waitFor: null, position: 'top'
+    },
+    {
+        selector: '#player-director-area',
+        title: '⚡ El Tempo',
+        text: 'El TEMPO (a la dreta del teu avatar) és el teu manà. Comences amb 3 per a aquest tutorial i en guanyes 1 cada torn (màxim 10).\n\nJugar cartes costa Tempo!',
+        waitFor: null, position: 'top'
+    },
+    {
+        selector: '#player-hand',
+        title: '🃏 La Teva Mà',
+        text: 'Tens 3 cartes. Cada una mostra:\n\n🔵 Cost — Tempo necessari per jugar-la\n🔴 Atac — Dany que infligeix\n🟢 Defensa — Vida que té\n\nPassa el cursor per sobre per veure l\'habilitat especial!',
+        waitFor: null, position: 'top'
+    },
+    {
+        selectors: ['#player-hand', '#player-stage'],
+        title: '▶ Juga la Flauta Travessera!',
+        text: 'Arrossega la FLAUTA TRAVESSERA (cost 1⚡) cap avall fins a la zona de l\'Escenari (centre de la pantalla).\n\nÉs un Vent Fusta amb habilitat ÀGIL — pot atacar el mateix torn que es juga!',
+        waitFor: 'card_played', position: 'corner'
+    },
+    {
+        selectors: ['#player-stage', '#ai-director-area'],
+        title: '⚔️ Ataca el Director Rival!',
+        text: 'La carta és a l\'Escenari! Ara ataca en 2 passos:\n\n1️⃣ Clica la carta per seleccionar-la (es posarà brillant)\n2️⃣ Clica el Director Rival (a dalt) per atacar-lo!\n\n(Si la carta té 💤, finalitza el torn primer)',
+        waitFor: 'attack_done', position: 'corner'
+    },
+    {
+        selector: null,
+        title: '✨ Habilitats de les Cartes',
+        text: 'Cada família d\'instruments té una habilitat única:\n\n⚡ Vent Fusta — Àgil: ataca el torn que s\'invoca\n📯 Vent Metall — Fanfàrria: ignora el camp rival\n🎻 Corda Fregada — Ressonància: recupera PA cada torn\n🎹 Corda Percudida — Impacte Total: danya tots els rivals\n⛪ Vent Especial — Acord Major: danya el Director en entrar\n🎛️ Electrònic — Amplificació: dona +atac als aliats en entrar\n🎵 Percussió Det. — Melodia: dona +atac a un aliat en atacar\n💀 Percussió Ind. — Colp Final: danya al morir',
+        waitFor: null, position: 'center'
+    },
+    {
+        selector: '#btn-end-turn',
+        title: '⚡ Finalitza el Torn',
+        text: 'Quan hagis jugat totes les cartes que vulguis i atacat, finalitza el torn.\n\nEl rival jugarà les seves cartes, i desprès tornes a jugar tu. El joc alterna torns fins que un dels dos arriba a 0 PA.',
+        waitFor: 'end_turn', position: 'corner'
+    },
+    {
+        selector: null,
+        title: '🎉 Ja Saps Jugar!',
+        text: 'Ara la resta és per compte teu!\n\nContinua jugant cartes, atacant el Director Rival i reduint la seva vida a 0. Si guanyes el tutorial rebràs 100 Notes d\'Or per comprar les teves primeres cartes!',
+        waitFor: 'dismiss', position: 'center'
+    }
+];
 
 // ALBUM & ECONOMY STATE
 let cartasDescubiertas = JSON.parse(localStorage.getItem('symphonicClashAlbum')) || [];
@@ -208,13 +281,263 @@ const elems = {
     btnEndTurn: document.getElementById('btn-end-turn')
 };
 
+// ========================
+// TUTORIAL ENGINE
+// ========================
+function iniciarTutorial() {
+    tutorialActivo = true;
+    tutorialPas = 0;
+    tutorialEsperant = null;
+
+    // Setup special tutorial game state
+    const nomInput = document.getElementById('player-name-input').value.trim();
+    estado.player.nombre = nomInput || 'Estudiant';
+    elems.playerNameDisplay.textContent = estado.player.nombre;
+
+    estado.turnoActual = 1;
+    estado.jugadorActual = 'player';
+    estado.playerHpMax = 5000;
+    estado.aiHpMax = 800;
+
+    estado.player = { ...estado.player, hp: 5000, tempoMax: 3, tempoActual: 3, mazo: [], mano: [], escenario: [] };
+    estado.ai    = { hp: 800, tempoMax: 2, tempoActual: 2, mazo: [], mano: [], escenario: [] };
+
+    // Fixed player hand: Flauta (Àgil), Ukelele (Punteig), Violí (Ressonància)
+    ['v_01', 'c_08', 'c_02'].forEach(id => {
+        const base = cartasBD.find(c => c.id === id);
+        if (base) estado.player.mano.push({ ...base, instanceId: `tut_p_${cardCounter++}`, sleeping: false });
+    });
+
+    // Weak enemy hand
+    ['p_01', 'c_08', 'p_02'].forEach(id => {
+        const base = cartasBD.find(c => c.id === id);
+        if (base) estado.ai.mano.push({ ...base, instanceId: `tut_ai_${cardCounter++}`, sleeping: false });
+    });
+
+    // Set enemy portrait
+    document.getElementById('ai-director-avatar').className = 'director-avatar bg-apprentice';
+    document.getElementById('ai-director-name').textContent = "L'Aprenent";
+
+    // Show board
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('dialogue-overlay').classList.add('hidden');
+    const board = document.getElementById('game-board');
+    board.classList.remove('hidden');
+    board.classList.add('tut-lock');
+    elems.btnEndTurn.disabled = false;
+    elems.btnEndTurn.textContent = '⚡ FINALITZAR TORN';
+
+    actualizarUI();
+    renderizarMano('player');
+    renderizarMano('ai');
+    renderizarEscenario('player');
+    renderizarEscenario('ai');
+    actualizarTurnIndicator();
+
+    document.getElementById('tutorial-overlay').classList.remove('hidden');
+    mostrarPasTutorial(0);
+}
+
+function mostrarPasTutorial(n) {
+    const pas = TUTORIAL_PASOS[n];
+    if (!pas) { tancarTutorial(); return; }
+
+    tutorialPas      = n;
+    tutorialEsperant = pas.waitFor;
+
+    // Clear previous highlights and blinks
+    document.querySelectorAll('.tutorial-highlighted, .tut-blink').forEach(el => {
+        el.classList.remove('tutorial-highlighted', 'tut-blink');
+    });
+
+    const titleEl  = document.getElementById('tut-title');
+    const textEl   = document.getElementById('tut-text');
+    const nextBtn  = document.getElementById('btn-tut-next');
+    const stepEl   = document.getElementById('tut-step');
+    const tooltip  = document.getElementById('tutorial-tooltip');
+    const backdrop = document.getElementById('tut-backdrop');
+
+    titleEl.textContent = pas.title;
+    textEl.textContent  = pas.text;
+    stepEl.textContent  = `${n + 1} / ${TUTORIAL_PASOS.length}`;
+
+    if (pas.waitFor === null) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = n === 0 ? 'Comencem! →' : 'Entès →';
+    } else if (pas.waitFor === 'dismiss') {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = '← Tornar al Menú';
+    } else {
+        nextBtn.classList.add('hidden');
+    }
+
+    if (pas.selectors || pas.selector) {
+        const selectorList = pas.selectors || [pas.selector];
+        let firstTarget = null;
+
+        selectorList.forEach((sel, idx) => {
+            const target = document.querySelector(sel);
+            if (target) {
+                target.classList.add('tutorial-highlighted');
+                if (idx === 0) firstTarget = target;
+            }
+        });
+
+        backdrop.style.background = 'rgba(0,0,0,0.65)';
+
+        // Add blink to the PRIMARY action target for interactive steps
+        aplicarBlinkTutorial(pas.waitFor);
+
+        if (pas.position === 'corner') {
+            posicionarTooltipTutorial(null, 'corner', tooltip);
+        } else if (firstTarget) {
+            posicionarTooltipTutorial(firstTarget, pas.position, tooltip);
+        }
+    } else {
+        backdrop.style.background = 'rgba(0,0,0,0.88)';
+        tooltip.style.top    = '50%';
+        tooltip.style.left   = '50%';
+        tooltip.style.right  = 'auto';
+        tooltip.style.bottom = 'auto';
+        tooltip.style.transform = 'translate(-50%,-50%)';
+    }
+}
+
+function aplicarBlinkTutorial(waitFor) {
+    if (!waitFor || waitFor === 'dismiss') return;
+
+    if (waitFor === 'card_played') {
+        // Blink each card in the player's hand
+        document.querySelectorAll('#player-hand .card').forEach(c => c.classList.add('tut-blink'));
+    } else if (waitFor === 'attack_done') {
+        // Blink cards on stage (to select) + enemy director (to attack)
+        document.querySelectorAll('#player-stage .card').forEach(c => c.classList.add('tut-blink'));
+        const dir = document.getElementById('ai-director-area');
+        if (dir) dir.classList.add('tut-blink');
+    } else if (waitFor === 'end_turn') {
+        const btn = document.getElementById('btn-end-turn');
+        if (btn) btn.classList.add('tut-blink');
+    }
+}
+
+function posicionarTooltipTutorial(targetEl, position, tooltip) {
+    tooltip.style.transform = 'none';
+    tooltip.style.bottom    = 'auto';
+    tooltip.style.top       = 'auto';
+    tooltip.style.left      = 'auto';
+    tooltip.style.right     = 'auto';
+
+    // Interactive steps: park tooltip in bottom-right corner so it never covers the play area
+    if (position === 'corner') {
+        tooltip.style.bottom = '14px';
+        tooltip.style.right  = '14px';
+        return;
+    }
+
+    const rect = targetEl.getBoundingClientRect();
+    const GAP  = 20;
+    const TW   = 430;
+
+    const leftVal = Math.min(
+        Math.max(rect.left + rect.width / 2 - TW / 2, 10),
+        window.innerWidth - TW - 10
+    ) + 'px';
+
+    if (position === 'bottom') {
+        tooltip.style.top  = (rect.bottom + GAP) + 'px';
+        tooltip.style.left = leftVal;
+    } else if (position === 'top') {
+        tooltip.style.bottom = (window.innerHeight - rect.top + GAP) + 'px';
+        tooltip.style.top    = 'auto';
+        tooltip.style.left   = leftVal;
+    } else {
+        tooltip.style.top    = '50%';
+        tooltip.style.left   = '50%';
+        tooltip.style.transform = 'translate(-50%,-50%)';
+    }
+}
+
+function avançarTutorial() {
+    mostrarPasTutorial(tutorialPas + 1);
+}
+
+function tancarTutorial() {
+    tutorialActivo   = false;
+    tutorialEsperant = null;
+    document.querySelectorAll('.tutorial-highlighted').forEach(el => el.classList.remove('tutorial-highlighted'));
+    document.getElementById('tutorial-overlay').classList.add('hidden');
+    document.getElementById('game-board').classList.remove('tut-lock');
+}
+
+function tancarTotsElsModals() {
+    const modals = [
+        'instructions-modal', 'album-modal', 'deckbuilder-modal', 
+        'store-modal', 'quiz-modal', 'welcome-modal', 
+        'game-result-modal', 'arena-modal', 'pack-opening-modal'
+    ];
+    modals.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+    });
+}
+
+function terminarPartidaTutorial(victoria) {
+    tancarTutorial();
+    const modal  = document.getElementById('game-result-modal');
+    const icon   = document.getElementById('result-icon');
+    const titulo = document.getElementById('result-title');
+    const msj    = document.getElementById('result-message');
+    modal.classList.remove('hidden');
+
+    if (victoria) {
+        notasDeOro += 100;
+        actualizarEconomia();
+        icon.textContent   = '🎓';
+        titulo.textContent = 'Tutorial Completat!';
+        titulo.style.color = '#a855f7';
+        msj.textContent    = 'Enhorabona! Ja saps jugar a Symphonic Clash.\n\n💰 Has guanyat 100 Notes d\'Or. Compra\'t cartes a la Botiga i construeix el teu primer Mazo per a la Campanya!';
+    } else {
+        icon.textContent   = '💀';
+        titulo.textContent = 'Has Perdut!';
+        titulo.style.color = '#ff5555';
+        msj.textContent    = 'El rival t\'ha vençut. No pateixis — el tutorial és per aprendre! Torna-ho a intentar.';
+    }
+}
+
 function init() {
     actualizarEconomia();
     actualizarMazoContador();
+    actualizarRachaNodos();
 
-    // Check first time playing
-    if (!localStorage.getItem('sc_hasPlayed')) {
-        document.getElementById('welcome-modal').classList.remove('hidden');
+    // Splash screen logic
+    const splashScreen = document.getElementById('splash-screen');
+    const mainMenu = document.getElementById('main-menu');
+    
+    // Ensure main menu is hidden initially if splash is present
+    if (splashScreen) {
+        mainMenu.classList.add('hidden');
+        const btnEnter = document.getElementById('btn-splash-enter');
+        if (btnEnter) {
+            btnEnter.onclick = () => {
+                splashScreen.style.opacity = '0';
+                splashScreen.style.visibility = 'hidden';
+                splashScreen.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    splashScreen.classList.add('hidden');
+                    mainMenu.classList.remove('hidden');
+                    actualizarEconomia(); // Ensure initial state is rendered
+                    actualizarMazoContador();
+                    
+                    // Check for welcome pack if it's the first time
+                    if (!localStorage.getItem('sc_hasPlayed')) {
+                        tancarTotsElsModals();
+                        document.getElementById('welcome-modal').classList.remove('hidden');
+                    }
+                }, 800);
+            };
+        }
+    } else {
+        mainMenu.classList.remove('hidden');
     }
 
     // Welcome Screen listeners
@@ -227,19 +550,20 @@ function init() {
     // Menu listeners
     document.getElementById('btn-play').addEventListener('click', () => {
         if(mazoJugador.length < 10) {
-            mostrarToast("⚠️ Necesitas construir tu mazo (10 cartas) primero.", "danger");
+            mostrarToast("⚠️ Necessites construir el teu mazo (10 cartes) primer.", "danger");
             return;
         }
         iniciarPartida();
     });
     document.getElementById('btn-menu-help').addEventListener('click', () => {
+        tancarTotsElsModals();
         document.getElementById('instructions-modal').classList.remove('hidden');
     });
     document.getElementById('btn-close-help').addEventListener('click', () => {
         document.getElementById('instructions-modal').classList.add('hidden');
     });
     document.getElementById('btn-reset-data').addEventListener('click', () => {
-        if(confirm("⚠️ ¿Estás seguro de que quieres BORRAR TODA TU PARTIDA? Perderás tus cartas, tus mazos y tus Notas de Oro. Esta acción es irreversible.")) {
+        if(confirm("⚠️ Estàs segur que vols ESBORRAR TOTA LA TEVA PARTIDA? Perdràs les teves cartes, els teus mazos i les teves Notes d'Or. Aquesta acció és irreversible.")) {
             localStorage.clear();
             location.reload();
         }
@@ -249,7 +573,10 @@ function init() {
     });
 
     // Quiz listeners
-    document.getElementById('btn-menu-quiz').addEventListener('click', abrirQuiz);
+    document.getElementById('btn-menu-quiz').addEventListener('click', () => {
+        tancarTotsElsModals();
+        abrirQuiz();
+    });
     document.getElementById('btn-close-quiz').addEventListener('click', () => {
         document.getElementById('quiz-modal').classList.add('hidden');
     });
@@ -263,6 +590,7 @@ function init() {
     // Store & Deckbuilder
     document.getElementById('btn-menu-store').addEventListener('click', () => {
         actualizarEconomia();
+        tancarTotsElsModals();
         document.getElementById('store-modal').classList.remove('hidden');
     });
     document.getElementById('btn-close-store').addEventListener('click', () => {
@@ -278,7 +606,10 @@ function init() {
         actualizarEconomia();
     });
 
-    document.getElementById('btn-menu-deck').addEventListener('click', abrirDeckbuilder);
+    document.getElementById('btn-menu-deck').addEventListener('click', () => {
+        tancarTotsElsModals();
+        abrirDeckbuilder();
+    });
     document.getElementById('btn-close-deckbuilder').addEventListener('click', () => {
         document.getElementById('deckbuilder-modal').classList.add('hidden');
         actualizarMazoContador();
@@ -286,14 +617,55 @@ function init() {
     document.getElementById('btn-save-deck').addEventListener('click', guardarMazo);
 
     // Album listeners
-    document.getElementById('btn-menu-album').addEventListener('click', abrirAlbum);
+    document.getElementById('btn-menu-album').addEventListener('click', () => {
+        tancarTotsElsModals();
+        abrirAlbum();
+    });
     document.getElementById('btn-close-album').addEventListener('click', () => {
         document.getElementById('album-modal').classList.add('hidden');
     });
 
-    // Game result modal
+    // Tutorial listeners
+    document.getElementById('btn-menu-tutorial').addEventListener('click', iniciarTutorial);
+    document.getElementById('btn-tut-next').addEventListener('click', () => {
+        if (tutorialEsperant === 'dismiss') {
+            tancarTutorial();
+            document.getElementById('game-board').classList.add('hidden');
+            document.getElementById('main-menu').classList.remove('hidden');
+            actualizarRachaNodos();
+        } else {
+            avançarTutorial();
+        }
+    });
+
+    // Arena listeners
+    document.getElementById('btn-menu-arena').addEventListener('click', abrirArena);
+    document.getElementById('btn-close-arena').addEventListener('click', () => {
+        arenaMode = false;
+        arenaDeck = [];
+        arenaStreak = 0;
+        document.getElementById('arena-modal').classList.add('hidden');
+    });
+    document.getElementById('btn-arena-fight').addEventListener('click', () => {
+        document.getElementById('arena-modal').classList.add('hidden');
+        iniciarBatallaArena();
+    });
+
+    // Game result modal — returns to menu or continues arena run
     document.getElementById('btn-result-ok').addEventListener('click', () => {
         document.getElementById('game-result-modal').classList.add('hidden');
+        document.getElementById('game-board').classList.add('hidden');
+
+        if (arenaMode) {
+            // Arena run still active → show ready phase and fight again
+            document.getElementById('arena-ready-phase').classList.remove('hidden');
+            document.getElementById('arena-draft-phase').classList.add('hidden');
+            document.getElementById('arena-streak-display').textContent = arenaStreak;
+            document.getElementById('arena-modal').classList.remove('hidden');
+        } else {
+            document.getElementById('main-menu').classList.remove('hidden');
+            actualizarRachaNodos();
+        }
     });
 
     // Game listeners
@@ -311,13 +683,27 @@ function init() {
         }
     });
 
+    // Back to menu button (in-game)
+    document.getElementById('btn-back-menu').addEventListener('click', () => {
+        if (confirm('Segur que vols abandonar la partida i tornar al menú?')) {
+            arenaMode = false;
+            if (tutorialActivo) tancarTutorial();
+            document.getElementById('game-board').classList.add('hidden');
+            document.getElementById('dialogue-overlay').classList.add('hidden');
+            document.getElementById('main-menu').classList.remove('hidden');
+            actualizarRachaNodos();
+        }
+    });
+
     setupDragAndDrop();
     actualizarRachaNodos();
 }
 
 function iniciarPartida() {
-    let aiHpBase = 3500 + (rachaVictorias * 1000);
-    let aiTempoBase = 3 + rachaVictorias;
+    // Progressió: Aprenent 1500 → Promesa 2500 → Titular 3500 → Virtuós 5000 → Mestre 7000
+    const aiHpPerBoss = [1500, 2500, 3500, 5000, 7000];
+    let aiHpBase = aiHpPerBoss[Math.min(rachaVictorias, 4)];
+    let aiTempoBase = 2 + rachaVictorias; // 2→6 tempo
 
     const inputNombre = document.getElementById('player-name-input').value.trim();
     estado.player.nombre = inputNombre || 'Tu Director';
@@ -339,7 +725,14 @@ function iniciarPartida() {
     }
 
     document.getElementById('main-menu').classList.add('hidden');
-    
+
+    // Set in-game AI avatar and name to current boss
+    const bossClasses = ['bg-apprentice', 'bg-promise', 'bg-titular', 'bg-virtuoso', 'bg-maestro'];
+    const bossFullNames = ["L'Aprenent", "La Promesa", "El Titular", "El Virtuós", "El Mestre Suprem"];
+    const aiAvatarEl = document.getElementById('ai-director-avatar');
+    aiAvatarEl.className = 'director-avatar ' + (bossClasses[rachaVictorias] || bossClasses[4]);
+    document.getElementById('ai-director-name').textContent = bossFullNames[rachaVictorias] || bossFullNames[4];
+
     // Show dialogue intercepting the board rendering
     showBossDialogue(rachaVictorias);
 }
@@ -349,7 +742,7 @@ function proceedToBoard() {
     document.getElementById('game-board').classList.remove('hidden');
 
     elems.btnEndTurn.disabled = false;
-    elems.btnEndTurn.textContent = "Fin de Turno";
+    elems.btnEndTurn.textContent = "⚡ FINALITZAR TORN";
 
     actualizarUI();
     renderizarMano('player');
@@ -361,9 +754,12 @@ function proceedToBoard() {
 
 function generarMazo(isPlayer) {
     let mazo = [];
-    if (isPlayer && mazoJugador.length === 10) {
+    const src = isPlayer
+        ? (arenaMode ? arenaDeck : mazoJugador)
+        : null;
+    if (src && src.length === 10) {
         for (let i = 0; i < 30; i++) {
-            let cardId = mazoJugador[i % 10];
+            let cardId = src[i % 10];
             let cardDef = cartasBD.find(c => c.id === cardId);
             if(cardDef) mazo.push({ ...cardDef, instanceId: `card_${cardCounter++}`, sleeping: false });
         }
@@ -402,7 +798,7 @@ function robarCartaJugador() {
         actualizarUI();
         renderizarMano('player');
     } else {
-        mostrarToast("⚠️ No tienes Tempo suficiente para robar. (Cuesta 1)", "danger");
+        mostrarToast("⚠️ No tens prou Tempo per robar. (Costa 1)", "danger");
     }
 }
 
@@ -466,26 +862,35 @@ function mostrarResultado(victoria) {
     if (victoria) {
         if (rachaVictorias >= 5) {
             icon.textContent = '🏆';
-            title.textContent = '¡CAMPAÑA COMPLETADA!';
+            title.textContent = 'Campanya Completada!';
             title.style.color = '#ffdd44';
-            message.textContent = 'Has derrotado a la IA 5 veces consecutivas y eres un Maestro Director. ¡La orquesta es tuya!';
+            message.textContent = 'Has derrotat els 5 Directors i ets el nou Mestre Suprem. L\'orquestra és teva!';
         } else {
             icon.textContent = '🎵';
-            title.textContent = '¡Concierto un Éxito!';
+            title.textContent = 'Concert un Èxit!';
             title.style.color = '#55ee55';
-            message.textContent = `Has vencido al Director rival. Racha actual: ${rachaVictorias}/5.`;
+            message.textContent = `Has vençut al Director rival. Ratxa actual: ${rachaVictorias}/5.`;
         }
     } else {
         icon.textContent = '💀';
-        title.textContent = '¡Has Perdido!';
+        title.textContent = 'Has Perdut!';
         title.style.color = '#ff5555';
-        message.textContent = 'Tus Puntos de Audiencia llegaron a 0. Tu racha vuelve a cero. ¡Inténtalo de nuevo!';
+        message.textContent = 'Els teus Punts d\'Audiència han arribat a 0. La teva ratxa torna a zero. Torna-ho a intentar!';
     }
 
     modal.classList.remove('hidden');
 }
 
 function terminarPartida(victoria) {
+    if (tutorialActivo) {
+        terminarPartidaTutorial(victoria);
+        return;
+    }
+    if (arenaMode) {
+        terminarPartidaArena(victoria);
+        return;
+    }
+
     const modal = document.getElementById('game-result-modal');
     const msj = document.getElementById('result-message');
     const icon = document.getElementById('result-icon');
@@ -498,14 +903,17 @@ function terminarPartida(victoria) {
         notasDeOro += 50;
         actualizarEconomia();
 
-        let defeatedBoss = bossNames[rachaVictorias - 1] || 'Director Vencido';
-        icon.className = 'result-icon win';
-        titulo.innerText = '¡Gran Actuación!';
-        msj.innerText = `Tu sinfonía ha silenciado al ${defeatedBoss}.\n\n💰 Has ganado 50 Notas de Oro.`;
+        let defeatedBoss = bossNames[rachaVictorias - 1] || 'Director Vençut';
+        icon.textContent = '🎵';
+        titulo.style.color = '#55ee55';
+        titulo.innerText = 'Gran Actuació!';
+        msj.innerText = `La teva simfonia ha silenciat ${defeatedBoss}.\n\n💰 Has guanyat 50 Notes d'Or.`;
 
         if (rachaVictorias >= 5) {
-            titulo.innerText = '¡Campaña Superada!';
-            msj.innerText = `¡Eres el nuevo Maestro Supremo de la Sinfonía!\n\n💰 Has ganado 50 Notas de Oro.`;
+            icon.textContent = '🏆';
+            titulo.style.color = '#ffdd44';
+            titulo.innerText = 'Campanya Superada!';
+            msj.innerText = `Ets el nou Mestre Suprem de la Simfonia! L'orquestra és teva.\n\n💰 Has guanyat 50 Notes d'Or.`;
             rachaVictorias = 0;
         }
     } else {
@@ -517,12 +925,50 @@ function terminarPartida(victoria) {
     actualizarRachaNodos();
 }
 
+function terminarPartidaArena(victoria) {
+    const modal = document.getElementById('game-result-modal');
+    const icon = document.getElementById('result-icon');
+    const titulo = document.getElementById('result-title');
+    const msj = document.getElementById('result-message');
+
+    modal.classList.remove('hidden');
+
+    if (victoria) {
+        arenaStreak++;
+        if (arenaStreak >= 5) {
+            notasDeOro += 300;
+            actualizarEconomia();
+            icon.textContent = '🏆';
+            titulo.innerText = 'Arena Conquistada!';
+            titulo.style.color = '#ffdd44';
+            msj.innerText = `Has guanyat 5 batalles seguides!\n\n💰 Has guanyat 300 Notes d'Or. L'Arena és teva!`;
+            // End run
+            arenaMode = false;
+            arenaDeck = [];
+            arenaStreak = 0;
+        } else {
+            icon.textContent = '⚔️';
+            titulo.innerText = `Victòria d'Arena! (${arenaStreak}/5)`;
+            titulo.style.color = '#ff9944';
+            msj.innerText = `Ratxa: ${arenaStreak}/5 victòries consecutives.\nSegueix lluitant per conquerir l'Arena!`;
+        }
+    } else {
+        icon.textContent = '💀';
+        titulo.innerText = 'Eliminat de l\'Arena';
+        titulo.style.color = '#ff5555';
+        msj.innerText = `Has perdut la teva ratxa d'Arena (${arenaStreak}/5).\nTorna a draftejar un nou mazo per intentar-ho de nou.`;
+        arenaMode = false;
+        arenaDeck = [];
+        arenaStreak = 0;
+    }
+}
+
 function getFamilyClass(familia) {
-    if (familia.includes('Frotada') || familia.includes('Pulsada') || familia.includes('Percutida')) return 'family-cuerda-frotada';
-    if (familia === 'Viento Madera') return 'family-viento-madera';
-    if (familia === 'Viento Metal' || familia === 'Viento Especial') return 'family-viento-metal';
-    if (familia === 'Percusión Determinada' || familia === 'Percusión Indeterminada') return 'family-percusion-teclado';
-    if (familia.includes('Electrónico')) return 'family-electronico';
+    if (familia.includes('Fregada') || familia.includes('Pulsada') || familia.includes('Percudida')) return 'family-cuerda-frotada';
+    if (familia === 'Vent Fusta') return 'family-viento-madera';
+    if (familia === 'Vent Metall' || familia === 'Vent Especial') return 'family-viento-metal';
+    if (familia === 'Percussió Determinada' || familia === 'Percussió Indeterminada') return 'family-percusion-teclado';
+    if (familia.includes('Electrònic')) return 'family-electronico';
     return '';
 }
 
@@ -537,16 +983,15 @@ function crearElementoCarta(carta, ubicacion, dueño = 'player') {
     if (dueño === 'ai' && ubicacion === 'mano') {
         div.classList.add('face-down');
     } else {
+        let photoHTML = '';
         if (carta.imagen) {
-            const photo = document.createElement('div');
-            photo.className = 'card-photo';
-            photo.style.backgroundImage = `url('${carta.imagen}')`;
-            div.appendChild(photo);
+            photoHTML = `<div class="card-photo" style="background-image: url('${carta.imagen}')"></div>`;
         } else if (carta.emoji) {
-            div.innerHTML = `<div class="card-emoji">${carta.emoji}</div>`;
+            photoHTML = `<div class="card-emoji">${carta.emoji}</div>`;
         }
 
-        div.innerHTML += `
+        div.innerHTML = `
+            ${photoHTML}
             <div class="card-cost">${carta.costo}</div>
             <div class="card-info">
                 <div class="card-title">${carta.nombre}</div>
@@ -556,7 +1001,6 @@ function crearElementoCarta(carta, ubicacion, dueño = 'player') {
             <div class="card-stats">
                 <div class="card-atk">${formatStat(carta.ataque)}</div>
                 <div class="card-def">${formatStat(carta.defensa)}</div>
-            </div>
             </div>
             <div class="card-tooltip">
                 ${carta.descripcion ? `<i>"${carta.descripcion}"</i><br><br>` : ''}
@@ -573,9 +1017,6 @@ function crearElementoCarta(carta, ubicacion, dueño = 'player') {
         } else {
             div.addEventListener('click', () => abrirInspectorPedagogico(carta));
             div.style.cursor = 'pointer';
-            div.style.transition = 'transform 0.2s';
-            div.onmouseover = () => div.style.transform = 'scale(1.05)';
-            div.onmouseout = () => div.style.transform = 'scale(1)';
         }
         return div;
     }
@@ -584,7 +1025,6 @@ function crearElementoCarta(carta, ubicacion, dueño = 'player') {
         div.setAttribute('draggable', true);
         div.addEventListener('dragstart', handleDragStart);
         div.addEventListener('dragend', handleDragEnd);
-        // Touch support
         div.addEventListener('touchstart', handleTouchStart, { passive: false });
         div.addEventListener('touchmove', handleTouchMove, { passive: false });
         div.addEventListener('touchend', handleTouchEnd);
@@ -606,6 +1046,7 @@ function renderizarMano(jugadorKey) {
     estado[jugadorKey].mano.forEach(carta => {
         handElem.appendChild(crearElementoCarta(carta, 'mano', jugadorKey));
     });
+    if (tutorialActivo && jugadorKey === 'player') aplicarBlinkTutorial(tutorialEsperant);
 }
 
 function renderizarEscenario(jugadorKey = 'player') {
@@ -615,6 +1056,7 @@ function renderizarEscenario(jugadorKey = 'player') {
         const cardEl = crearElementoCarta(carta, 'escenario', jugadorKey);
         stageElem.appendChild(cardEl);
     });
+    if (tutorialActivo && jugadorKey === 'player') aplicarBlinkTutorial(tutorialEsperant);
 }
 
 function abrirAlbum() {
@@ -680,7 +1122,7 @@ function setupDragAndDrop() {
 
 function jugarCartaDesdeMano(cardId, costo) {
     if (costo > estado.player.tempoActual) {
-        mostrarToast(`⚠️ Necesitas ${costo} de Tempo (tienes ${estado.player.tempoActual})`, "danger");
+        mostrarToast(`⚠️ Necessites ${costo} de Tempo (en tens ${estado.player.tempoActual})`, "danger");
         return;
     }
 
@@ -713,7 +1155,7 @@ function jugarCartaDesdeMano(cardId, costo) {
             const targetEl = document.getElementById('ai-director-area');
             mostrarDano(targetEl, cartaJugada.habilidad.valor);
             aplicarFlash(targetEl);
-            mostrarToast(`⛪ ¡Acorde Mayor! ${cartaJugada.nombre} inflige ${cartaJugada.habilidad.valor} al Director rival`, "success");
+            mostrarToast(`⛪ Acord Major! ${cartaJugada.nombre} infligeix ${cartaJugada.habilidad.valor} al Director rival`, "success");
             actualizarUI();
             if (estado.ai.hp <= 0) { setTimeout(() => terminarPartida(true), 300); return; }
         }
@@ -723,12 +1165,15 @@ function jugarCartaDesdeMano(cardId, costo) {
             const aliados = estado.player.escenario.filter(c => c.instanceId !== cartaJugada.instanceId);
             aliados.forEach(c => { c.ataque += cartaJugada.habilidad.valor; });
             if (aliados.length > 0) {
-                mostrarToast(`🎛️ Amplificación: tus instrumentos ganan +${cartaJugada.habilidad.valor} de ataque`, "success");
+                mostrarToast(`🎛️ Amplificació! Els teus instruments guanyen +${cartaJugada.habilidad.valor} d'atac`, "success");
                 renderizarEscenario('player');
             }
         }
 
-        mostrarToast(`🎵 ${cartaJugada.nombre} entra al escenario`, "success");
+        mostrarToast(`🎵 ${cartaJugada.nombre} entra a l'escenari`, "success");
+
+        // Tutorial hook
+        if (tutorialActivo && tutorialEsperant === 'card_played') avançarTutorial();
     }
 }
 
@@ -813,14 +1258,55 @@ function handleTouchEnd(e) {
 // ========================
 function terminarTurno() {
     if (estado.jugadorActual !== 'player') return;
+
+    // Tutorial hook — advance before passing turn
+    if (tutorialActivo && tutorialEsperant === 'end_turn') avançarTutorial();
+
     estado.jugadorActual = 'ai';
     elems.btnEndTurn.disabled = true;
-    elems.btnEndTurn.textContent = "Turno Rival...";
+    elems.btnEndTurn.textContent = "Torn Rival...";
     actualizarTurnIndicator();
     setTimeout(turnoDeIA, 1000);
 }
 
 function turnoDeIA() {
+    // Tutorial: IA passive — plays one weak card, never attacks player directly
+    if (tutorialActivo) {
+        if (estado.ai.tempoMax < 10) estado.ai.tempoMax++;
+        estado.ai.tempoActual = estado.ai.tempoMax;
+        robarCartaInterno('ai');
+        estado.ai.escenario.forEach(c => c.sleeping = false);
+
+        // Play one cheap card (max 2 on board)
+        const affordable = estado.ai.mano.filter(c => c.costo <= estado.ai.tempoActual);
+        if (affordable.length > 0 && estado.ai.escenario.length < 2) {
+            const card = affordable[0];
+            estado.ai.tempoActual -= card.costo;
+            const idx = estado.ai.mano.findIndex(c => c.instanceId === card.instanceId);
+            const played = estado.ai.mano.splice(idx, 1)[0];
+            played.sleeping = true;
+            estado.ai.escenario.push(played);
+        }
+
+        // Very weak attack only if player board is empty (teach concept, not punish)
+        const awake = estado.ai.escenario.filter(c => !c.sleeping);
+        awake.forEach(aiCard => {
+            if (estado.player.escenario.length === 0 && aiCard.ataque <= 200) {
+                aiCard.sleeping = true;
+                estado.player.hp -= aiCard.ataque;
+                if (estado.player.hp < 0) estado.player.hp = 0;
+                mostrarDano(document.getElementById('player-director-area'), aiCard.ataque);
+            }
+        });
+
+        actualizarUI();
+        renderizarMano('ai');
+        renderizarEscenario('ai');
+        renderizarEscenario('player');
+        setTimeout(iniciarTurnoJugador, 1500);
+        return;
+    }
+
     if (estado.ai.tempoMax < 10) estado.ai.tempoMax++;
     estado.ai.tempoActual = estado.ai.tempoMax;
 
@@ -979,13 +1465,13 @@ function iniciarTurnoJugador() {
     estado.player.escenario.forEach(c => { if (c.habilidad?.tipo === 'regen') playerRegen += c.habilidad.valor; });
     if (playerRegen > 0) {
         estado.player.hp = Math.min(estado.playerHpMax, estado.player.hp + playerRegen);
-        mostrarToast(`🎻 Resonancia: recuperas ${playerRegen} PA`, "success");
+        mostrarToast(`🎻 Ressonància: recuperes ${playerRegen} PA`, "success");
     }
 
     robarCartaInterno('player');
 
     elems.btnEndTurn.disabled = false;
-    elems.btnEndTurn.textContent = "Fin de Turno";
+    elems.btnEndTurn.textContent = "⚡ FINALITZAR TORN";
 
     actualizarUI();
     actualizarTurnIndicator();
@@ -1006,7 +1492,7 @@ function iniciarTurnoJugador() {
 function seleccionarAtacante(carta, divElem) {
     if (estado.jugadorActual !== 'player') return;
     if (carta.sleeping) {
-        mostrarToast("💤 Cansancio de Afinación: no puede atacar aún.", "info");
+        mostrarToast("💤 Cansament d'Afinació: no pot atacar encara.", "info");
         return;
     }
 
@@ -1041,7 +1527,7 @@ function seleccionarAtacante(carta, divElem) {
         document.addEventListener('mousemove', window.actualizarLineaTarget);
     }
 
-    mostrarToast(`⚔️ ${carta.nombre} listo para atacar. Elige objetivo.`, "info");
+    mostrarToast(`⚔️ ${carta.nombre} a punt per atacar. Tria objectiu.`, "info");
 }
 
 function deseleccionarAtacante() {
@@ -1064,7 +1550,7 @@ function atacarObjetivo(objetivo, tipo) {
     if (tipo === 'director') {
         // Viento Metal puede ignorar la protección del director
         if (estado.ai.escenario.length > 0 && atacanteSeleccionado.habilidad?.tipo !== 'ataque_directo') {
-            mostrarToast("🛡️ ¡Debes destruir los instrumentos rivales primero!", "danger");
+            mostrarToast("🛡️ Has de destruir els instruments rivals primer!", "danger");
             deseleccionarAtacante();
             return;
         }
@@ -1080,7 +1566,7 @@ function atacarObjetivo(objetivo, tipo) {
         const targetEl = document.getElementById('ai-director-area');
         mostrarDano(targetEl, ataqueReal);
         aplicarFlash(targetEl);
-        mostrarToast(`💥 ${atacanteSeleccionado.nombre} golpea al Director por ${formatStat(ataqueReal)}`, "success");
+        mostrarToast(`💥 ${atacanteSeleccionado.nombre} colpeja al Director per ${formatStat(ataqueReal)}`, "success");
 
     } else if (tipo === 'carta') {
         let ataqueReal = atacanteSeleccionado.ataque;
@@ -1093,7 +1579,7 @@ function atacarObjetivo(objetivo, tipo) {
         if (atacanteSeleccionado.habilidad?.tipo === 'splash') {
             estado.ai.escenario.forEach(c => { c.defensa -= ataqueReal; });
             atacanteSeleccionado.defensa -= objetivo.ataque; // solo el objetivo contraataca
-            mostrarToast(`🎹 ¡Impacto Total! ${atacanteSeleccionado.nombre} golpea a todos los rivales`, "success");
+            mostrarToast(`🎹 Impacte Total! ${atacanteSeleccionado.nombre} colpeja a tots els rivals`, "success");
         } else {
             objetivo.defensa -= ataqueReal;
             atacanteSeleccionado.defensa -= objetivo.ataque;
@@ -1113,9 +1599,9 @@ function atacarObjetivo(objetivo, tipo) {
             if (dead.habilidad?.tipo === 'muerte_dano') {
                 estado.player.hp -= dead.ataque;
                 if (estado.player.hp < 0) estado.player.hp = 0;
-                mostrarToast(`💥 ¡Golpe Final! ${dead.nombre} inflige ${dead.ataque} a tu Director`, "danger");
+                mostrarToast(`💥 Cop Final! ${dead.nombre} infligeix ${dead.ataque} al teu Director`, "danger");
             } else {
-                mostrarToast(`💥 ¡${dead.nombre} destruido!`, "success");
+                mostrarToast(`💥 ${dead.nombre} destruït!`, "success");
             }
         });
         estado.ai.escenario = estado.ai.escenario.filter(c => c.defensa > 0);
@@ -1126,20 +1612,20 @@ function atacarObjetivo(objetivo, tipo) {
             if (atacanteSeleccionado.habilidad?.tipo === 'muerte_dano') {
                 estado.ai.hp -= atacanteSeleccionado.ataque;
                 if (estado.ai.hp < 0) estado.ai.hp = 0;
-                mostrarToast(`💥 ¡Golpe Final! Tu ${atacanteSeleccionado.nombre} inflige ${atacanteSeleccionado.ataque} al Director rival`, "success");
+                mostrarToast(`💥 Cop Final! El teu ${atacanteSeleccionado.nombre} infligeix ${atacanteSeleccionado.ataque} al Director rival`, "success");
             } else {
-                mostrarToast(`😵 ¡Tu ${atacanteSeleccionado.nombre} ha caído!`, "danger");
+                mostrarToast(`😵 El teu ${atacanteSeleccionado.nombre} ha caigut!`, "danger");
             }
             estado.player.escenario = estado.player.escenario.filter(c => c.instanceId !== atacanteSeleccionado.instanceId);
         }
 
-        // Percusión Determinada: Melodía — buff a aliado tras atacar
+        // Percusión Determinada: Melodía — buff a aliat després d'atacar
         if (atacanteVivo && atacanteSeleccionado.habilidad?.tipo === 'buff_aliado') {
             const aliados = estado.player.escenario.filter(c => c.instanceId !== atacanteSeleccionado.instanceId);
             if (aliados.length > 0) {
                 const aliado = aliados[Math.floor(Math.random() * aliados.length)];
                 aliado.ataque += atacanteSeleccionado.habilidad.valor;
-                mostrarToast(`🎵 Melodía: ${aliado.nombre} gana +${atacanteSeleccionado.habilidad.valor} de ataque`, "success");
+                mostrarToast(`🎵 Melodia: ${aliado.nombre} guanya +${atacanteSeleccionado.habilidad.valor} d'atac`, "success");
             }
         }
     }
@@ -1150,6 +1636,9 @@ function atacarObjetivo(objetivo, tipo) {
     actualizarUI();
     renderizarEscenario('player');
     renderizarEscenario('ai');
+
+    // Tutorial hook
+    if (tutorialActivo && tutorialEsperant === 'attack_done') avançarTutorial();
 
     if (estado.ai.hp <= 0) {
         setTimeout(() => terminarPartida(true), 600);
@@ -1164,34 +1653,114 @@ function atacarObjetivo(objetivo, tipo) {
 /* ========================================================= */
 
 const infoPedagogicaDB = {
-    "Violín": {
-        historia: "El violín surgió en Italia a principios del siglo XVI. Su forma actual se consolidó gracias a legendarios luthiers como Stradivari y Guarneri en Cremona.",
-        timbre: "Posee un registro agudo, brillante y extremadamente expresivo. Es considerado la columna vertebral tímbrica y melódica de la orquesta sinfónica.",
-        mecanica: "Al estar diseñado para fraseos ágiles y agudos, cuenta con un alto Tempo de ataque, pero baja Defensa debido a su frágil y delgada caja de resonancia."
+    "Violí": {
+        historia: "El violí va sorgir a Itàlia a principis del segle XVI. La seva forma actual es va consolidar gràcies a llegendaris luthiers com Stradivari i Guarneri a Cremona.",
+        timbre: "Posseeix un registre agut, brillant i extremadament expressiu. És considerat la columna vertebral tímbrica i melòdica de l'orquestra simfònica.",
+        mecanica: "Dissenyat per a frasejos àgils, té un atac elevat però baixa defensa a causa de la seva fràgil caixa de ressonància."
     },
-    "Trompeta": {
-        historia: "Con orígenes en la antigüedad como instrumento de señales militares, la trompeta adquirió pistones en el siglo XIX, permitiéndole tocar toda la escala cromática.",
-        timbre: "Su sonido es brillante, penetrante, heroico y majestuoso. Puede sobresalir por encima de toda la orquesta combinada.",
-        mecanica: "El inmenso volumen generado por la vibración de los labios en la boquilla le otorga un Ataque devastador en el juego."
+    "Viola": {
+        historia: "La viola és l'instrument de corda fregada de mida intermèdia. El seu nom anglès, 'viola', reflecteix el seu paper intermedi entre el violí i el violoncel.",
+        timbre: "El seu so és càlid, melancòlic i fosc, menys brillant que el violí però amb una profunditat expressiva única.",
+        mecanica: "Equilibri entre atac i defensa: no tan àgil com el violí ni tan resistent com el contrabaix."
     },
-    "Timbales": {
-        historia: "Tienen su origen en Oriente Medio y fueron introducidos en Europa en el siglo XV. Son los únicos tambores de la orquesta de tono definido (afinados).",
-        timbre: "Producen un sonido rotundo, profundo y percusivo, capaz de imitar truenos o marcar resoluciones armónicas absolutas.",
-        mecanica: "Sus pesados calderos de cobre otorgan una Resonancia suprema (Defensa), haciéndolos verdaderos tanques en el escenario."
+    "Violoncel": {
+        historia: "El violoncel va evolucionar al segle XVII a partir de la viola da gamba. Bach li va dedicar les seves cèlebres Suites per a violoncel sol.",
+        timbre: "El seu registre greu i càlid és proper a la veu humana. Pot ser solista brillant o suport harmònic fonamental.",
+        mecanica: "Combina un atac contundent amb una defensa sòlida, reflectint la seva versatilitat orquestral."
+    },
+    "Contrabaix": {
+        historia: "El contrabaix és el membre més gran i greu de la família de cordes. Va evolucionar de la viola da gamba baixa durant el segle XVII.",
+        timbre: "Produeix els sons més greus de l'orquestra. La seva ressonància profunda és la base harmònica de tot el conjunt.",
+        mecanica: "Defensa màxima de la família de corda: és el tanc per excel·lència, sacrificant atac per una ressonància inexpugnable."
+    },
+    "Guitarra Clàssica": {
+        historia: "Originada en instruments àrabs i medievals, la guitarra clàssica moderna va ser codificada per Antonio de Torres al segle XIX.",
+        timbre: "So càlid, íntim i polifònic. Pot interpretar melodia, harmonia i baix simultàniament, sent una orquestra en miniatura.",
+        mecanica: "Punteig devastador: el seu primer atac fa el doble de dany, aprofitant l'efecte sorpresa del debut en escena."
     },
     "Arpa": {
-        historia: "Es uno de los instrumentos más antiguos de la humanidad. El arpa de pedales moderna fue patentada por Sébastien Érard en 1810.",
-        timbre: "Ofrece un sonido celestial, arpegiado y acuático. Es famosa por sus elegantes glissandos que añaden polvo de estrellas a cualquier composición.",
-        mecanica: "Su naturaleza mágica se traduce en mecánicas de curación al líder y un equilibrio místico de estadísticas defensivas."
+        historia: "És un dels instruments més antics de la humanitat. L'arpa de pedals moderna va ser patentada per Sébastien Érard el 1810.",
+        timbre: "Ofereix un so celestial, arpegiat i aquàtic. És famosa pels seus elegants glissandos que afegeixen pols d'estrelles a qualsevol composició.",
+        mecanica: "La seva naturalesa màgica es tradueix en una defensa elevada i un primer atac devastador."
+    },
+    "Piano": {
+        historia: "Inventat per Bartolomeo Cristofori c. 1700, el piano substituí el clavicèmbal en combinar dinàmica expressiva amb harmonia plena.",
+        timbre: "Instrument de percussió i corda alhora: cobreix tot el registre audible humà amb un so ric i harmònicament complet.",
+        mecanica: "Impacte Total: en atacar, el seu so penetrant afecta tots els instruments rivals al camp simultàniament."
+    },
+    "Flauta Travessera": {
+        historia: "La flauta travessera moderna va ser dissenyada per Theobald Boehm el 1847, amb un sistema de claus que permet tota la cromàtica.",
+        timbre: "So aeri, lleuger i brillant en registre agut; fosc i aterciopelat en el registre greu. Capaç de grans virtuosismes.",
+        mecanica: "La seva agilitat excepcional li permet atacar el mateix torn que és jugada, sorprenent l'adversari."
+    },
+    "Oboè": {
+        historia: "L'oboè va néixer a França al segle XVII. La seva doble canya li dona un so característic que li va valdre el rol d'afinar l'orquestra.",
+        timbre: "So penetrant, nasal i molt expressiu. Reconeixible entre tots els instruments, és el que afina l'orquestra al concert.",
+        mecanica: "Atac molt elevat per al seu cost: la seva punyència sonora es tradueix en dany massiu i ràpid."
+    },
+    "Clarinet": {
+        historia: "Inventat per Johann Christoph Denner c. 1700, el clarinet va popularitzar-se quan Mozart li va dedicar obres magistrals.",
+        timbre: "Posseeix tres registres clarament diferenciats: el greu (chalumeau), l'agut (clarino) i el molt agut (altíssimo).",
+        mecanica: "Atac agressiu i mobilitat immediata: pot atacar des del primer torn gràcies a la seva habilitat Àgil."
+    },
+    "Saxofon": {
+        historia: "Inventat per Adolphe Sax el 1840, el saxofon és un híbrid únic: cos metàl·lic però canya de fusta. Molt emprat al jazz.",
+        timbre: "Versàtil i carismàtic: pot sonar suau i seductor o agressiu i penetrant. Pont natural entre vent fusta i metall.",
+        mecanica: "Equilibri perfecte entre atac i defensa amb velocitat immediata, reflectint la seva versatilitat estilística."
+    },
+    "Fagot": {
+        historia: "El fagot és el baix de la família de vent-fusta. El seu nom italià significa 'feixet de llenya', referint-se al seu cos repliat.",
+        timbre: "So fosc, rodó i lleugerament bassoon. Pot ser còmic o profundament expressiu, amb un rang que cobreix dues octaves i mitja.",
+        mecanica: "Suport pesat amb velocitat immediata: alta defensa i atac moderat, i pot atacar el mateix torn que és jugat."
+    },
+    "Trompeta": {
+        historia: "Amb orígens en l'antiguitat com a instrument de senyals militars, la trompeta va adquirir pistons al segle XIX.",
+        timbre: "El seu so és brillant, penetrant, heroic i majestuós. Pot destacar per sobre de tota l'orquestra combinada.",
+        mecanica: "Fanfàrria: pot atacar directament al Director rival ignorant els instruments que el protegeixin."
+    },
+    "Trompa": {
+        historia: "Descendeix de les trompes de caça del segle XVII. Wagner la va elevar a protagonista simfònica en les seves òperes.",
+        timbre: "So ple, rodó i majestuós. Pot ser suau i misteriós o brillant i heroic, amb gran capacitat expressiva.",
+        mecanica: "Equilibri entre atac i defensa, amb la capacitat d'atacar directament al Director rival."
+    },
+    "Trombó": {
+        historia: "El trombó és l'únic instrument de vent-metall sense pistols ni claus: la vara corredissa permet afinar amb precisió.",
+        timbre: "Possibilita des de sons dolços i nobles fins a rugits poderosos. Fonamental en la coral de metalls.",
+        mecanica: "Destructor de defenses: alt atac directe al Director rival, que pot ignorar els bloquejadors."
+    },
+    "Tuba": {
+        historia: "La tuba va ser inventada el 1835 per Wilhelm Wieprecht. És el membre més gran i greu dels instruments de vent-metall.",
+        timbre: "So vast, profund i ple. La seva ressonància és la base acústica de tota la secció de metalls.",
+        mecanica: "Mur acústic: defensa màxima de la família de metall, però pot atacar directament al Director."
+    },
+    "Orgue": {
+        historia: "L'orgue és un dels instruments més antics i complexos. Bach va elevar l'orgue de tubs a la màxima expressió polifònica.",
+        timbre: "Pot imitar pràcticament qualsevol instrument amb els seus registres. El rei dels instruments per la seva plenitud sonora.",
+        mecanica: "Acord Major: en entrar en escena, infligeix dany directe i massiu al Director rival instantàniament."
+    },
+    "Timbales": {
+        historia: "Tenen el seu origen a l'Orient Mitjà i van ser introduïts a Europa al segle XV. Són els únics tambors de l'orquestra de to definit.",
+        timbre: "Produeixen un so rotund, profund i percussiu, capaç d'imitar trons o marcar resolucions harmòniques absolutes.",
+        mecanica: "En atacar, enforteix un instrument aliat amb un buff d'atac, reflectint el seu rol de motor rítmic."
+    },
+    "Xilòfon": {
+        historia: "El xilòfon té orígens africans i asiàtics. Va arribar a l'orquestra clàssica al segle XIX, celebrat per Saint-Saëns.",
+        timbre: "So sec, brillant i percussiu. Les seves làmines de fusta produeixen notes clares i definides sense sustain.",
+        mecanica: "Melodia: cada cop que ataca, dóna un buff d'atac a un instrument aliat, impulsant la sinèrgia."
+    },
+    "Bateria": {
+        historia: "La bateria moderna va néixer als EUA a inicis del segle XX, combinant bombo, caixa, charles i plats en un sol instrument.",
+        timbre: "El seu so és versàtil i potent: motor rítmic per excel·lència, defineix el groove i l'energia de qualsevol gènere.",
+        mecanica: "En ser destruïda, infligeix tot el seu atac al Director que l'ha eliminat: un últim cop de drum fill."
     }
 };
 
 function getInfoPedagogica(nombre) {
     if (infoPedagogicaDB[nombre]) return infoPedagogicaDB[nombre];
     return {
-        historia: "Instrumento fundamental en la orquesta moderna, su diseño acústico ha evolucionado a lo largo de los siglos para aportar su color único al gran tejido sinfónico.",
-        timbre: "Posee un color sonoro inconfundible y vital para su respectiva familia orquestal, combinándose en perfectos armónicos con sus compañeros.",
-        mecanica: "Sus estadísticas en batalla reflejan el balance realista entre su capacidad de generar volumen inicial (Ataque) y la resonancia natural de su cuerpo acústico (Defensa)."
+        historia: "Instrument fonamental en l'orquestra moderna, el seu disseny acústic ha evolucionat al llarg dels segles per aportar el seu color únic al gran teixit simfònic.",
+        timbre: "Posseeix un color sonor inconfusible i vital per a la seva respectiva família orquestral, combinant-se en perfectes harmònics amb els seus companys.",
+        mecanica: "Les seves estadístiques en batalla reflecteixen el balanç realista entre la seva capacitat de generar volum inicial (Atac) i la ressonància natural del seu cos acústic (Defensa)."
     };
 }
 
@@ -1239,14 +1808,14 @@ init();
 
 function abrirSobre() {
     if (notasDeOro < 100) {
-        mostrarToast("❌ No tienes suficientes Notas de Oro (Cuesta 100)", "danger");
+        mostrarToast("❌ No tens suficients Notes d'Or (costa 100)", "danger");
         return;
     }
     
     // Find locked cards
     const lockedCards = cartasBD.filter(c => !cartasDescubiertas.includes(c.id));
     if (lockedCards.length === 0) {
-        mostrarToast("✨ ¡Ya tienes todas las cartas de esta expansión!", "info");
+        mostrarToast("✨ Ja tens totes les cartes d'aquesta expansió!", "info");
         return;
     }
 
@@ -1324,7 +1893,7 @@ function renderizarDeckbuilder() {
     // Available cards
     const unlockedCards = cartasBD.filter(c => cartasDescubiertas.includes(c.id));
     unlockedCards.forEach(carta => {
-        const cardEl = crearElementoCarta(carta, 'album', 'player');
+        const cardEl = crearElementoCarta(carta, 'deckbuilder', 'player');
         cardEl.style.cursor = 'pointer';
         
         const countInDeck = currentDeckDraft.filter(id => id === carta.id).length;
@@ -1337,9 +1906,9 @@ function renderizarDeckbuilder() {
                 currentDeckDraft.push(carta.id);
                 renderizarDeckbuilder();
             } else if (currentDeckDraft.length >= 10) {
-                mostrarToast("El mazo ya tiene 10 cartas.", "danger");
+                mostrarToast("El mazo ja té 10 cartes.", "danger");
             } else {
-                mostrarToast("Máximo 2 copias por carta.", "danger");
+                mostrarToast("Màxim 2 còpies per carta.", "danger");
             }
         };
         
@@ -1350,7 +1919,7 @@ function renderizarDeckbuilder() {
     const deckCards = currentDeckDraft.map(id => cartasBD.find(c => c.id === id));
     deckCards.sort((a,b) => a.costo - b.costo);
     
-    deckCards.forEach((carta, i) => {
+    deckCards.forEach((carta) => {
         const item = document.createElement('div');
         item.className = 'decklist-item';
         item.innerHTML = `
@@ -1375,7 +1944,7 @@ function guardarMazo() {
     if (currentDeckDraft.length === 10) {
         mazoJugador = [...currentDeckDraft];
         localStorage.setItem('symphonicClashMazo', JSON.stringify(mazoJugador));
-        mostrarToast("✅ Mazo guardado correctamente", "success");
+        mostrarToast("✅ Mazo guardat correctament", "success");
         actualizarMazoContador();
         document.getElementById('deckbuilder-modal').classList.add('hidden');
     }
@@ -1402,7 +1971,7 @@ function startWelcomeFlow() {
     const modal = document.getElementById('pack-opening-modal');
     
     container.innerHTML = '';
-    title.innerText = "¡Tu Primera Orquesta!";
+    title.innerText = "La Teva Primera Orquestra!";
     title.classList.remove('hidden');
     btnFinish.classList.add('hidden');
     modal.classList.remove('hidden');
@@ -1445,11 +2014,11 @@ function startWelcomeFlow() {
 }
 
 const dialogosDeJefes = [
-    { nombre: "El Aprendiz", texto: "M-mis manos están sudando un poco... pero he practicado mis escalas. ¡Prepárate para escuchar mi esfuerzo!", imgClase: 'bg-aprendiz' },
-    { nombre: "La Promesa", texto: "El Conservatorio me ha dado una técnica perfecta. Tú solo eres ruido de fondo para mi gran debut.", imgClase: 'bg-promesa' },
-    { nombre: "El Titular", texto: "Afinación y volumen. La orquesta principal no acepta a novatos. Te voy a aplastar con mi contrapunto.", imgClase: 'bg-titular' },
-    { nombre: "El Virtuoso", texto: "Cien notas por segundo. Mi música vuela más rápido de lo que tus ojos pueden seguir. Intenta seguir mi Tempo, si atreves.", imgClase: 'bg-virtuoso' },
-    { nombre: "El Maestro Supremo", texto: "Silencio total en la sala. La Batuta del Destino me pertenece. ¡Toda la creación es una sinfonía, y yo soy su dueño absoluto!", imgClase: 'bg-maestro' }
+    { nombre: "L'Aprenent", texto: "L-les meves mans estan suant un poc... però he praticat les meves escales. Prepara't per escoltar el meu esforç!", imgClase: 'bg-apprentice' },
+    { nombre: "La Promesa", texto: "El Conservatori m'ha donat una tècnica perfecta. Tu només ets soroll de fons per al meu gran debut.", imgClase: 'bg-promise' },
+    { nombre: "El Titular", texto: "Afinació i volum. L'orquestra principal no accepta novells. T'aixafaré amb el meu contrapunt.", imgClase: 'bg-titular' },
+    { nombre: "El Virtuós", texto: "Cent notes per segon. La meva música vola més ràpid del que els teus ulls poden seguir. Intenta seguir el meu Tempo, si t'atreveixes.", imgClase: 'bg-virtuoso' },
+    { nombre: "El Mestre Suprem", texto: "Silenci total a la sala. La Batuta del Destí em pertany. Tota la creació és una simfonia, i jo en sóc el propietari absolut!", imgClase: 'bg-maestro' }
 ];
 
 let typeWriterInterval = null;
@@ -1458,10 +2027,13 @@ function showBossDialogue(bossIndex) {
     const dialogData = dialogosDeJefes[bossIndex] || dialogosDeJefes[0];
     const overlay = document.getElementById('dialogue-overlay');
     const txtEl = document.getElementById('dialogue-text');
-    const avatarInfo = document.getElementById('dialogue-avatar');
+    const avatarContainer = document.getElementById('dialogue-avatar');
     
     document.getElementById('dialogue-name').innerText = dialogData.nombre;
-    avatarInfo.className = 'boss-avatar-large ' + dialogData.imgClase; // inherits background classes
+    
+    // Use the premium large avatar class
+    avatarContainer.innerHTML = `<div class="boss-avatar-large ${dialogData.imgClase}"></div>`;
+    
     txtEl.innerText = "";
     overlay.classList.remove('hidden');
     
@@ -1485,6 +2057,139 @@ function showBossDialogue(bossIndex) {
 
 
 /* ========================================================= */
+/* ARENA MODE                                               */
+/* ========================================================= */
+
+function abrirArena() {
+    arenaDeck = [];
+    arenaStreak = 0;
+    arenaMode = false;
+
+    document.getElementById('arena-draft-phase').classList.remove('hidden');
+    document.getElementById('arena-ready-phase').classList.add('hidden');
+    document.getElementById('arena-modal').classList.remove('hidden');
+    renderizarArenaDraft();
+}
+
+function renderizarArenaDraft() {
+    const choices = document.getElementById('arena-draft-choices');
+    const pickCount = document.getElementById('arena-pick-count');
+    const pickBar = document.getElementById('arena-pick-bar');
+
+    pickCount.textContent = arenaDeck.length;
+    pickBar.style.width = (arenaDeck.length / 10 * 100) + '%';
+
+    if (arenaDeck.length >= 10) {
+        document.getElementById('arena-draft-phase').classList.add('hidden');
+        const readyPhase = document.getElementById('arena-ready-phase');
+        readyPhase.classList.remove('hidden');
+        document.getElementById('arena-streak-display').textContent = arenaStreak;
+        renderizarArenaDeckList();
+        return;
+    }
+
+    choices.innerHTML = '';
+
+    // Pick 2 distinct random cards
+    const shuffled = [...cartasBD].sort(() => Math.random() - 0.5);
+    const card1 = shuffled[0];
+    // Ensure card2 is a different card (different id)
+    const card2 = shuffled.find(c => c.id !== card1.id) || shuffled[1];
+
+    const vs = document.createElement('div');
+    vs.className = 'arena-vs-badge';
+    vs.textContent = 'VS';
+
+    [card1, null, card2].forEach(carta => {
+        if (carta === null) {
+            choices.appendChild(vs);
+            return;
+        }
+        const slot = document.createElement('div');
+        slot.className = 'arena-card-slot';
+        const el = crearElementoCarta(carta, 'deckbuilder', 'player');
+        slot.appendChild(el);
+        slot.addEventListener('click', () => {
+            arenaDeck.push(carta.id);
+            renderizarArenaDraft();
+        });
+        choices.appendChild(slot);
+    });
+}
+
+function renderizarArenaDeckList() {
+    const preview = document.getElementById('arena-deck-preview');
+    preview.innerHTML = '';
+
+    // Count duplicates
+    const counts = {};
+    arenaDeck.forEach(id => counts[id] = (counts[id] || 0) + 1);
+
+    Object.entries(counts).forEach(([id, count]) => {
+        const carta = cartasBD.find(c => c.id === id);
+        if (!carta) return;
+        const item = document.createElement('div');
+        item.className = 'arena-list-item';
+        item.innerHTML = `
+            <span class="arena-list-cost">${carta.costo}</span>
+            <span>${carta.nombre}${count > 1 ? ` ×${count}` : ''}</span>
+            <span style="margin-left:auto;opacity:0.6;font-size:1.4vh">${carta.familia}</span>
+        `;
+        preview.appendChild(item);
+    });
+}
+
+function iniciarBatallaArena() {
+    arenaMode = true;
+    const aiHpBase = 3000 + (arenaStreak * 800);
+    const aiTempoBase = 3 + arenaStreak;
+
+    const inputNombre = document.getElementById('player-name-input').value.trim();
+    estado.player.nombre = inputNombre || 'Tu Director';
+    elems.playerNameDisplay.textContent = estado.player.nombre;
+
+    estado.turnoActual = 1;
+    estado.jugadorActual = 'player';
+    estado.playerHpMax = 5000;
+    estado.aiHpMax = aiHpBase;
+    estado.player = { ...estado.player, hp: 5000, tempoMax: 5, tempoActual: 5, mazo: [], mano: [], escenario: [] };
+    estado.ai = { hp: aiHpBase, tempoMax: aiTempoBase, tempoActual: aiTempoBase, mazo: [], mano: [], escenario: [] };
+
+    estado.player.mazo = generarMazo(true);
+    estado.ai.mazo = generarMazo(false);
+
+    for (let i = 0; i < 5; i++) {
+        robarCartaInterno('player');
+        robarCartaInterno('ai');
+    }
+
+    // Arena boss: scales with streak
+    const bossClasses = ['bg-apprentice', 'bg-promise', 'bg-titular', 'bg-virtuoso', 'bg-maestro'];
+    const bossFullNames = ["L'Aprenent", "La Promesa", "El Titular", "El Virtuós", "El Mestre Suprem"];
+    const bossIdx = Math.min(arenaStreak, 4);
+    const aiAvatarEl = document.getElementById('ai-director-avatar');
+    aiAvatarEl.className = 'director-avatar ' + bossClasses[bossIdx];
+    document.getElementById('ai-director-name').textContent = `[Arena] ${bossFullNames[bossIdx]}`;
+
+    // Hide menus
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('arena-modal').classList.add('hidden');
+
+
+    // Skip campaign dialogue — go directly to board
+    document.getElementById('game-board').classList.remove('hidden');
+    elems.btnEndTurn.disabled = false;
+    elems.btnEndTurn.textContent = `⚡ FINALITZAR TORN`;
+    actualizarUI();
+    renderizarMano('player');
+    renderizarMano('ai');
+    renderizarEscenario('player');
+    renderizarEscenario('ai');
+    actualizarTurnIndicator();
+    mostrarToast(`⚔️ Arena Batalla ${arenaStreak + 1}/5 — Bona sort!`, 'info');
+}
+
+/* ========================================================= */
 /* QUIZ PEDAGÓGICO */
 /* ========================================================= */
 
@@ -1503,23 +2208,29 @@ function abrirQuiz() {
 function generarPregunta() {
     const optionsGrid = document.getElementById('quiz-options');
     optionsGrid.innerHTML = '';
-    
-    // Pick 1 correct and 3 wrong distinct card IDs
-    let pool = cartasBD.filter(c => getInfoPedagogica(c.nombre)); // Ensure it has info
+
+    // Only use cards that have specific pedagogical info (not the generic fallback)
+    const knownNames = Object.keys(infoPedagogicaDB);
+    let pool = cartasBD.filter(c => knownNames.includes(c.nombre));
     pool.sort(() => Math.random() - 0.5);
-    
+
     const correctCard = pool[0];
-    const wrongCards = pool.slice(1, 4);
-    
-    const infoCorrectFn = getInfoPedagogica(correctCard.nombre);
-    
+    const wrongPool = pool.filter(c => c.nombre !== correctCard.nombre);
+    const wrongCards = wrongPool.slice(0, 3);
+
+    const infoCorrectFn = infoPedagogicaDB[correctCard.nombre];
+
     // Pick a random fact category: historia, timbre, or mecanica
-    const categories = ['historia', 'timbre', 'mecanica'];
-    const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-    const factText = infoCorrectFn[selectedCategory];
-    
+    const categories = [
+        { key: 'historia', label: 'Història' },
+        { key: 'timbre',   label: 'Timbre i so' },
+        { key: 'mecanica', label: 'Mecànica en batalla' }
+    ];
+    const selected = categories[Math.floor(Math.random() * categories.length)];
+    const factText = infoCorrectFn[selected.key];
+
     const questionText = document.getElementById('quiz-question');
-    questionText.innerText = `"${factText}"\n\n¿A qué instrumento pertenece esta afirmación?`;
+    questionText.innerText = `[${selected.label}]\n\n"${factText}"\n\nA quin instrument pertany?`;
     
     const chosenOptions = [correctCard, ...wrongCards].sort(() => Math.random() - 0.5);
     

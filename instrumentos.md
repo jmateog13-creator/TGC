@@ -1,53 +1,55 @@
-En los TCG profesionales, el coste de una carta debe ser proporcional a sus estadísticas totales. La fórmula que he aplicado para Symphonic Clash es: (Tempo x 200) + 100 = Total de Estadísticas (Volumen + Resonancia).
+En els TCG professionals, el cost d'una carta ha de ser proporcional a les seves estadístiques totals. La fórmula que he aplicat per a Symphonic Clash és: (Tempo x 200) + 100 = Total d'Estadístiques (Volum + Ressonància).
 
-Con esta matemática de fondo, los números reflejan perfectamente la realidad acústica en clase: un instrumento masivo como la Tuba necesita muchísimo aire (Alto Tempo) y tiene una caja de resonancia enorme (Alta Defensa), mientras que una Flauta es rápida y ágil (Bajo Tempo) pero frágil.
+Amb aquesta matemàtica de fons, els números reflecteixen perfectament la realitat acústica a classe: un instrument massiu com la Tuba necessita moltíssim aire (Alt Tempo) i té una caixa de ressonància enorme (Alta Defensa), mentre que una Flauta és ràpida i àgil (Baix Tempo) però fràgil.
 
-Aquí tienes la base de datos equilibrada:
+Aquí tens la base de dades equilibrada:
 
-1. Cuerda (Frotada, Percutida y Pulsada)
-La familia más versátil. Tienen un equilibrio excelente para mantener el control del tablero.
+1. Corda (Fregada, Percudida i Pulsada)
+La família més versàtil. Tenen un equilibri excel·lent per mantenir el control del tauler.
 
-Instrumento	Tempo (Coste)	Volumen (Ataque)	Resonancia (Vida)	Rol Principal
-Flauta Travesera (Madera)	1	200	100	Apertura rápida.
-Guitarra Clásica	2	300	200	Daño temprano.
-Violín	2	300	200	Tropa base ágil.
-Viola	3	200	500	Defensa media.
-Violonchelo	4	400	500	Luchador equilibrado.
-Arpa	5	300	800	Muro defensivo.
-Contrabajo	6	300	1000	Tanque principal.
-Piano	8	700	1000	Rematador pesado.
-(Nota: He movido la Flauta aquí solo visualmente como coste 1 de ejemplo, pero pertenece a Madera. Vamos a la tabla real de Viento).
+Instrument	Tempo (Cost)	Volum (Atac)	Ressonància (Vida)	Rol Principal
+Flauta Travessera (Fusta)	1	200	100	Obertura ràpida.
+Guitarra Clàssica	2	300	200	Dany primerenc.
+Violí	2	300	200	Tropa base àgil.
+Viola	3	200	500	Defensa mitjana.
+Violoncel	4	400	500	Lluitador equilibrat.
+Arpa	5	300	800	Mur defensiu.
+Contrabaix	6	300	1000	Tanc principal.
+Piano	8	700	1000	Rematador pesat.
+(Nota: He mogut la Flauta aquí només visualment com a cost 1 d'exemple, però pertany a Fusta. Anem a la taula real de Vent).
 
-2. Viento (Madera, Metal y Teclado)
-Los metales son "cañones de cristal" (mucho volumen, poca resonancia), mientras que las maderas son tácticas. El Órgano es la carta suprema del juego.
+2. Vent (Fusta, Metall i Teclat)
+Els metalls són "canons de cristall" (molt volum, poca ressonància), mentre que les fustes són tàctiques. L'Orgue és la carta suprema del joc.
 
-Instrumento	Tempo (Coste)	Volumen (Ataque)	Resonancia (Vida)	Rol Principal
-Flauta Travesera	1	200	100	Apertura rápida.
-Oboe	2	400	100	Ataque punzante, frágil.
-Clarinete	3	400	300	Tropa agresiva.
-Trompeta	4	700	200	Daño explosivo (Cañón).
-Saxofón	4	500	400	Luchador versátil.
-Fagot	5	400	700	Soporte pesado.
-Trompa	5	500	600	Metal equilibrado.
-Trombón	6	800	500	Destructor de defensas.
-Tuba	7	500	1000	Muro acústico gigante.
-Órgano	10	1000	1100	Jefe Final.
-3. Percusión (Determinada e Indeterminada)
-Perfectos para alterar el ritmo de la partida. Suelen tener estadísticas extremas hacia un lado u otro.
+Instrument	Tempo (Cost)	Volum (Atac)	Ressonància (Vida)	Rol Principal
+Flauta Travessera	1	200	100	Obertura ràpida.
+Oboè	2	400	100	Atac punyent, fràgil.
+Clarinet	3	400	300	Tropa agressiva.
+Trompeta	4	700	200	Dany explosiu (Canó).
+Saxofon	4	500	400	Lluitador versàtil.
+Fagot	5	400	700	Suport pesat.
+Trompa	5	500	600	Metall equilibrat.
+Trombó	6	800	500	Destructor de defenses.
+Tuba	7	500	1000	Mur acústic gegant.
+Orgue	10	1000	1100	Cap Final.
 
-Instrumento	Tempo (Coste)	Volumen (Ataque)	Resonancia (Vida)	Rol Principal
-Triángulo	1	100	200	Utilidad barata.
-Pandereta	2	200	300	Defensa ligera.
-Xilófono	3	500	200	Ataque preciso.
-Metalófono	4	600	300	Daño contundente.
-Platos (Crash)	5	900	200	Ataque suicida masivo.
-Bombo	6	400	900	Absorbedor de daño.
-Timbales	7	700	800	Tropa de élite.
-4. Electrónicos
-Instrumentos modernos que rompen un poco el molde clásico, con buenas estadísticas ofensivas.
+3. Percussió (Determinada i Indeterminada)
+Perfectes per alterar el ritme de la partida. Solen tenir estadístiques extremes cap a un costat o un altre.
 
-Instrumento	Tempo (Coste)	Volumen (Ataque)	Resonancia (Vida)	Rol Principal
-Teclado MIDI	3	300	400	Soporte flexible.
-Sintetizador	4	500	400	Daño constante.
-Bajo Eléctrico	5	400	700	Base rítmica sólida.
-Guitarra Eléctrica	6	800	500
+Instrument	Tempo (Cost)	Volum (Atac)	Ressonància (Vida)	Rol Principal
+Triangle	1	100	200	Utilitat barata.
+Pandereta	2	200	300	Defensa lleugera.
+Xilòfon	3	500	200	Atac precís.
+Metal·lòfon	4	600	300	Dany contundent.
+Plats (Crash)	5	900	200	Atac suïcida massiu.
+Bombo	6	400	900	Absorbidor de dany.
+Timbales	7	700	800	Tropa d'elit.
+
+4. Electrònics
+Instruments moderns que trenquen una mica el motlle clàssic, amb bones estadístiques ofensives.
+
+Instrument	Tempo (Cost)	Volum (Atac)	Ressonància (Vida)	Rol Principal
+Teclat MIDI	3	300	400	Suport flexible.
+Sintetitzador	4	500	400	Dany constant.
+Baix Elèctric	5	400	700	Base rítmica sòlida.
+Guitarra Elèctrica	6	800	500	Rematador elèctric.
