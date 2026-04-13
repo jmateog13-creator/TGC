@@ -111,66 +111,182 @@ let arenaStreak = 0;  // victòries consecutives en la run actual
 let tutorialActivo = false;
 let tutorialPas = 0;
 let tutorialEsperant = null; // 'card_played' | 'attack_done' | 'end_turn'
+let tutorialTurnoIA = 0; // tracks which AI turn we're on (1, 2, 3...)
 
 const TUTORIAL_PASOS = [
+    // 0 — Benvinguda
     {
         selector: null,
-        title: '🎼 Benvingut al Tutorial!',
-        text: 'Aprèn a jugar a Symphonic Clash en uns pocs passos guiats.\n\nObjectiu: reduir la vida del Director Rival a 0 usant les teves cartes d\'instruments. Clica "Entès" per continuar!',
+        title: '🎼 Benvingut al Tutorial Complet!',
+        text: 'Aprèn TOTES les mecàniques de Symphonic Clash pas a pas.\n\nEl tutorial cobreix el combat, l\'Elixir de Tempo, el Cansament, les Habilitats, la Botiga, el Mazo i l\'Arena. Clica "Comencem!" per continuar!',
         waitFor: null, position: 'center'
     },
+    // 1 — Objectiu
     {
         selector: '#ai-director-area',
-        title: '🎯 L\'Objectiu: Reduir la seva vida',
-        text: 'Aquí és el Director Rival. Té 800 Punts d\'Audiència (PA). Quan arribin a 0, guanyes la partida!',
+        title: '🎯 L\'Objectiu: Reduir la vida rival',
+        text: 'Aquí és el Director Rival. Té Punts d\'Audiència (PA). Quan arribin a 0, guanyes!\n\nEls dos directors es turnen jugant cartes i ordenant atacar. Qui es queda sense PA, perd.',
         waitFor: null, position: 'bottom'
     },
+    // 2 — La teva vida
     {
         selector: '#player-director-area',
         title: '🛡️ La Teva Vida',
-        text: 'Ets el Director Blau. Tens 5000 PA. Si el rival et deixa a 0, perds.\n\nProtegeix-te mentre destrueixes el rival!',
+        text: 'Ets el Director Blau. Si el rival et deixa a 0 PA, perds.\n\nProtegeix el teu director mentre destrueixes el rival!',
         waitFor: null, position: 'top'
     },
+    // 3 — Elixir de Tempo
     {
         selector: '#player-director-area',
-        title: '⚡ El Tempo',
-        text: 'El TEMPO (a la dreta del teu avatar) és el teu manà. Comences amb 3 per a aquest tutorial i en guanyes 1 cada torn (màxim 10).\n\nJugar cartes costa Tempo!',
+        title: '💧 Elixir de Tempo',
+        text: 'L\'ELIXIR DE TEMPO (com al Clash Royale!) és el teu recurs per jugar cartes.\n\nComences amb 3 i en guanyes 1 cada torn (màxim 10). Cada carta té un cost d\'Elixir — si no en tens prou, no pots jugar-la!',
         waitFor: null, position: 'top'
     },
+    // 4 — Les cartes
     {
         selector: '#player-hand',
-        title: '🃏 La Teva Mà',
-        text: 'Tens 3 cartes. Cada una mostra:\n\n🔵 Cost — Tempo necessari per jugar-la\n🔴 Atac — Dany que infligeix\n🟢 Defensa — Vida que té\n\nPassa el cursor per sobre per veure l\'habilitat especial!',
+        title: '🃏 Les Teves Cartes',
+        text: 'Tens cartes a la mà. Cada una mostra:\n\n🔵 Cost (cantonada) — Elixir necessari per jugar-la\n⚔️ ATK — Dany que infligeix\n🛡️ DEF — Vida que té la carta\n\nPassa el cursor per sobre per veure l\'habilitat especial!',
         waitFor: null, position: 'top'
     },
+    // 5 — Explicació del cansament (ANTES de jugar)
+    {
+        selector: null,
+        title: '💤 Cansament d\'Afinació',
+        text: 'La majoria de cartes, quan les jugues, apareixen DORMIDES 💤 i NO poden atacar aquell torn.\n\nHan d\'esperar al torn següent per despertar-se i atacar.\n\nAra ho veuràs en directe: jugaràs el VIOLÍ, que és una carta normal que dorm.',
+        waitFor: null, position: 'center'
+    },
+    // 6 — Juga el Violí (DORM!) — interactiu card_played
     {
         selectors: ['#player-hand', '#player-stage'],
-        title: '▶ Juga la Flauta Travessera!',
-        text: 'Arrossega la FLAUTA TRAVESSERA (cost 1⚡) cap avall fins a la zona de l\'Escenari (centre de la pantalla).\n\nÉs un Vent Fusta amb habilitat ÀGIL — pot atacar el mateix torn que es juga!',
+        title: '▶ Juga el Violí (dormirà!)',
+        text: 'Arrossega el VIOLÍ (cost 2 Elixir) cap avall fins a l\'Escenari (centre).\n\nFixa\'t que apareixerà amb el símbol 💤 — no podrà atacar fins al torn que ve. Això és normal per a la majoria de cartes!',
         waitFor: 'card_played', position: 'corner'
     },
+    // 7 — El Violí dorm: info
     {
-        selectors: ['#player-stage', '#ai-director-area'],
-        title: '⚔️ Ataca el Director Rival!',
-        text: 'La carta és a l\'Escenari! Ara ataca en 2 passos:\n\n1️⃣ Clica la carta per seleccionar-la (es posarà brillant)\n2️⃣ Clica el Director Rival (a dalt) per atacar-lo!\n\n(Si la carta té 💤, finalitza el torn primer)',
+        selector: '#player-stage',
+        title: '💤 El Violí Dorm!',
+        text: 'Veus el símbol 💤? El Violí ha entrat a l\'escenari però ha d\'esperar un torn per atacar.\n\nAixò és el CANSAMENT D\'AFINACIÓ — com a Yu-Gi-Oh!\n\nFinalitza el torn per avançar al torn 2, on el Violí es despertarà.',
+        waitFor: null, position: 'top'
+    },
+    // 8 — Finalitzar torn 1 → AI juga 1 Ukelele — interactiu end_turn
+    {
+        selector: '#btn-end-turn',
+        title: '⚡ Finalitza el Torn 1',
+        text: 'Clica FINALITZAR TORN.\n\nEl rival jugarà 1 Ukelele. Desprès serà el teu torn 2 i el Violí s\'haurà despertat!',
+        waitFor: 'end_turn', position: 'corner'
+    },
+    // 9 — Torn 2: Violí despert, ataca l'Ukelele — info
+    {
+        selector: null,
+        title: '⚡ Torn 2 — El Violí és Despert!',
+        text: 'El Violí ja no té 💤 i pot atacar!\n\nEl rival té un Ukelele al camp (DEF 100). El teu Violí té ATK 300.\n\nCOM FUNCIONA EL COMBAT (estil Yu-Gi-Oh!):\n• ATK > DEF rival → la destrueixes, la teva carta sobreviu intacta\n• ATK < DEF rival → la teva carta rep la diferència en la seva DEF\n• ATK = DEF → tots dos moren\n\nAtaca l\'Ukelele amb el Violí!',
+        waitFor: null, position: 'center'
+    },
+    // 10 — Atac Violí → Ukelele — interactiu attack_done
+    {
+        selectors: ['#player-stage', '#ai-stage'],
+        title: '⚔️ Ataca l\'Ukelele amb el Violí!',
+        text: 'Ataca en 2 passos:\n1️⃣ Clica el VIOLÍ per seleccionar-lo (brillarà)\n2️⃣ Clica l\'UKELELE rival al camp\n\nATK Violí (300) > DEF Ukelele (100) → el destrueixes i el Violí sobreviu!',
         waitFor: 'attack_done', position: 'corner'
     },
+    // 11 — Camp buit: info + finalitza torn → AI no juga res
+    {
+        selector: null,
+        title: '💥 Ukelele Destruït!',
+        text: 'Perfecte! El Violí ha destruït l\'Ukelele i ha quedat intacte — combat estil Yu-Gi-Oh!\n\nEl camp rival és buit. Finalitza el torn: el rival NO traurà cap carta ara.',
+        waitFor: null, position: 'center'
+    },
+    // 12 — Finalitzar torn 2 → AI no juga res — interactiu end_turn
+    {
+        selector: '#btn-end-turn',
+        title: '⚡ Finalitza el Torn 2',
+        text: 'Clica FINALITZAR TORN.\n\nEl rival no jugarà cap carta. Al torn 3 tindràs el Violí despert i el camp buit — podràs atacar el Director directament!',
+        waitFor: 'end_turn', position: 'corner'
+    },
+    // 13 — Torn 3: camp buit, atac directe al Director — info
+    {
+        selector: null,
+        title: '🎯 Torn 3 — Atac Directe al Director!',
+        text: 'El camp rival és buit! Quan no hi ha cartes rivals, pots atacar directament el Director rival.\n\nAixò és l\'objectiu final: reduir els seus PA a 0.\n\nAtaca el Director rival amb el Violí!',
+        waitFor: null, position: 'center'
+    },
+    // 14 — Atac directe al Director — interactiu attack_done
+    {
+        selectors: ['#player-stage', '#ai-director-area'],
+        title: '⚔️ Ataca el Director Directament!',
+        text: 'Camp buit = atac directe!\n\n1️⃣ Clica el VIOLÍ per seleccionar-lo\n2️⃣ Clica el DIRECTOR RIVAL (la foto de dalt)\n\nEl seu HP baixarà directament pel valor d\'ATK del Violí.',
+        waitFor: 'attack_done', position: 'corner'
+    },
+    // 15 — Torn 3: finalitza torn → AI juga 2 Ukeleles — info
+    {
+        selector: null,
+        title: '✅ Atac Directe Fet!',
+        text: 'Genial! Has demostrat com atacar el Director quan el camp és buit.\n\n🚨 PERÒ COMPTE: si el rival té cartes al camp, NO pots atacar el Director directament — primer has de destruir les seves cartes.\n\nFinalitza el torn per veure-ho en acció!',
+        waitFor: null, position: 'center'
+    },
+    // 16 — Finalitzar torn 3 → AI juga 2 Ukeleles — interactiu end_turn
+    {
+        selector: '#btn-end-turn',
+        title: '⚡ Finalitza el Torn 3',
+        text: 'Clica FINALITZAR TORN.\n\nAra el rival treurà 2 Ukeleles al camp. Veuràs la situació on NO pots atacar el Director i necessites cartes especials!',
+        waitFor: 'end_turn', position: 'corner'
+    },
+    // 17 — Torn 4: camp ple, explicació Flauta (Àgil) — info
+    {
+        selector: null,
+        title: '🚨 Torn 4 — Camp Rival Ple!',
+        text: 'El rival té cartes al camp → NO pots atacar el Director directament.\n\nPrimeres has de destruir les seves cartes.\n\n⚡ EXCEPCIÓ: cartes amb l\'habilitat FANFÀRRIA (Vent Metall) poden atacar el Director fins i tot si hi ha cartes rivals. Però ara et presentem l\'ÀGIL!\n\nLa FLAUTA TRAVESSERA té l\'habilitat ÀGIL — pot atacar el MATEIX torn que es juga (sense dormir 💤). Juga-la!',
+        waitFor: null, position: 'center'
+    },
+    // 18 — Juga la Flauta (ÀGIL) — interactiu card_played
+    {
+        selectors: ['#player-hand', '#player-stage'],
+        title: '▶ Juga la Flauta Travessera (ÀGIL!)',
+        text: 'Arrossega la FLAUTA TRAVESSERA (cost 1 Elixir) cap avall fins a l\'Escenari.\n\nFixa\'t que NO tindrà el símbol 💤 — la Flauta és ÀGIL i pot atacar immediatament!',
+        waitFor: 'card_played', position: 'corner'
+    },
+    // 19 — Ataca amb la Flauta per destruir una carta rival — interactiu attack_done
+    {
+        selectors: ['#player-stage', '#ai-stage'],
+        title: '⚔️ Destrueix una Carta Rival!',
+        text: 'La Flauta no té 💤 — ataca ara!\n\nATK Flauta (200) > DEF Ukelele (100) → el destrueixes!\n\n1️⃣ Clica la FLAUTA per seleccionar-la\n2️⃣ Clica un UKELELE rival\n\nDestrueix les cartes rivals per poder atacar el Director!',
+        waitFor: 'attack_done', position: 'corner'
+    },
+    // 20 — Habilitats
     {
         selector: null,
         title: '✨ Habilitats de les Cartes',
-        text: 'Cada família d\'instruments té una habilitat única:\n\n⚡ Vent Fusta — Àgil: ataca el torn que s\'invoca\n📯 Vent Metall — Fanfàrria: ignora el camp rival\n🎻 Corda Fregada — Ressonància: recupera PA cada torn\n🎹 Corda Percudida — Impacte Total: danya tots els rivals\n⛪ Vent Especial — Acord Major: danya el Director en entrar\n🎛️ Electrònic — Amplificació: dona +atac als aliats en entrar\n🎵 Percussió Det. — Melodia: dona +atac a un aliat en atacar\n💀 Percussió Ind. — Colp Final: danya al morir',
+        text: 'Cada família té una habilitat única:\n\n⚡ Vent Fusta — Àgil: ataca el torn que s\'invoca (sense dormir)\n📯 Vent Metall — Fanfàrria: atac directe al Director (ignora el camp rival)\n🎻 Corda Fregada — Ressonància: recupera PA cada torn\n🎹 Corda Percudida — Impacte Total: danya TOTS els rivals alhora\n⛪ Vent Especial — Acord Major: danya el Director en entrar\n🎛️ Electrònic — Amplificació: dona +ATK als aliats en entrar\n🎵 Percussió Det. — Melodia: dona +ATK a un aliat en atacar\n💀 Percussió Ind. — Colp Final: danya el Director rival quan moren',
         waitFor: null, position: 'center'
     },
-    {
-        selector: '#btn-end-turn',
-        title: '⚡ Finalitza el Torn',
-        text: 'Quan hagis jugat totes les cartes que vulguis i atacat, finalitza el torn.\n\nEl rival jugarà les seves cartes, i desprès tornes a jugar tu. El joc alterna torns fins que un dels dos arriba a 0 PA.',
-        waitFor: 'end_turn', position: 'corner'
-    },
+    // 21 — La Botiga
     {
         selector: null,
-        title: '🎉 Ja Saps Jugar!',
-        text: 'Ara la resta és per compte teu!\n\nContinua jugant cartes, atacant el Director Rival i reduint la seva vida a 0. Si guanyes el tutorial rebràs 100 Notes d\'Or per comprar les teves primeres cartes!',
+        title: '🏪 La Botiga',
+        text: 'Al Menú Principal trobaràs la BOTIGA!\n\nAmb Notes d\'Or 💰 pots comprar Paquets de Cartes (100 Notes cada un). Cada paquet conté 3 cartes noves per ampliar la col·lecció.\n\nGuanya batalles per aconseguir Notes d\'Or!',
+        waitFor: null, position: 'center'
+    },
+    // 22 — El Mazo
+    {
+        selector: null,
+        title: '🃏 Construeix el Teu Mazo',
+        text: 'A l\'apartat MAZO del menú tries les 10 cartes que formin el teu mazo de combat.\n\nNormes:\n✅ Exactament 10 cartes\n❌ Sense còpies duplicades (màxim 1 per carta)\n\nTria bé la combinació d\'habilitats — la varietat guanya batalles!',
+        waitFor: null, position: 'center'
+    },
+    // 23 — L'Arena
+    {
+        selector: null,
+        title: '⚔️ L\'Arena',
+        text: 'L\'ARENA és un mode especial de repte!\n\nEn entrar, elegiràs 10 cartes per parelles d\'ofertes aleatòries (draft). Amb aquest mazo únic, intenta guanyar 5 batalles consecutives.\n\n🏆 Premi màxim: 300 Notes d\'Or per 5 victòries seguides!\n\nÉs el repte definitiu de Symphonic Clash.',
+        waitFor: null, position: 'center'
+    },
+    // 24 — Final
+    {
+        selector: null,
+        title: '🎉 Ara Ho Saps Tot!',
+        text: 'Domines totes les mecàniques:\n💧 Elixir de Tempo · 💤 Cansament · ⚔️ Combat estil Yu-Gi-Oh!\n✨ Habilitats · 🏪 Botiga · 🃏 Mazo · ⚔️ Arena\n\nHas guanyat 100 Notes d\'Or pel tutorial completat! Bona sort, Director! 🎼',
         waitFor: 'dismiss', position: 'center'
     }
 ];
@@ -294,22 +410,24 @@ function iniciarTutorial() {
     estado.player.nombre = nomInput || 'Estudiant';
     elems.playerNameDisplay.textContent = estado.player.nombre;
 
+    tutorialTurnoIA = 0;
+
     estado.turnoActual = 1;
     estado.jugadorActual = 'player';
     estado.playerHpMax = 5000;
-    estado.aiHpMax = 800;
+    estado.aiHpMax = 2000;
 
     estado.player = { ...estado.player, hp: 5000, tempoMax: 3, tempoActual: 3, mazo: [], mano: [], escenario: [] };
-    estado.ai    = { hp: 800, tempoMax: 2, tempoActual: 2, mazo: [], mano: [], escenario: [] };
+    estado.ai    = { hp: 2000, tempoMax: 2, tempoActual: 2, mazo: [], mano: [], escenario: [] };
 
-    // Fixed player hand: Flauta (Àgil), Ukelele (Punteig), Violí (Ressonància)
-    ['v_01', 'c_08', 'c_02'].forEach(id => {
+    // Player hand: Violí (dorm, cost 2) first to demo sleeping, then Flauta (Àgil, cost 1) for ability demo
+    ['c_02', 'v_01', 'c_08'].forEach(id => {
         const base = cartasBD.find(c => c.id === id);
         if (base) estado.player.mano.push({ ...base, instanceId: `tut_p_${cardCounter++}`, sleeping: false });
     });
 
-    // Weak enemy hand
-    ['p_01', 'c_08', 'p_02'].forEach(id => {
+    // AI hand: 3 Ukeleles (DEF 100 each) — Violí ATK 300 and Flauta ATK 200 both clearly destroy them
+    ['c_08', 'c_08', 'c_08'].forEach((id, i) => {
         const base = cartasBD.find(c => c.id === id);
         if (base) estado.ai.mano.push({ ...base, instanceId: `tut_ai_${cardCounter++}`, sleeping: false });
     });
@@ -344,6 +462,14 @@ function mostrarPasTutorial(n) {
 
     tutorialPas      = n;
     tutorialEsperant = pas.waitFor;
+
+    // During interactive steps (waitFor != null except dismiss), unlock the board so drag/click works
+    const board = document.getElementById('game-board');
+    if (pas.waitFor && pas.waitFor !== 'dismiss') {
+        board.classList.remove('tut-lock');
+    } else {
+        board.classList.add('tut-lock');
+    }
 
     // Clear previous highlights and blinks
     document.querySelectorAll('.tutorial-highlighted, .tut-blink').forEach(el => {
@@ -410,10 +536,16 @@ function aplicarBlinkTutorial(waitFor) {
         // Blink each card in the player's hand
         document.querySelectorAll('#player-hand .card').forEach(c => c.classList.add('tut-blink'));
     } else if (waitFor === 'attack_done') {
-        // Blink cards on stage (to select) + enemy director (to attack)
+        // Blink player stage cards (to select attacker)
         document.querySelectorAll('#player-stage .card').forEach(c => c.classList.add('tut-blink'));
-        const dir = document.getElementById('ai-director-area');
-        if (dir) dir.classList.add('tut-blink');
+        if (estado.ai.escenario.length > 0) {
+            // There are enemy cards: blink them (must destroy these first!)
+            document.querySelectorAll('#ai-stage .card').forEach(c => c.classList.add('tut-blink'));
+        } else {
+            // Field is clear: blink the director (can now attack directly)
+            const dir = document.getElementById('ai-director-area');
+            if (dir) dir.classList.add('tut-blink');
+        }
     } else if (waitFor === 'end_turn') {
         const btn = document.getElementById('btn-end-turn');
         if (btn) btn.classList.add('tut-blink');
@@ -629,10 +761,13 @@ function init() {
     document.getElementById('btn-menu-tutorial').addEventListener('click', iniciarTutorial);
     document.getElementById('btn-tut-next').addEventListener('click', () => {
         if (tutorialEsperant === 'dismiss') {
+            notasDeOro += 100;
+            actualizarEconomia();
             tancarTutorial();
             document.getElementById('game-board').classList.add('hidden');
             document.getElementById('main-menu').classList.remove('hidden');
             actualizarRachaNodos();
+            mostrarToast('🎓 Tutorial completat! +100 Notes d\'Or', 'success');
         } else {
             avançarTutorial();
         }
@@ -798,7 +933,7 @@ function robarCartaJugador() {
         actualizarUI();
         renderizarMano('player');
     } else {
-        mostrarToast("⚠️ No tens prou Tempo per robar. (Costa 1)", "danger");
+        mostrarToast("⚠️ No tens prou Elixir de Tempo per robar. (Costa 1)", "danger");
     }
 }
 
@@ -1122,7 +1257,7 @@ function setupDragAndDrop() {
 
 function jugarCartaDesdeMano(cardId, costo) {
     if (costo > estado.player.tempoActual) {
-        mostrarToast(`⚠️ Necessites ${costo} de Tempo (en tens ${estado.player.tempoActual})`, "danger");
+        mostrarToast(`⚠️ Necessites ${costo} d'Elixir de Tempo (en tens ${estado.player.tempoActual})`, "danger");
         return;
     }
 
@@ -1270,35 +1405,26 @@ function terminarTurno() {
 }
 
 function turnoDeIA() {
-    // Tutorial: IA passive — plays one weak card, never attacks player directly
+    // Tutorial: fully controlled AI — no draws from deck, no attacks on player
     if (tutorialActivo) {
-        if (estado.ai.tempoMax < 10) estado.ai.tempoMax++;
-        estado.ai.tempoActual = estado.ai.tempoMax;
-        robarCartaInterno('ai');
+        tutorialTurnoIA++;
         estado.ai.escenario.forEach(c => c.sleeping = false);
 
-        // Play one cheap card (max 2 on board)
-        const affordable = estado.ai.mano.filter(c => c.costo <= estado.ai.tempoActual);
-        if (affordable.length > 0 && estado.ai.escenario.length < 2) {
-            const card = affordable[0];
-            estado.ai.tempoActual -= card.costo;
-            const idx = estado.ai.mano.findIndex(c => c.instanceId === card.instanceId);
-            const played = estado.ai.mano.splice(idx, 1)[0];
-            played.sleeping = true;
-            estado.ai.escenario.push(played);
+        // Turn 1: AI plays 1 Ukelele
+        // Turn 2: AI plays nothing (field clear scenario)
+        // Turn 3: AI plays 2 Ukeleles (to show "can't attack director" scenario)
+        // Turn 4+: AI plays nothing
+        const cardsToPlay = tutorialTurnoIA === 1 ? 1 : tutorialTurnoIA === 3 ? 2 : 0;
+        for (let i = 0; i < cardsToPlay; i++) {
+            if (estado.ai.mano.length > 0) {
+                const card = estado.ai.mano[0];
+                estado.ai.mano.splice(0, 1);
+                card.sleeping = false; // AI cards don't sleep in tutorial for clarity
+                estado.ai.escenario.push(card);
+            }
         }
 
-        // Very weak attack only if player board is empty (teach concept, not punish)
-        const awake = estado.ai.escenario.filter(c => !c.sleeping);
-        awake.forEach(aiCard => {
-            if (estado.player.escenario.length === 0 && aiCard.ataque <= 200) {
-                aiCard.sleeping = true;
-                estado.player.hp -= aiCard.ataque;
-                if (estado.player.hp < 0) estado.player.hp = 0;
-                mostrarDano(document.getElementById('player-director-area'), aiCard.ataque);
-            }
-        });
-
+        // AI never attacks in tutorial
         actualizarUI();
         renderizarMano('ai');
         renderizarEscenario('ai');
@@ -1383,13 +1509,28 @@ function turnoDeIA() {
                 aiCard.primerAtaque = false;
             }
 
-            // Cuerda Percutida: splash a todos los jugadores
+            // Cuerda Percutida: splash a todos los jugadores — Yu-Gi-Oh style
             if (aiCard.habilidad?.tipo === 'splash') {
-                estado.player.escenario.forEach(c => { c.defensa -= ataqueReal; });
-                aiCard.defensa -= targetCard.ataque;
+                const defensaTargetOriginal = targetCard.defensa;
+                estado.player.escenario.forEach(c => {
+                    if (ataqueReal >= c.defensa) c.defensa = 0;
+                });
+                // AI attacker only damaged by primary target counterattack
+                if (ataqueReal < defensaTargetOriginal) {
+                    aiCard.defensa -= (defensaTargetOriginal - ataqueReal);
+                } else if (ataqueReal === defensaTargetOriginal) {
+                    aiCard.defensa = 0;
+                }
             } else {
-                targetCard.defensa -= ataqueReal;
-                aiCard.defensa -= targetCard.ataque;
+                // Normal combat: Yu-Gi-Oh style (ATK vs DEF)
+                if (ataqueReal > targetCard.defensa) {
+                    targetCard.defensa = 0; // Player card destroyed, AI card unaffected
+                } else if (ataqueReal < targetCard.defensa) {
+                    aiCard.defensa -= (targetCard.defensa - ataqueReal); // AI card damaged
+                } else {
+                    targetCard.defensa = 0;
+                    aiCard.defensa = 0; // Tie: both destroyed
+                }
             }
 
             // Show damage on player cards
@@ -1577,12 +1718,37 @@ function atacarObjetivo(objetivo, tipo) {
 
         // Cuerda Percutida: Impacto Total — daña a todos los rivales en campo
         if (atacanteSeleccionado.habilidad?.tipo === 'splash') {
-            estado.ai.escenario.forEach(c => { c.defensa -= ataqueReal; });
-            atacanteSeleccionado.defensa -= objetivo.ataque; // solo el objetivo contraataca
+            // Capture original defensa of primary target before the loop modifies it
+            const defensaPrimaryOriginal = objetivo.defensa;
+            // Splash: Yu-Gi-Oh style — destroy enemies where ATK >= DEF
+            estado.ai.escenario.forEach(c => {
+                if (ataqueReal >= c.defensa) c.defensa = 0;
+            });
+            // Attacker counterattack: only from primary target (using original defensa)
+            if (ataqueReal < defensaPrimaryOriginal) {
+                atacanteSeleccionado.defensa -= (defensaPrimaryOriginal - ataqueReal);
+            } else if (ataqueReal === defensaPrimaryOriginal) {
+                atacanteSeleccionado.defensa = 0;
+            }
             mostrarToast(`🎹 Impacte Total! ${atacanteSeleccionado.nombre} colpeja a tots els rivals`, "success");
         } else {
-            objetivo.defensa -= ataqueReal;
-            atacanteSeleccionado.defensa -= objetivo.ataque;
+            // Normal combat: Yu-Gi-Oh style (ATK vs DEF)
+            if (ataqueReal > objetivo.defensa) {
+                // Attacker wins: defender destroyed, attacker unaffected
+                const defensaRival = objetivo.defensa;
+                objetivo.defensa = 0;
+                mostrarToast(`⚔️ ${atacanteSeleccionado.nombre} destrueix ${objetivo.nombre}! (${formatStat(ataqueReal)} ATK supera ${formatStat(defensaRival)} DEF)`, "success");
+            } else if (ataqueReal < objetivo.defensa) {
+                // Defender wins: attacker takes damage equal to the difference
+                const damage = objetivo.defensa - ataqueReal;
+                atacanteSeleccionado.defensa -= damage;
+                mostrarToast(`🛡️ ${objetivo.nombre} resisteix! ${atacanteSeleccionado.nombre} perd ${formatStat(damage)} de Defensa`, "danger");
+            } else {
+                // Tie: both destroyed
+                objetivo.defensa = 0;
+                atacanteSeleccionado.defensa = 0;
+                mostrarToast(`💥 Empat! Tots dos instruments es destrueixen!`, "info");
+            }
         }
 
         // Show damage on the target card
@@ -1897,18 +2063,18 @@ function renderizarDeckbuilder() {
         cardEl.style.cursor = 'pointer';
         
         const countInDeck = currentDeckDraft.filter(id => id === carta.id).length;
-        if (countInDeck >= 2) {
+        if (countInDeck >= 1) {
             cardEl.classList.add('deck-selected');
         }
-        
+
         cardEl.onclick = () => {
-            if (currentDeckDraft.length < 10 && currentDeckDraft.filter(id => id === carta.id).length < 2) {
+            if (currentDeckDraft.length < 10 && currentDeckDraft.filter(id => id === carta.id).length < 1) {
                 currentDeckDraft.push(carta.id);
                 renderizarDeckbuilder();
             } else if (currentDeckDraft.length >= 10) {
                 mostrarToast("El mazo ja té 10 cartes.", "danger");
             } else {
-                mostrarToast("Màxim 2 còpies per carta.", "danger");
+                mostrarToast("No es poden repetir cartes al mazo.", "danger");
             }
         };
         

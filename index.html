@@ -147,19 +147,19 @@
                 </div>
                 <div class="rule-row">
                     <span class="rule-icon">⚡</span>
-                    <div><strong>Tempo</strong><br>El teu manà. Comences amb 1 i en guanyes 1 cada torn (màxim 10). Les cartes costen Tempo per jugar-les.</div>
+                    <div><strong>Elixir de Tempo</strong><br>El teu recurs (com al Clash Royale!). Comences amb 1 i en guanyes 1 cada torn (màxim 10). Jugar cartes costa Elixir de Tempo.</div>
                 </div>
                 <div class="rule-row">
                     <span class="rule-icon">🎻</span>
-                    <div><strong>Les Cartes</strong><br><span class="stat-pill cost">🔵 Cost</span> <span class="stat-pill atk">🔴 Atac</span> <span class="stat-pill def">🟢 Defensa</span><br>Juga-les a l'Escenari i ordena'ls atacar.</div>
+                    <div><strong>Les Cartes</strong><br><span class="stat-pill cost">🔵 Cost (Elixir)</span> <span class="stat-pill atk">⚔️ ATK (Atac)</span> <span class="stat-pill def">🛡️ DEF (Defensa)</span><br>Arrossega-les a l'Escenari per invocar-les.</div>
                 </div>
                 <div class="rule-row">
                     <span class="rule-icon">💤</span>
-                    <div><strong>Primer torn</strong><br>Una carta acabada d'invocar no pot atacar fins al torn següent.</div>
+                    <div><strong>Cansament d'Afinació</strong><br>Una carta acabada d'invocar no pot atacar fins al torn següent (com a Yu-Gi-Oh!). Les cartes <strong>ÀGILS</strong> (Vent Fusta) sí que poden atacar el mateix torn.</div>
                 </div>
                 <div class="rule-row">
                     <span class="rule-icon">⚔️</span>
-                    <div><strong>Atacar</strong><br>Clica una de les teves cartes i després "Atacar". El dany va directe al rival!</div>
+                    <div><strong>Combat (estil Yu-Gi-Oh!)</strong><br>Si el teu ATK supera la DEF rival → la destrueixes i la teva carta sobreviu intacta. Si el teu ATK és menor → la teva carta perd la diferència de DEF. Si és igual → tots dos es destrueixen.</div>
                 </div>
             </div>
             <button id="btn-close-help" class="btn-primary" style="margin-top: 2vh;">Entesos</button>
@@ -331,7 +331,7 @@
             <div class="stats">
                 <span class="hp">PA: <span id="ai-hp">8000</span></span>
                 <div class="tempo-crystals-wrap">
-                    <span class="tempo-label">TEMPO</span>
+                    <span class="tempo-label">ELIXIR</span>
                     <div class="tempo-crystals" id="ai-tempo-crystals"></div>
                     <span class="tempo-text"><span id="ai-tempo">1</span>/<span id="ai-max-tempo">1</span></span>
                 </div>
@@ -389,7 +389,7 @@
             <div class="stats">
                 <span class="hp">PA: <span id="player-hp">8000</span></span>
                 <div class="tempo-crystals-wrap">
-                    <span class="tempo-label">TEMPO</span>
+                    <span class="tempo-label">ELIXIR</span>
                     <div class="tempo-crystals" id="player-tempo-crystals"></div>
                     <span class="tempo-text"><span id="player-tempo">1</span>/<span id="player-max-tempo">1</span></span>
                 </div>
