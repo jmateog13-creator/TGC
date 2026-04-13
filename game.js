@@ -112,7 +112,8 @@ let tutorialActivo = false;
 let tutorialPas = 0;
 let tutorialEsperant = null; // 'card_played' | 'attack_done' | 'end_turn'
 let tutorialTurnoIA = 0; // tracks which AI turn we're on (1, 2, 3...)
-let tutorialRecompensaDonada = false; // prevents double reward
+let tutorialRecompensaDonada = false; // prevents double reward within a session
+const tutorialJaCompletat = !!localStorage.getItem('symphonicClashTutDone'); // persists across sessions
 
 const TUTORIAL_PASOS = [
     // 0 — Benvinguda
@@ -642,15 +643,19 @@ function terminarPartidaTutorial(victoria) {
     modal.classList.remove('hidden');
 
     if (victoria) {
-        if (!tutorialRecompensaDonada) {
+        const primeraVegada = !tutorialJaCompletat && !tutorialRecompensaDonada;
+        if (primeraVegada) {
             notasDeOro += 100;
             tutorialRecompensaDonada = true;
+            localStorage.setItem('symphonicClashTutDone', '1');
             actualizarEconomia();
         }
         icon.textContent   = '🎓';
         titulo.textContent = 'Tutorial Completat!';
         titulo.style.color = '#a855f7';
-        msj.textContent    = 'Enhorabona! Ja saps jugar a Symphonic Clash.\n\n💰 Has guanyat 100 Notes d\'Or. Compra\'t cartes a la Botiga i construeix el teu primer Equip per a la Campanya!';
+        msj.textContent    = primeraVegada
+            ? 'Enhorabona! Ja saps jugar a Symphonic Clash.\n\n💰 Has guanyat 100 Notes d\'Or. Compra\'t cartes a la Botiga i construeix el teu primer Equip per a la Campanya!'
+            : 'Bon repàs! Ja coneixes totes les mecàniques.\n\nLa recompensa de Notes d\'Or només es dona la primera vegada. Ara a per la Campanya!';
     } else {
         icon.textContent   = '💀';
         titulo.textContent = 'Has Perdut!';
@@ -784,16 +789,21 @@ function init() {
     document.getElementById('btn-menu-tutorial').addEventListener('click', iniciarTutorial);
     document.getElementById('btn-tut-next').addEventListener('click', () => {
         if (tutorialEsperant === 'dismiss') {
-            if (!tutorialRecompensaDonada) {
+            const primeraVegada = !tutorialJaCompletat && !tutorialRecompensaDonada;
+            if (primeraVegada) {
                 notasDeOro += 100;
                 tutorialRecompensaDonada = true;
+                localStorage.setItem('symphonicClashTutDone', '1');
                 actualizarEconomia();
             }
             tancarTutorial();
             document.getElementById('game-board').classList.add('hidden');
             document.getElementById('main-menu').classList.remove('hidden');
             actualizarRachaNodos();
-            mostrarToast('🎓 Tutorial completat! +100 Notes d\'Or', 'success');
+            mostrarToast(
+                primeraVegada ? '🎓 Tutorial completat! +100 Notes d\'Or' : '🎓 Bon repàs del tutorial!',
+                'success'
+            );
         } else {
             avançarTutorial();
         }
