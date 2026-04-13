@@ -98,7 +98,7 @@ const estado = {
 
 let draggingCard = null;
 let cardCounter = 0;
-let rachaVictorias = 0;
+let rachaVictorias = parseInt(localStorage.getItem('symphonicClashRacha')) || 0;
 let atacanteSeleccionado = null;
 const bossNames = ["Aprenent", "Promesa", "Titular", "Virtuós", "Mestre"];
 
@@ -112,13 +112,14 @@ let tutorialActivo = false;
 let tutorialPas = 0;
 let tutorialEsperant = null; // 'card_played' | 'attack_done' | 'end_turn'
 let tutorialTurnoIA = 0; // tracks which AI turn we're on (1, 2, 3...)
+let tutorialRecompensaDonada = false; // prevents double reward
 
 const TUTORIAL_PASOS = [
     // 0 — Benvinguda
     {
         selector: null,
         title: '🎼 Benvingut al Tutorial Complet!',
-        text: 'Aprèn TOTES les mecàniques de Symphonic Clash pas a pas.\n\nEl tutorial cobreix el combat, l\'Elixir de Tempo, el Cansament, les Habilitats, la Botiga, el Mazo i l\'Arena. Clica "Comencem!" per continuar!',
+        text: 'Aprèn TOTES les mecàniques de Symphonic Clash pas a pas.\n\nEl tutorial cobreix el combat, l\'Elixir de Tempo, el Cansament, les Habilitats, la Botiga, l\'Equip i l\'Arena. Clica "Comencem!" per continuar!',
         waitFor: null, position: 'center'
     },
     // 1 — Objectiu
@@ -161,7 +162,7 @@ const TUTORIAL_PASOS = [
         selectors: ['#player-hand', '#player-stage'],
         title: '▶ Juga el Violí (dormirà!)',
         text: 'Arrossega el VIOLÍ (cost 2 Elixir) cap avall fins a l\'Escenari (centre).\n\nFixa\'t que apareixerà amb el símbol 💤 — no podrà atacar fins al torn que ve. Això és normal per a la majoria de cartes!',
-        waitFor: 'card_played', position: 'corner'
+        waitFor: 'card_played', expectedCardId: 'c_02', position: 'corner'
     },
     // 7 — El Violí dorm: info
     {
@@ -245,14 +246,14 @@ const TUTORIAL_PASOS = [
         selectors: ['#player-hand', '#player-stage'],
         title: '▶ Juga la Flauta Travessera (ÀGIL!)',
         text: 'Arrossega la FLAUTA TRAVESSERA (cost 1 Elixir) cap avall fins a l\'Escenari.\n\nFixa\'t que NO tindrà el símbol 💤 — la Flauta és ÀGIL i pot atacar immediatament!',
-        waitFor: 'card_played', position: 'corner'
+        waitFor: 'card_played', expectedCardId: 'v_01', position: 'corner'
     },
     // 19 — Ataca amb la Flauta per destruir una carta rival — interactiu attack_done
     {
         selectors: ['#player-stage', '#ai-stage'],
         title: '⚔️ Destrueix una Carta Rival!',
         text: 'La Flauta no té 💤 — ataca ara!\n\nATK Flauta (200) > DEF Ukelele (100) → el destrueixes!\n\n1️⃣ Clica la FLAUTA per seleccionar-la\n2️⃣ Clica un UKELELE rival\n\nDestrueix les cartes rivals per poder atacar el Director!',
-        waitFor: 'attack_done', position: 'corner'
+        waitFor: 'attack_done', expectedAttackerId: 'v_01', position: 'corner'
     },
     // 20 — Habilitats
     {
@@ -268,25 +269,25 @@ const TUTORIAL_PASOS = [
         text: 'Al Menú Principal trobaràs la BOTIGA!\n\nAmb Notes d\'Or 💰 pots comprar Paquets de Cartes (100 Notes cada un). Cada paquet conté 3 cartes noves per ampliar la col·lecció.\n\nGuanya batalles per aconseguir Notes d\'Or!',
         waitFor: null, position: 'center'
     },
-    // 22 — El Mazo
+    // 22 — L'Equip
     {
         selector: null,
-        title: '🃏 Construeix el Teu Mazo',
-        text: 'A l\'apartat MAZO del menú tries les 10 cartes que formin el teu mazo de combat.\n\nNormes:\n✅ Exactament 10 cartes\n❌ Sense còpies duplicades (màxim 1 per carta)\n\nTria bé la combinació d\'habilitats — la varietat guanya batalles!',
+        title: '🃏 Construeix el Teu Equip',
+        text: 'A l\'apartat EQUIP del menú tries les 10 cartes que formin el teu equip de combat.\n\nNormes:\n✅ Exactament 10 cartes\n❌ Sense còpies duplicades (màxim 1 per carta)\n\n💡 Consells per a un equip equilibrat:\n• Mescla costos baixos (1-2 Elixir) i alts (4-5) per tenir opcions a cada torn\n• Inclou almenys 1 carta amb Ressonància (regen de PA) per aguantar més\n• Una carta Àgil (Vent Fusta) et dona velocitat per atacar de seguida\n• Combina ATK alt amb DEF alt — no tot ha de ser atac\n\nLa varietat de famílies guanya batalles!',
         waitFor: null, position: 'center'
     },
     // 23 — L'Arena
     {
         selector: null,
         title: '⚔️ L\'Arena',
-        text: 'L\'ARENA és un mode especial de repte!\n\nEn entrar, elegiràs 10 cartes per parelles d\'ofertes aleatòries (draft). Amb aquest mazo únic, intenta guanyar 5 batalles consecutives.\n\n🏆 Premi màxim: 300 Notes d\'Or per 5 victòries seguides!\n\nÉs el repte definitiu de Symphonic Clash.',
+        text: 'L\'ARENA és un mode especial de repte!\n\nEn entrar, elegiràs 10 cartes per parelles d\'ofertes aleatòries (draft). Amb aquest equip únic, intenta guanyar 5 batalles consecutives.\n\n🏆 Premi màxim: 300 Notes d\'Or per 5 victòries seguides!\n\nÉs el repte definitiu de Symphonic Clash.',
         waitFor: null, position: 'center'
     },
     // 24 — Final
     {
         selector: null,
         title: '🎉 Ara Ho Saps Tot!',
-        text: 'Domines totes les mecàniques:\n💧 Elixir de Tempo · 💤 Cansament · ⚔️ Combat estil Yu-Gi-Oh!\n✨ Habilitats · 🏪 Botiga · 🃏 Mazo · ⚔️ Arena\n\nHas guanyat 100 Notes d\'Or pel tutorial completat! Bona sort, Director! 🎼',
+        text: 'Domines totes les mecàniques:\n💧 Elixir de Tempo · 💤 Cansament · ⚔️ Combat estil Yu-Gi-Oh!\n✨ Habilitats · 🏪 Botiga · 🃏 Equip · ⚔️ Arena\n\n🏆 L\'OBJECTIU FINAL del joc és doble:\n• Derrota els 5 Directors de la Campanya (Aprenent → Mestre)\n• Descobreix TOTES les cartes — pots veure les que tens a l\'ÀLBUM\n\nCom aconseguir més cartes? Guanyant batalles (Notes d\'Or) i comprant paquets a la Botiga!\n\n💡 Consell: si veus que els Directors de Campanya són massa difícils, comença per l\'Arena fins tenir una bona quantitat de cartes i un equip fort.\n\nHas guanyat 100 Notes d\'Or pel tutorial completat! Bona sort, Director! 🎼',
         waitFor: 'dismiss', position: 'center'
     }
 ];
@@ -411,6 +412,7 @@ function iniciarTutorial() {
     elems.playerNameDisplay.textContent = estado.player.nombre;
 
     tutorialTurnoIA = 0;
+    tutorialRecompensaDonada = false;
 
     estado.turnoActual = 1;
     estado.jugadorActual = 'player';
@@ -427,7 +429,7 @@ function iniciarTutorial() {
     });
 
     // AI hand: 3 Ukeleles (DEF 100 each) — Violí ATK 300 and Flauta ATK 200 both clearly destroy them
-    ['c_08', 'c_08', 'c_08'].forEach((id, i) => {
+    ['c_08', 'c_08', 'c_08'].forEach((id) => {
         const base = cartasBD.find(c => c.id === id);
         if (base) estado.ai.mano.push({ ...base, instanceId: `tut_ai_${cardCounter++}`, sleeping: false });
     });
@@ -471,9 +473,9 @@ function mostrarPasTutorial(n) {
         board.classList.add('tut-lock');
     }
 
-    // Clear previous highlights and blinks
-    document.querySelectorAll('.tutorial-highlighted, .tut-blink').forEach(el => {
-        el.classList.remove('tutorial-highlighted', 'tut-blink');
+    // Clear previous highlights, blinks and disabled cards
+    document.querySelectorAll('.tutorial-highlighted, .tut-blink, .tut-card-disabled').forEach(el => {
+        el.classList.remove('tutorial-highlighted', 'tut-blink', 'tut-card-disabled');
     });
 
     const titleEl  = document.getElementById('tut-title');
@@ -509,7 +511,10 @@ function mostrarPasTutorial(n) {
             }
         });
 
-        backdrop.style.background = 'rgba(0,0,0,0.65)';
+        // Interactive (corner) steps need full visibility — no backdrop dimming
+        backdrop.style.background = pas.position === 'corner'
+            ? 'rgba(0,0,0,0)'
+            : 'rgba(0,0,0,0.65)';
 
         // Add blink to the PRIMARY action target for interactive steps
         aplicarBlinkTutorial(pas.waitFor);
@@ -533,16 +538,29 @@ function aplicarBlinkTutorial(waitFor) {
     if (!waitFor || waitFor === 'dismiss') return;
 
     if (waitFor === 'card_played') {
-        // Blink each card in the player's hand
-        document.querySelectorAll('#player-hand .card').forEach(c => c.classList.add('tut-blink'));
+        const currentStep = TUTORIAL_PASOS[tutorialPas];
+        const expectedId = currentStep?.expectedCardId;
+        document.querySelectorAll('#player-hand .card').forEach(c => {
+            if (!expectedId || c.dataset.cardtype === expectedId) {
+                c.classList.add('tut-blink');
+            } else {
+                c.classList.add('tut-card-disabled');
+            }
+        });
     } else if (waitFor === 'attack_done') {
-        // Blink player stage cards (to select attacker)
-        document.querySelectorAll('#player-stage .card').forEach(c => c.classList.add('tut-blink'));
+        const currentStep = TUTORIAL_PASOS[tutorialPas];
+        const expectedAtkId = currentStep?.expectedAttackerId;
+        // Blink only the expected attacker; disable the rest
+        document.querySelectorAll('#player-stage .card').forEach(c => {
+            if (!expectedAtkId || c.dataset.cardtype === expectedAtkId) {
+                c.classList.add('tut-blink');
+            } else {
+                c.classList.add('tut-card-disabled');
+            }
+        });
         if (estado.ai.escenario.length > 0) {
-            // There are enemy cards: blink them (must destroy these first!)
             document.querySelectorAll('#ai-stage .card').forEach(c => c.classList.add('tut-blink'));
         } else {
-            // Field is clear: blink the director (can now attack directly)
             const dir = document.getElementById('ai-director-area');
             if (dir) dir.classList.add('tut-blink');
         }
@@ -596,7 +614,9 @@ function avançarTutorial() {
 function tancarTutorial() {
     tutorialActivo   = false;
     tutorialEsperant = null;
-    document.querySelectorAll('.tutorial-highlighted').forEach(el => el.classList.remove('tutorial-highlighted'));
+    document.querySelectorAll('.tutorial-highlighted, .tut-blink, .tut-card-disabled').forEach(el => {
+        el.classList.remove('tutorial-highlighted', 'tut-blink', 'tut-card-disabled');
+    });
     document.getElementById('tutorial-overlay').classList.add('hidden');
     document.getElementById('game-board').classList.remove('tut-lock');
 }
@@ -622,12 +642,15 @@ function terminarPartidaTutorial(victoria) {
     modal.classList.remove('hidden');
 
     if (victoria) {
-        notasDeOro += 100;
-        actualizarEconomia();
+        if (!tutorialRecompensaDonada) {
+            notasDeOro += 100;
+            tutorialRecompensaDonada = true;
+            actualizarEconomia();
+        }
         icon.textContent   = '🎓';
         titulo.textContent = 'Tutorial Completat!';
         titulo.style.color = '#a855f7';
-        msj.textContent    = 'Enhorabona! Ja saps jugar a Symphonic Clash.\n\n💰 Has guanyat 100 Notes d\'Or. Compra\'t cartes a la Botiga i construeix el teu primer Mazo per a la Campanya!';
+        msj.textContent    = 'Enhorabona! Ja saps jugar a Symphonic Clash.\n\n💰 Has guanyat 100 Notes d\'Or. Compra\'t cartes a la Botiga i construeix el teu primer Equip per a la Campanya!';
     } else {
         icon.textContent   = '💀';
         titulo.textContent = 'Has Perdut!';
@@ -682,7 +705,7 @@ function init() {
     // Menu listeners
     document.getElementById('btn-play').addEventListener('click', () => {
         if(mazoJugador.length < 10) {
-            mostrarToast("⚠️ Necessites construir el teu mazo (10 cartes) primer.", "danger");
+            mostrarToast("⚠️ Necessites construir el teu equip (10 cartes) primer.", "danger");
             return;
         }
         iniciarPartida();
@@ -695,7 +718,7 @@ function init() {
         document.getElementById('instructions-modal').classList.add('hidden');
     });
     document.getElementById('btn-reset-data').addEventListener('click', () => {
-        if(confirm("⚠️ Estàs segur que vols ESBORRAR TOTA LA TEVA PARTIDA? Perdràs les teves cartes, els teus mazos i les teves Notes d'Or. Aquesta acció és irreversible.")) {
+        if(confirm("⚠️ Estàs segur que vols ESBORRAR TOTA LA TEVA PARTIDA? Perdràs les teves cartes, els teus equips i les teves Notes d'Or. Aquesta acció és irreversible.")) {
             localStorage.clear();
             location.reload();
         }
@@ -761,8 +784,11 @@ function init() {
     document.getElementById('btn-menu-tutorial').addEventListener('click', iniciarTutorial);
     document.getElementById('btn-tut-next').addEventListener('click', () => {
         if (tutorialEsperant === 'dismiss') {
-            notasDeOro += 100;
-            actualizarEconomia();
+            if (!tutorialRecompensaDonada) {
+                notasDeOro += 100;
+                tutorialRecompensaDonada = true;
+                actualizarEconomia();
+            }
             tancarTutorial();
             document.getElementById('game-board').classList.add('hidden');
             document.getElementById('main-menu').classList.remove('hidden');
@@ -1056,6 +1082,7 @@ function terminarPartida(victoria) {
         mostrarResultado(false);
     }
 
+    localStorage.setItem('symphonicClashRacha', rachaVictorias);
     document.getElementById('player-streak-ingame').textContent = rachaVictorias;
     actualizarRachaNodos();
 }
@@ -1091,7 +1118,7 @@ function terminarPartidaArena(victoria) {
         icon.textContent = '💀';
         titulo.innerText = 'Eliminat de l\'Arena';
         titulo.style.color = '#ff5555';
-        msj.innerText = `Has perdut la teva ratxa d'Arena (${arenaStreak}/5).\nTorna a draftejar un nou mazo per intentar-ho de nou.`;
+        msj.innerText = `Has perdut la teva ratxa d'Arena (${arenaStreak}/5).\nTorna a draftejar un nou equip per intentar-ho de nou.`;
         arenaMode = false;
         arenaDeck = [];
         arenaStreak = 0;
@@ -1170,6 +1197,7 @@ function crearElementoCarta(carta, ubicacion, dueño = 'player') {
     }
 
     div.dataset.id = carta.instanceId;
+    div.dataset.cardtype = carta.id;
     div.dataset.costo = carta.costo;
 
     return div;
@@ -1259,6 +1287,19 @@ function jugarCartaDesdeMano(cardId, costo) {
     if (costo > estado.player.tempoActual) {
         mostrarToast(`⚠️ Necessites ${costo} d'Elixir de Tempo (en tens ${estado.player.tempoActual})`, "danger");
         return;
+    }
+
+    // Tutorial: enforce which card must be played
+    if (tutorialActivo && tutorialEsperant === 'card_played') {
+        const currentStep = TUTORIAL_PASOS[tutorialPas];
+        if (currentStep?.expectedCardId) {
+            const cartaAJugar = estado.player.mano.find(c => c.instanceId === cardId);
+            if (cartaAJugar?.id !== currentStep.expectedCardId) {
+                const expected = cartasBD.find(c => c.id === currentStep.expectedCardId);
+                mostrarToast(`Juga el ${expected?.nombre || 'instrument correcte'} per continuar!`, "danger");
+                return;
+            }
+        }
     }
 
     estado.player.tempoActual -= costo;
@@ -1635,6 +1676,16 @@ function seleccionarAtacante(carta, divElem) {
     if (carta.sleeping) {
         mostrarToast("💤 Cansament d'Afinació: no pot atacar encara.", "info");
         return;
+    }
+
+    // Tutorial: enforce which card must be the attacker
+    if (tutorialActivo && tutorialEsperant === 'attack_done') {
+        const currentStep = TUTORIAL_PASOS[tutorialPas];
+        if (currentStep?.expectedAttackerId && carta.id !== currentStep.expectedAttackerId) {
+            const expected = cartasBD.find(c => c.id === currentStep.expectedAttackerId);
+            mostrarToast(`Ataca amb la ${expected?.nombre || 'carta correcta'}!`, "danger");
+            return;
+        }
     }
 
     if (atacanteSeleccionado === carta) {
@@ -2072,9 +2123,9 @@ function renderizarDeckbuilder() {
                 currentDeckDraft.push(carta.id);
                 renderizarDeckbuilder();
             } else if (currentDeckDraft.length >= 10) {
-                mostrarToast("El mazo ja té 10 cartes.", "danger");
+                mostrarToast("L'equip ja té 10 cartes.", "danger");
             } else {
-                mostrarToast("No es poden repetir cartes al mazo.", "danger");
+                mostrarToast("No es poden repetir cartes a l'equip.", "danger");
             }
         };
         
@@ -2110,7 +2161,7 @@ function guardarMazo() {
     if (currentDeckDraft.length === 10) {
         mazoJugador = [...currentDeckDraft];
         localStorage.setItem('symphonicClashMazo', JSON.stringify(mazoJugador));
-        mostrarToast("✅ Mazo guardat correctament", "success");
+        mostrarToast("✅ Equip guardat correctament", "success");
         actualizarMazoContador();
         document.getElementById('deckbuilder-modal').classList.add('hidden');
     }
@@ -2356,14 +2407,80 @@ function iniciarBatallaArena() {
 }
 
 /* ========================================================= */
-/* QUIZ PEDAGÓGICO */
+/* QUIZ PEDAGÓGICO                                           */
 /* ========================================================= */
 
+const quizDB = [
+    // — FAMÍLIES D'INSTRUMENTS —
+    { pregunta: "A quina família orquestral pertany el Violí?", opcions: ["Corda Fregada", "Corda Pulsada", "Vent Fusta", "Percussió"], correcta: 0 },
+    { pregunta: "A quina família pertany la Trompeta?", opcions: ["Vent Fusta", "Vent Metall", "Corda Metàl·lica", "Electrònic"], correcta: 1 },
+    { pregunta: "El Saxofon és de la família...", opcions: ["Vent Metall", "Corda Pulsada", "Vent Fusta", "Electrònic"], correcta: 2 },
+    { pregunta: "El Piano pertany a la família de...", opcions: ["Corda Pulsada", "Corda Fregada", "Corda Percudida", "Vent Especial"], correcta: 2 },
+    { pregunta: "A quina família pertany l'Arpa?", opcions: ["Corda Fregada", "Corda Percudida", "Corda Pulsada", "Vent Especial"], correcta: 2 },
+    { pregunta: "El Contrabaix pertany a la família...", opcions: ["Corda Pulsada", "Percussió Indeterminada", "Vent Fusta", "Corda Fregada"], correcta: 3 },
+    { pregunta: "El Triangle és un instrument de...", opcions: ["Corda Pulsada", "Vent Fusta", "Percussió", "Electrònic"], correcta: 2 },
+    { pregunta: "A quina família pertany l'Orgue de tubs?", opcions: ["Vent Metall", "Corda Percudida", "Vent Especial", "Electrònic"], correcta: 2 },
+    { pregunta: "La Bateria és un instrument de...", opcions: ["Vent Fusta", "Corda Pulsada", "Electrònic", "Percussió"], correcta: 3 },
+    { pregunta: "L'Acordió pertany a la família de...", opcions: ["Vent Fusta", "Corda Pulsada", "Vent Metall", "Percussió"], correcta: 0 },
+    { pregunta: "El Violoncel pertany a la família de...", opcions: ["Corda Pulsada", "Corda Fregada", "Vent Fusta", "Percussió"], correcta: 1 },
+    { pregunta: "La Flauta Travessera és de la família...", opcions: ["Vent Metall", "Vent Especial", "Vent Fusta", "Corda Pulsada"], correcta: 2 },
+    { pregunta: "La Tuba pertany a la família...", opcions: ["Vent Fusta", "Percussió", "Vent Metall", "Electrònic"], correcta: 2 },
+    { pregunta: "El Teclat MIDI és un instrument...", opcions: ["Acústic de corda", "Electrònic", "De percussió", "De vent"], correcta: 1 },
+    { pregunta: "El Xilòfon és un instrument de...", opcions: ["Corda Fregada", "Vent Fusta", "Electrònic", "Percussió Determinada"], correcta: 3 },
+
+    // — CARACTERÍSTIQUES FÍSIQUES —
+    { pregunta: "Quantes cordes té un violí?", opcions: ["3", "4", "5", "6"], correcta: 1 },
+    { pregunta: "Qui va inventar el saxofon al segle XIX?", opcions: ["Johann Bach", "Adolphe Sax", "Vivaldi", "Beethoven"], correcta: 1 },
+    { pregunta: "En quin país va néixer el violí modern?", opcions: ["Alemanya", "França", "Itàlia", "Àustria"], correcta: 2 },
+    { pregunta: "Quantes tecles té un piano de concert estàndard?", opcions: ["72", "76", "88", "96"], correcta: 2 },
+    { pregunta: "A quin arxipèlag va néixer l'ukelele?", opcions: ["Canàries", "Hawaii", "Filipines", "Açores"], correcta: 1 },
+    { pregunta: "Com es canvia de nota al Trombó?", opcions: ["Amb vàlvules rotatives", "Amb una vara corredissa", "Amb una canya", "Amb arquet"], correcta: 1 },
+    { pregunta: "El Clarinet utilitza...", opcions: ["Una canya doble", "Una canya simple", "Cap canya (tub directe)", "Un embocall cònic metàl·lic"], correcta: 1 },
+    { pregunta: "Quin instrument de vent metall té el so més greu?", opcions: ["Trompeta", "Trompa", "Trombó", "Tuba"], correcta: 3 },
+    { pregunta: "L'Oboè utilitza...", opcions: ["Una canya simple", "Una canya doble", "Un embocall cònic", "Cap canya, és tub directe"], correcta: 1 },
+    { pregunta: "Quantes cordes té normalment una Arpa de concert?", opcions: ["36", "40", "47", "52"], correcta: 2 },
+    { pregunta: "Quin instrument de teclat produeix el so per percussió de martells?", opcions: ["Clavicèmbal", "Orgue", "Piano", "Sintetitzador"], correcta: 2 },
+    { pregunta: "De quin material estan fetes tradicionalment les cordes del violí?", opcions: ["Acer", "Niló", "Tripa d'ovella", "Seda"], correcta: 2 },
+    { pregunta: "Quin és l'instrument de corda fregada més gran?", opcions: ["Viola", "Violoncel", "Contrabaix", "Violí baix"], correcta: 2 },
+    { pregunta: "Quantes cordes té normalment una guitarra clàssica?", opcions: ["4", "5", "6", "7"], correcta: 2 },
+    { pregunta: "La Trompa és un instrument que originalment s'usava per a...", opcions: ["Concerts de cambra", "La caça i senyals militars", "L'acompanyament del cant gregorià", "El ballet clàssic"], correcta: 1 },
+
+    // — MECÀNIQUES DEL JOC —
+    { pregunta: "Quina família té l'habilitat ÀGIL al joc?", opcions: ["Corda Fregada", "Vent Fusta", "Vent Metall", "Electrònic"], correcta: 1 },
+    { pregunta: "Quina família pot atacar el Director directament tot i que hi hagi rivals al camp?", opcions: ["Corda Percudida", "Percussió Indeterminada", "Vent Metall", "Vent Especial"], correcta: 2 },
+    { pregunta: "Quina habilitat permet recuperar PA a l'inici de cada torn?", opcions: ["Amplificació", "Ressonància", "Melodia", "Punteig"], correcta: 1 },
+    { pregunta: "L'habilitat ÀGIL significa que la carta...", opcions: ["Té molt d'ATK", "Pot atacar el torn que s'invoca", "No pot ser destruïda el primer torn", "Costa menys Elixir"], correcta: 1 },
+    { pregunta: "Quantes cartes ha de tenir un equip al joc?", opcions: ["5", "8", "10", "15"], correcta: 2 },
+    { pregunta: "Quantes victòries consecutives cal per superar la Campanya?", opcions: ["3", "4", "5", "7"], correcta: 2 },
+    { pregunta: "L'Elixir de Tempo serveix per...", opcions: ["Recuperar PA", "Jugar cartes", "Atacar el director", "Robar cartes del mazo"], correcta: 1 },
+    { pregunta: "El 'Cansament d'Afinació' significa que...", opcions: ["La carta perd ATK", "La carta no pot atacar fins al torn següent", "La carta no pot defensar", "La carta torna a la mà"], correcta: 1 },
+    { pregunta: "Quin instrument del joc té l'habilitat 'Impacte Total' (danya tots els rivals)?", opcions: ["Violí", "Trompeta", "Piano", "Orgue"], correcta: 2 },
+    { pregunta: "Quina habilitat fan servir els instruments Electrònics al joc?", opcions: ["Ressonància", "Melodia", "Amplificació", "Fanfàrria"], correcta: 2 },
+    { pregunta: "L'habilitat 'Colp Final' s'activa...", opcions: ["En entrar al camp", "En atacar", "En ser destruïda la carta", "Al final del torn"], correcta: 2 },
+    { pregunta: "Quants PA inicials té cada Director al joc?", opcions: ["3000", "5000", "8000", "10000"], correcta: 2 },
+
+    // — TEORIA MUSICAL —
+    { pregunta: "Quants semitons hi ha en una octava?", opcions: ["6", "10", "12", "14"], correcta: 2 },
+    { pregunta: "Quin terme indica que s'ha de tocar molt suau?", opcions: ["Fortissimo", "Pianissimo", "Forte", "Mezzo-forte"], correcta: 1 },
+    { pregunta: "Quin terme indica que s'ha de tocar molt fort?", opcions: ["Piano", "Mezzo-piano", "Fortissimo", "Pianissimo"], correcta: 2 },
+    { pregunta: "Quin és el nom de l'interval de 8 notes (ex: Do fins al Do superior)?", opcions: ["Quinta", "Setena", "Octava", "Novena"], correcta: 2 },
+    { pregunta: "Quin és el terme per a la velocitat d'una peça musical?", opcions: ["Dinàmica", "Timbre", "Tempo", "Harmonia"], correcta: 2 },
+    { pregunta: "Quantes notes naturals té una escala diatònica major?", opcions: ["5", "6", "7", "8"], correcta: 2 },
+    { pregunta: "Quin símbol s'usa normalment per als instruments aguts com el violí?", opcions: ["Clau de fa", "Clau de sol", "Clau d'ut en tercera", "Clau de percussió"], correcta: 1 },
+    { pregunta: "Com s'anomena el conjunt de 4 músics de cambra?", opcions: ["Duet", "Trio", "Quartet", "Quintet"], correcta: 2 },
+    { pregunta: "Quin instrument s'utilitza habitualment per donar el La d'afinació a l'orquestra?", opcions: ["Violí", "Piano", "Oboè", "Flauta"], correcta: 2 },
+    { pregunta: "Qui va compondre les 'Quatre Estacions' per a violí?", opcions: ["Bach", "Mozart", "Vivaldi", "Beethoven"], correcta: 2 },
+    { pregunta: "Quants instruments hi ha aproximadament en una orquestra simfònica completa?", opcions: ["30-40", "50-60", "80-100", "120-150"], correcta: 2 },
+    { pregunta: "Quin instrument és conegut popularment com 'el rei dels instruments'?", opcions: ["Piano", "Violí", "Orgue", "Arpa"], correcta: 2 },
+];
+
 let aciertosQuiz = 0;
-let preguntaActual = null;
+let quizCurrentIndex = -1;
+let quizUsedIndices = [];
 
 function abrirQuiz() {
     aciertosQuiz = 0;
+    quizUsedIndices = [];
     document.getElementById('quiz-score').innerText = aciertosQuiz;
     document.getElementById('quiz-reward-container').classList.add('hidden');
     document.getElementById('quiz-question-container').classList.remove('hidden');
@@ -2375,36 +2492,23 @@ function generarPregunta() {
     const optionsGrid = document.getElementById('quiz-options');
     optionsGrid.innerHTML = '';
 
-    // Only use cards that have specific pedagogical info (not the generic fallback)
-    const knownNames = Object.keys(infoPedagogicaDB);
-    let pool = cartasBD.filter(c => knownNames.includes(c.nombre));
-    pool.sort(() => Math.random() - 0.5);
+    // Reset used pool when all questions have been shown
+    if (quizUsedIndices.length >= quizDB.length) quizUsedIndices = [];
 
-    const correctCard = pool[0];
-    const wrongPool = pool.filter(c => c.nombre !== correctCard.nombre);
-    const wrongCards = wrongPool.slice(0, 3);
+    let idx;
+    do { idx = Math.floor(Math.random() * quizDB.length); }
+    while (quizUsedIndices.includes(idx));
+    quizUsedIndices.push(idx);
+    quizCurrentIndex = idx;
 
-    const infoCorrectFn = infoPedagogicaDB[correctCard.nombre];
+    const q = quizDB[idx];
+    document.getElementById('quiz-question').innerText = q.pregunta;
 
-    // Pick a random fact category: historia, timbre, or mecanica
-    const categories = [
-        { key: 'historia', label: 'Història' },
-        { key: 'timbre',   label: 'Timbre i so' },
-        { key: 'mecanica', label: 'Mecànica en batalla' }
-    ];
-    const selected = categories[Math.floor(Math.random() * categories.length)];
-    const factText = infoCorrectFn[selected.key];
-
-    const questionText = document.getElementById('quiz-question');
-    questionText.innerText = `[${selected.label}]\n\n"${factText}"\n\nA quin instrument pertany?`;
-    
-    const chosenOptions = [correctCard, ...wrongCards].sort(() => Math.random() - 0.5);
-    
-    chosenOptions.forEach(carta => {
+    q.opcions.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'btn-quiz-option';
-        btn.innerText = carta.nombre;
-        btn.onclick = () => comprobarRespuesta(carta.id === correctCard.id, btn);
+        btn.innerText = opt;
+        btn.onclick = () => comprobarRespuesta(i === q.correcta, btn);
         optionsGrid.appendChild(btn);
     });
 }
@@ -2412,12 +2516,12 @@ function generarPregunta() {
 function comprobarRespuesta(isCorrect, btnElement) {
     const btns = document.querySelectorAll('.btn-quiz-option');
     btns.forEach(b => b.onclick = null); // disable all
-    
+
     if (isCorrect) {
         btnElement.classList.add('correct');
         aciertosQuiz++;
         document.getElementById('quiz-score').innerText = aciertosQuiz;
-        
+
         if (aciertosQuiz >= 5) {
             setTimeout(() => {
                 document.getElementById('quiz-question-container').classList.add('hidden');
@@ -2428,8 +2532,11 @@ function comprobarRespuesta(isCorrect, btnElement) {
         }
     } else {
         btnElement.classList.add('incorrect');
-        aciertosQuiz = 0; // reset
+        // Highlight the correct answer so the player learns
+        const correctIdx = quizDB[quizCurrentIndex].correcta;
+        if (btns[correctIdx]) btns[correctIdx].classList.add('correct');
+        aciertosQuiz = 0;
         document.getElementById('quiz-score').innerText = aciertosQuiz;
-        setTimeout(generarPregunta, 1500);
+        setTimeout(generarPregunta, 1800);
     }
 }

@@ -129,8 +129,8 @@ h3 {
 }
 
 .director-avatar {
-    width: 140px;
-    height: 140px;
+    width: clamp(52px, 12vh, 140px);
+    height: clamp(52px, 12vh, 140px);
     background: #333;
     border-radius: 50%;
     border: 3px solid #666;
@@ -417,7 +417,13 @@ h3 {
 }
 
 #player-stage {
-    border-top: 1px dashed rgba(255, 204, 0, 0.1);
+    border: 2px dashed rgba(255, 204, 0, 0.28);
+    border-radius: 14px;
+    background-image:
+        radial-gradient(circle, rgba(255, 204, 0, 0.055) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-color: rgba(255, 204, 0, 0.018);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
 #ai-stage {
@@ -425,10 +431,43 @@ h3 {
 }
 
 .stage.drag-over {
-    background: rgba(255, 204, 0, 0.05);
-    border-color: rgba(255, 204, 0, 0.8);
-    box-shadow: inset 0 0 30px rgba(255, 204, 0, 0.1);
-    border-radius: 20px;
+    background-image:
+        radial-gradient(circle, rgba(255, 204, 0, 0.15) 1px, transparent 1px) !important;
+    background-size: 28px 28px !important;
+    background-color: rgba(255, 204, 0, 0.07) !important;
+    border: 2px dashed rgba(255, 204, 0, 0.9) !important;
+    box-shadow: inset 0 0 40px rgba(255, 204, 0, 0.12), 0 0 20px rgba(255, 204, 0, 0.08);
+    border-radius: 14px;
+}
+
+/* Drop zone hint label */
+.zone-hint {
+    position: absolute;
+    font-size: 1.15vh;
+    color: rgba(255, 204, 0, 0.35);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+    font-weight: 600;
+}
+
+#player-stage .zone-hint {
+    bottom: 0.6vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#ai-stage .zone-hint {
+    top: 0.6vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Hide hint when cards are present */
+#player-stage:not(:empty) .zone-hint,
+#ai-stage:not(:empty) .zone-hint {
+    opacity: 0;
 }
 
 /* Play controls */
@@ -1140,7 +1179,7 @@ h3 {
 /* GAME RESULT MODAL */
 .result-box {
     text-align: center;
-    min-width: 400px;
+    min-width: min(400px, 90vw);
     animation: result-appear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -2587,6 +2626,44 @@ body.targeting-mode #ai-director-area:hover {
     margin-bottom: 2vh;
 }
 
+.deck-tips {
+    margin-top: 1.5vh;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 10px;
+    padding: 1.2vh 1.2rem;
+    font-size: 1.3vh;
+    color: #c4c9d8;
+    line-height: 1.7;
+}
+
+.deck-tips-title {
+    display: block;
+    font-weight: 700;
+    color: #c084fc;
+    margin-bottom: 0.6vh;
+    font-size: 1.35vh;
+}
+
+.deck-tips ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vh;
+}
+
+.deck-tips ul li strong {
+    color: #e9d5ff;
+}
+
+.deck-tips-footer {
+    margin: 0.8vh 0 0;
+    color: #a78bfa;
+    font-style: italic;
+    font-size: 1.25vh;
+}
+
 .decklist-item {
     background: linear-gradient(90deg, #2a2a3a, #1a1a24);
     border: 1px solid #443322;
@@ -2902,6 +2979,15 @@ body.targeting-mode #ai-director-area:hover {
     }
 }
 
+/* Card blocked during tutorial (wrong card to play) */
+.tut-card-disabled {
+    opacity: 0.25 !important;
+    pointer-events: none !important;
+    filter: grayscale(1) brightness(0.5) !important;
+    transform: scale(0.95) !important;
+    transition: all 0.2s ease !important;
+}
+
 /* Tutorial button in main menu */
 .btn-tutorial-main {
     width: 100%;
@@ -2921,4 +3007,152 @@ body.targeting-mode #ai-director-area:hover {
     background: linear-gradient(135deg, #8b5cf6, #6366f1);
     transform: scale(1.02);
     box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* =============================================
+   RESPONSIVE — small laptops (≤ 800px height)
+   Lenovo 11-13", 1366×768, 1280×720, etc.
+   ============================================= */
+@media (max-height: 800px) {
+    /* Reduce game board row heights */
+    #game-board {
+        grid-template-rows: auto 11vh 1fr 11vh auto;
+    }
+
+    /* Tighten director zones */
+    .director {
+        padding: 0.6vh 2vw;
+        gap: 1.5vw;
+    }
+
+    .director > h2,
+    .director-info > h2 {
+        font-size: 1.6vh;
+        margin-bottom: 0.2vh;
+    }
+
+    .stats {
+        font-size: 1.3vh;
+    }
+
+    .hp-bar-container {
+        height: 1.8vh;
+    }
+
+    .tempo-crystals-wrap {
+        gap: 0.3vh;
+    }
+
+    /* Stage cards smaller on small screens */
+    .stage .card {
+        width: calc(12vh * 0.71);
+        height: 12vh;
+    }
+
+    .stage .card:hover {
+        width: calc(20vh * 0.71);
+        height: 20vh;
+    }
+
+    /* Hand cards */
+    .card {
+        width: calc(13vh * 0.71);
+        height: 13vh;
+    }
+
+    /* Modal padding and font reduction */
+    .modal-box {
+        padding: 2.5vh 3vw;
+    }
+
+    .modal-box h2 {
+        font-size: 3vh;
+        margin-bottom: 2vh;
+    }
+
+    /* Main menu tighter */
+    .menu-content {
+        padding: 2vh 3vw;
+        gap: 1vh;
+    }
+
+    .menu-hero {
+        margin-bottom: 1vh;
+    }
+
+    .game-title {
+        font-size: 5vh;
+    }
+
+    /* Deckbuilder takes less vertical space */
+    .deckbuilder-box {
+        height: 88vh;
+    }
+
+    /* Tutorial tooltip smaller */
+    #tutorial-tooltip {
+        padding: 1.6vh 1.5rem 1.4vh;
+        max-width: 360px;
+    }
+
+    #tut-title {
+        font-size: 1.6vh;
+    }
+
+    #tut-text {
+        font-size: 1.35vh;
+    }
+}
+
+@media (max-height: 650px) {
+    #game-board {
+        grid-template-rows: auto 9vh 1fr 9vh auto;
+    }
+
+    .director {
+        padding: 0.4vh 2vw;
+    }
+
+    .stage .card {
+        width: calc(10vh * 0.71);
+        height: 10vh;
+    }
+
+    .stage .card:hover {
+        width: calc(17vh * 0.71);
+        height: 17vh;
+    }
+
+    .zone-hint {
+        font-size: 0.9vh;
+    }
+}
+
+/* Narrow viewport (small Lenovo 11") */
+@media (max-width: 1100px) {
+    .menu-horizontal-layout {
+        gap: 2vw;
+    }
+
+    .campaign-track {
+        gap: 0.5vw;
+    }
+
+    .boss-node {
+        min-width: 0;
+    }
+
+    .modal-box {
+        max-width: 95vw;
+        padding: 2.5vh 3vw;
+    }
+
+    .deckbuilder-box {
+        width: 96vw;
+    }
+
+    #tutorial-tooltip {
+        max-width: min(380px, 46vw);
+        min-width: 260px;
+    }
 }
