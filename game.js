@@ -871,6 +871,7 @@ function init() {
 }
 
 function iniciarPartida() {
+    if (rachaVictorias === 0) window.AulaTechBridge?.startClock();
     // Progressió: Aprenent 1500 → Promesa 2500 → Titular 3500 → Virtuós 5000 → Mestre 7000
     const aiHpPerBoss = [1500, 2500, 3500, 5000, 7000];
     let aiHpBase = aiHpPerBoss[Math.min(rachaVictorias, 4)];
@@ -1069,6 +1070,7 @@ function terminarPartida(victoria) {
 
     modal.classList.remove('hidden');
 
+    let campanyaCompletada = false;
     if (victoria) {
         rachaVictorias++;
         notasDeOro += 50;
@@ -1086,11 +1088,14 @@ function terminarPartida(victoria) {
             titulo.innerText = 'Campanya Superada!';
             msj.innerText = `Ets el nou Mestre Suprem de la Simfonia! L'orquestra és teva.\n\n💰 Has guanyat 50 Notes d'Or.`;
             rachaVictorias = 0;
+            campanyaCompletada = true;
         }
     } else {
         rachaVictorias = 0;
         mostrarResultado(false);
     }
+
+    window.AulaTechBridge?.sendOnce('tgc-campanya', { completat: campanyaCompletada });
 
     localStorage.setItem('symphonicClashRacha', rachaVictorias);
     document.getElementById('player-streak-ingame').textContent = rachaVictorias;
@@ -1105,6 +1110,7 @@ function terminarPartidaArena(victoria) {
 
     modal.classList.remove('hidden');
 
+    let arenaConquerida = false;
     if (victoria) {
         arenaStreak++;
         if (arenaStreak >= 5) {
@@ -1118,6 +1124,7 @@ function terminarPartidaArena(victoria) {
             arenaMode = false;
             arenaDeck = [];
             arenaStreak = 0;
+            arenaConquerida = true;
         } else {
             icon.textContent = '⚔️';
             titulo.innerText = `Victòria d'Arena! (${arenaStreak}/5)`;
@@ -1133,6 +1140,8 @@ function terminarPartidaArena(victoria) {
         arenaDeck = [];
         arenaStreak = 0;
     }
+
+    window.AulaTechBridge?.sendOnce('tgc-arena', { completat: arenaConquerida });
 }
 
 function getFamilyClass(familia) {
@@ -2288,6 +2297,7 @@ function showBossDialogue(bossIndex) {
 /* ========================================================= */
 
 function abrirArena() {
+    window.AulaTechBridge?.startClock();
     arenaDeck = [];
     arenaStreak = 0;
     arenaMode = false;

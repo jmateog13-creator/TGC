@@ -161,7 +161,6 @@ h3 {
     box-shadow:
         0 0 40px rgba(40, 100, 200, 0.4),
         0 10px 30px rgba(0, 0, 0, 0.9);
-    background-image: url('img/npcs/avatar_jugador.png'); /* Default placeholder if exists, otherwise handled in JS */
 }
 
 /* Splash Screen Styles */
